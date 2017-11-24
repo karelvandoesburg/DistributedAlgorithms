@@ -46,6 +46,7 @@ public class Client implements Runnable {
 			System.out.println(process3.showYourself());
 			
 		}
+		
 		catch(Exception e) {
 			System.out.println(e);
 			e.printStackTrace();
