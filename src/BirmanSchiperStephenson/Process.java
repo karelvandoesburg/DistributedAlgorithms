@@ -98,21 +98,21 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 
 	@Override
-	public String getProcessFromRegistry(int ID) {
+	public IFProcess getProcessFromRegistry(int ID) {
 		try{
 			String id = Integer.toString(ID);
 			IFProcess process = (IFProcess) Naming.lookup(host + "/" + id);
-			return process.sayHello();
+			return process;
 		}
 		catch(Exception e) {
 			System.out.println(e);
 			e.printStackTrace();
 		}
-		return "hello";
+		return null;
 	}
 	
-	public String sayHello() {
-		return "hello2String";
+	public String showYourself() {
+		return "this is process" + ID;
 	}
 
 }

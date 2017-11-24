@@ -35,12 +35,13 @@ public class Client implements Runnable {
 		try {
 			Naming.bind(host + "/" + Integer.toString(ID), process);
 			System.out.println("Process " + ID + " added in " + host + "/" + Integer.toString(ID));
-			System.out.println(process.sayHello());
 //			
 			TimeUnit.SECONDS.sleep(1);
-			IFProcess process2 = (IFProcess) Naming.lookup(host + "/5");
+			IFProcess process2 = new Process(11,10,host);
 			
-			System.out.println(process2.sayHello());
+			String test = process2.getProcessFromRegistry(5).showYourself();
+			System.out.println(test);
+			
 		}
 		catch(Exception e) {
 			System.out.println(e);

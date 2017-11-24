@@ -18,7 +18,7 @@ public interface IFProcess extends Remote {
 	public void updateTimestamp(Timestamp timestamp) throws java.rmi.RemoteException;
 	public void startSendingMessages() throws java.rmi.RemoteException;
 	public double createRandomIntervalBetweenMessages() throws java.rmi.RemoteException;
-	public String getProcessFromRegistry(int ID) throws java.rmi.RemoteException;
-	public String sayHello() throws java.rmi.RemoteException;
+	public IFProcess getProcessFromRegistry(int ID) throws java.rmi.RemoteException;
+	public String showYourself() throws java.rmi.RemoteException;
 	
 }
