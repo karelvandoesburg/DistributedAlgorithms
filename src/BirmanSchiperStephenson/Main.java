@@ -6,15 +6,21 @@ import java.rmi.registry.LocateRegistry;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RemoteException {
 		int port = 1099;
+		String host = "rmi://localhost:" + port;
 		createLocalRegistry(port);
 		int amountofprocesses = 10;
 		
 		for (int i = 0; i < amountofprocesses; i++) {
-			Client client = new Client(i+1,10);
+			Client client = new Client(i+1,amountofprocesses,host);
 			new Thread(client).start();
 		}
+		
+		Process test = new Process(11,10,host);
+		
+		System.out.println("hallo");
+		System.out.println(test.getProcessFromRegistry(5));
 	}
 	
 	public static void createLocalRegistry(int port) {
@@ -25,10 +31,6 @@ public class Main {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static void startProcess(int amount) {
-		
 	}
 	
 }

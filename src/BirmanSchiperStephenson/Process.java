@@ -1,5 +1,6 @@
 package BirmanSchiperStephenson;
 
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.PriorityQueue;
@@ -9,17 +10,20 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	private static final long serialVersionUID = 1L;
 	private Timestamp timestamp;
 	private int ID;
+	private int amountofprocesses;
+	private String host;
 	private PriorityQueue<Message> buffer = new PriorityQueue<Message>();
 	
-	protected Process() throws RemoteException {
+	protected Process(int ID, int amountofprocesses, String host) throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
+		this.ID = ID;
+		this.amountofprocesses = amountofprocesses;
+		this.host = host;
 	}
 
 	@Override
 	public void deliverMessage(Message message) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(message.toString());
 	}
 
 	@Override
@@ -42,8 +46,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 
 	@Override
 	public int chooseRandomReceivingProcess() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int )(Math.random() * this.amountofprocesses + 1); 
 	}
 
 	@Override
@@ -92,6 +95,20 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	public double createRandomIntervalBetweenMessages() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Process getProcessFromRegistry(int ID) {
+		try{
+			String id = Integer.toString(ID);
+			Process process = (Process) Naming.lookup(host + id);
+			return process;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

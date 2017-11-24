@@ -5,18 +5,19 @@ import java.util.PriorityQueue;
 
 public interface IFProcess extends Remote {
 	
-	public void deliverMessage(Message message);
-	public void broadcastMessage();
-	public void receiveMessage();
-	public void incrementOwnTimeStamp();
-	public int chooseRandomReceivingProcess();
-	public double createRandomDelay();
-	public String createMessage();
-	public void receiveMessage(Message message);
-	public boolean canMessageBeDelivered(Message message);
-	public boolean compareMessageTimeStampToOwn(Timestamp timestamp);
-	public void updateTimestamp(Timestamp timestamp);
-	public void startSendingMessages();
-	public double createRandomIntervalBetweenMessages();
+	public void deliverMessage(Message message) throws java.rmi.RemoteException;
+	public void broadcastMessage() throws java.rmi.RemoteException;
+	public void receiveMessage() throws java.rmi.RemoteException;
+	public void incrementOwnTimeStamp() throws java.rmi.RemoteException;
+	public int chooseRandomReceivingProcess() throws java.rmi.RemoteException;
+	public double createRandomDelay() throws java.rmi.RemoteException;
+	public String createMessage() throws java.rmi.RemoteException;
+	public void receiveMessage(Message message) throws java.rmi.RemoteException;
+	public boolean canMessageBeDelivered(Message message) throws java.rmi.RemoteException;
+	public boolean compareMessageTimeStampToOwn(Timestamp timestamp) throws java.rmi.RemoteException;
+	public void updateTimestamp(Timestamp timestamp) throws java.rmi.RemoteException;
+	public void startSendingMessages() throws java.rmi.RemoteException;
+	public double createRandomIntervalBetweenMessages() throws java.rmi.RemoteException;
+	public Process getProcessFromRegistry(int ID) throws java.rmi.RemoteException;
 	
 }
