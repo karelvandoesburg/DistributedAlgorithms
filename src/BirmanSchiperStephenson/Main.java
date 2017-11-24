@@ -3,12 +3,13 @@ package BirmanSchiperStephenson;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-	public static void main(String[] args) throws RemoteException {
+	public static void main(String[] args) throws RemoteException, InterruptedException {
 		int port = 1099;
-		String host = "rmi://localhost:" + port;
+		String host = "rmi://127.0.0.1:" + port;
 		createLocalRegistry(port);
 		int amountofprocesses = 10;
 		
@@ -17,10 +18,6 @@ public class Main {
 			new Thread(client).start();
 		}
 		
-		Process test = new Process(11,10,host);
-		
-		System.out.println("hallo");
-		System.out.println(test.getProcessFromRegistry(5));
 	}
 	
 	public static void createLocalRegistry(int port) {
