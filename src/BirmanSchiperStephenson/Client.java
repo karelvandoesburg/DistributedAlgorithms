@@ -37,10 +37,13 @@ public class Client implements Runnable {
 			System.out.println("Process " + ID + " added in " + host + "/" + Integer.toString(ID));
 //			
 			TimeUnit.SECONDS.sleep(1);
-			IFProcess process2 = new Process(11,10,host);
+			Process process2 = new Process(11,10,host);
 			
 			String test = process2.getProcessFromRegistry(5).showYourself();
-			System.out.println(test);
+			
+			IFProcess process3 = process2.getProcessFromRegistry(5);
+			
+			System.out.println(process3.showYourself());
 			
 		}
 		catch(Exception e) {
