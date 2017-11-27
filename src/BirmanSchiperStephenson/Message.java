@@ -32,8 +32,8 @@ public class Message implements Runnable, Serializable{
 			IFProcess receivingprocess = (IFProcess) getProcessFromRegistry(this.receiverID);
 			System.out.println("up to here it works, delay is: " + delay);
 //			System.out.println(message);
-//			receivingprocess.receiveMessage(this);
-			receivingprocess.test();
+			receivingprocess.receiveMessage(this);
+//			receivingprocess.test();
 		}
 		catch(Exception e) {
 			System.out.println("Exception in run in Message: " + e);

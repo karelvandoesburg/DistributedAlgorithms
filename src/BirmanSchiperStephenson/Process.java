@@ -26,19 +26,19 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		System.out.println(message.toString());
 	}
 	
-	public void test() {
+	public synchronized void test() {
 		System.out.println("it is the passing of the parameters");
 	}
 
 	@Override
-	public synchronized void broadcastMessage() {
+	public void broadcastMessage() {
 //		incrementOwnTimeStamp();
 		Message message = createMessage();
 		message.send();
 	}
 
 	@Override
-	public synchronized void receiveMessage(Message message) {
+	public void receiveMessage(Message message) {
 		System.out.println(message.toString());
 	}
 
