@@ -2,6 +2,7 @@ package BirmanSchiperStephenson;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.util.concurrent.TimeUnit;
 
 public class Client implements Runnable {
 	
@@ -33,7 +34,11 @@ public class Client implements Runnable {
 	public void addProcessToRegistry(Process process) {
 		try {
 			Naming.bind(host + "/" + Integer.toString(ID), process);
-			System.out.println("Process " + ID + " added in " + host + "/" + Integer.toString(ID));			
+			System.out.println("Process " + ID + " added in " + host + "/" + Integer.toString(ID));	
+			
+			TimeUnit.SECONDS.sleep(1);
+			
+			process.broadcastMessage();
 		}
 		
 		catch(Exception e) {

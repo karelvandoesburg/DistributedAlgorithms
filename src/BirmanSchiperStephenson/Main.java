@@ -19,8 +19,8 @@ public class Main {
 			new Thread(client).start();
 		}
 		
-		TimeUnit.SECONDS.sleep(1);
-		System.out.println("All processes are added, time to start sending messages!");
+//		TimeUnit.SECONDS.sleep(1);
+//		System.out.println("All processes are added, time to start sending messages!");
 		
 	}
 	

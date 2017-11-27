@@ -25,17 +25,21 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	public void deliverMessage(Message message) {
 		System.out.println(message.toString());
 	}
+	
+	public void test() {
+		System.out.println("it is the passing of the parameters");
+	}
 
 	@Override
 	public synchronized void broadcastMessage() {
-		incrementOwnTimeStamp();
+//		incrementOwnTimeStamp();
 		Message message = createMessage();
 		message.send();
 	}
 
 	@Override
 	public synchronized void receiveMessage(Message message) {
-		
+		System.out.println(message.toString());
 	}
 
 	@Override
@@ -43,21 +47,12 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		timestamp.incrementProcessTimestampByOne(ID);
 	}
 
-	@Override
 	public int chooseRandomReceivingProcess() {
-		int res = this.amountofprocesses;
-		while(res == this.amountofprocesses) {
-			res = (int )(Math.random() * this.amountofprocesses + 1); 
+		int res = this.ID;
+		while(res == this.ID) {
+			res = Calculate.createRandomNumberBetween(1,amountofprocesses); 
 		}
 		return res;
-	}
-	
-	public int createRandomNumberBetween(int smallest, int largest) {
-		return (int )(Math.random() * ((largest+1)-smallest) + smallest);
-	}
-
-	public int createRandomDelay() {
-		return this.createRandomNumberBetween(1,5);
 	}
 
 	@Override
@@ -85,35 +80,9 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 
 	@Override
-	public double createRandomIntervalBetweenMessages() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	@Override
-	public IFProcess getRandomProcessFromRegistry() throws RemoteException{
-		int randomprocess = this.chooseRandomReceivingProcess();
-		return getProcessFromRegistry(randomprocess);
-	}
-
-	@Override
-	public IFProcess getProcessFromRegistry(int ID) {
-		try{
-			String id = Integer.toString(ID);
-			IFProcess process = (IFProcess) Naming.lookup(host + "/" + id);
-			return process;
-		}
-		catch(Exception e) {
-			System.out.println("Exception in getProcessFromRegistry in Process: " + e);
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
 	public Message createMessage() {
-		int delay = this.createRandomDelay();
-		return new Message(ID,timestamp,delay);
+		int receivingprocess = this.chooseRandomReceivingProcess();
+		return new Message(receivingprocess,timestamp,host);
 	}
 
 }
