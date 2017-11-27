@@ -18,19 +18,23 @@ public class Client implements Runnable {
 	
 	
 	public void run() {
-		System.out.println("the start of the clients should follow each other");
 		Process process;
 		try {
 			process = new Process(ID,amountofprocesses,host);
+			
 			addProcessToRegistry(process);
 			
+			Thread.sleep(1000);
 			
-			for(int i = 0; i < 3; i++) {
+			for(int i = 0; i < 1; i++) {
 				process.broadcastMessage();
 			}
 		} 
 		catch (RemoteException e) {
 			System.out.println("Exception in run in Client: " + e);
+			e.printStackTrace();
+		} 
+		catch (InterruptedException e) {
 			e.printStackTrace();
 		} 
 		

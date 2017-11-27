@@ -24,8 +24,9 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 
 	@Override
 	public synchronized void deliverMessage(Message message) {
+		this.incrementOwnTimeStamp();
+		message.replaceTimestamp(this.timestamp);
 		System.out.println(message.toString());
-		this.updateTimestampAfterDelivery(message.getTimestamp());
 	}
 
 	@Override
@@ -40,7 +41,6 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	@Override
 	public void receiveMessage(Message message) {
 		if(canMessageBeDelivered(message)) {
-			System.out.println("this is not the problem");
 			deliverMessage(message);
 		}
 		else {System.out.println("cannot be delivered");}
@@ -63,7 +63,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	public boolean canMessageBeDelivered(Message message) {
 		Timestamp timestamp = new Timestamp(this.amountofprocesses);
 		timestamp.replaceTimestamp(this.timestamp);
-		timestamp.incrementProcessTimestampByOne(ID);
+		timestamp.incrementProcessTimestampByOne(message.getSendingID());
 		System.out.println("it compares " + timestamp.toString() + " and " + message.getTimestamp().toString());
 		return timestamp.isLargerOrEqualToTimestamp(message.getTimestamp());
 	}
@@ -84,7 +84,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	@Override
 	public Message createMessage() {
 		int receivingprocess = this.chooseRandomReceivingProcess();
-		return new Message(receivingprocess,timestamp,host);
+		return new Message(ID,receivingprocess,timestamp,host);
 	}
 
 }

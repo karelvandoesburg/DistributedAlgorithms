@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Message implements Runnable, Serializable, Comparable<Message>{
 
+	private int sendingID;
 	private int receiverID;
 	private String message;
 	private Timestamp timestamp;
@@ -14,12 +15,12 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	private String host;
 	private static final long serialVersionUID = 7526472295622776147L;
 	
-	public Message(int receiverID, Timestamp timestamp, String host) {
+	public Message(int sendingID, int receiverID, Timestamp timestamp, String host) {
+		this.sendingID = sendingID;
 		this.receiverID = receiverID;
 		this.timestamp = timestamp;
 		this.host = host;
 		createRandomDelay();
-		createMessageText();
 	}
 	
 	public void send() {
@@ -29,7 +30,6 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	@Override
 	public void run() {
 		try {
-			System.out.println("these should follow each other");
 			Thread.sleep(delay);
 			IFProcess receivingprocess = (IFProcess) getProcessFromRegistry(this.receiverID);
 			receivingprocess.receiveMessage(this);
@@ -58,11 +58,16 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	}
 	
 	public void createMessageText() {
-		this.message = "This message is sent to process " + receiverID + ", with timestamp " + this.timestamp.toString();
+		this.message = "This message is sent from process " + this.sendingID + " to process " + receiverID + ", with timestamp " + this.timestamp.toString();
 	}
 	
 	public String toString() {
+		createMessageText();
 		return this.message;
+	}
+	
+	public int getSendingID() {
+		return this.sendingID;
 	}
 	
 	public int getReceiverID() {
@@ -71,6 +76,10 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	
 	public Timestamp getTimestamp() {
 		return this.timestamp;
+	}
+	
+	public void replaceTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	@Override
