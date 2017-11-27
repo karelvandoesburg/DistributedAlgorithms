@@ -3,8 +3,8 @@ package BirmanSchiperStephenson;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.Instant;
 import java.util.PriorityQueue;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Process extends UnicastRemoteObject implements IFProcess{
 
@@ -49,11 +49,22 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 	
 	public synchronized void deliverMessagesBuffer() {
-		if(!buffer.isEmpty() && canMessageBeDelivered(buffer.peek())) {
-			Message message = buffer.poll();
-			System.out.println("Following delivery is from buffer " + ID + ":");
-			this.deliverMessage(message);
+		if(!buffer.isEmpty()) {
+			if(buffer.peek().isOverBufferTime()) {
+				Message message = buffer.poll();
+				this.deliverMessage(message);
+			}
+			else if(this.canMessageBeDelivered(buffer.peek())) {
+				Message message = buffer.poll();
+				System.out.println("Following delivery is from buffer " + ID + ":");
+				this.deliverMessage(message);
+			}
 		}
+//		if(!buffer.isEmpty() && canMessageBeDelivered(buffer.peek())) {
+//			Message message = buffer.poll();
+//			System.out.println("Following delivery is from buffer " + ID + ":");
+//			this.deliverMessage(message);
+//		}
 	}
 	
 	
@@ -88,7 +99,12 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 	
 	public void placeInBuffer(Message message) {
+		long now = Instant.now().toEpochMilli();
+		message.setTimetobuffer(now);
 		buffer.add(message);
+		if(buffer.peek().isOverBufferTime()) {
+			this.deliverMessagesBuffer();
+		}
 	}
 	
 	public void updateTimestampAfterDelivery(Message message) {

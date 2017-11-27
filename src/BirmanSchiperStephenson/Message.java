@@ -14,6 +14,8 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	private int delay;
 	private String host;
 	private static final long serialVersionUID = 7526472295622776147L;
+	private long timeintobuffer;
+	private int millisecondstoemptymessagefrombuffer = 300;
 	
 	public Message(int sendingID, int receiverID, Timestamp timestamp, String host) {
 		this.sendingID = sendingID;
@@ -94,6 +96,18 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 		if(!timestamp1.isLargerOrEqualToTimestamp(timestamp2)) {return -1;};
 		if(timestamp1.isLargerOrEqualToTimestamp(timestamp2)) {return 1;};
 		return 0;
+	}
+	
+	public boolean isOverBufferTime() {
+		long now = Instant.now().toEpochMilli();
+		if((this.timeintobuffer + this.millisecondstoemptymessagefrombuffer) < now) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void setTimetobuffer(long time) {
+		this.timeintobuffer = time;
 	}
 
 }
