@@ -25,20 +25,41 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 
 	@Override
-	public void deliverMessage(Message message) {
-		this.timestamp.incrementProcessTimestampByOne(message.getSendingID());
-		System.out.println(message.toString() + ". Own timestamp (" + ID + ") is " + this.timestamp.toString());
-	}
-
-	@Override
 	public synchronized void broadcastMessage() {
-		if(ID == 1) {
-			incrementOwnTimeStamp();
-			Message message = createMessage();
-			System.out.println(message.getTimestamp().toString());
-			message.send();
+		incrementOwnTimeStamp();
+		Message message = createMessage();
+		message.send();
+	}
+	
+	@Override
+	public synchronized void receiveMessage(Message message) {
+		if(canMessageBeDelivered(message)) {
+			deliverMessage(message);
+		}
+		else {
+			placeInBuffer(message);
+			System.out.println(message.getTimestamp().toString() + "Sent from " + message.getSendingID() + ". Is placed in buffer. Number of message in buffer of process " + ID + " is: " + this.buffer.size());
 		}
 	}
+	
+	@Override
+	public synchronized void deliverMessage(Message message) {
+		this.updateTimestampAfterDelivery(message);
+		printMessage(message);
+		deliverMessagesBuffer();
+	}
+	
+	public synchronized void deliverMessagesBuffer() {
+		if(!buffer.isEmpty() && canMessageBeDelivered(buffer.peek())) {
+			Message message = buffer.poll();
+			System.out.println("Following delivery is from buffer " + ID + ":");
+			this.deliverMessage(message);
+		}
+	}
+	
+	
+	
+	
 	
 	@Override
 	public void incrementOwnTimeStamp() {
@@ -50,15 +71,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		int receivingprocess = this.chooseRandomReceivingProcess();
 		return new Message(ID,receivingprocess,timestamp,host);
 	}
-
-	@Override
-	public void receiveMessage(Message message) {
-		if(canMessageBeDelivered(message)) {
-			deliverMessage(message);
-		}
-		else {System.out.println("cannot be delivered");}
-	}
-
+	
 	public int chooseRandomReceivingProcess() {
 		int res = this.ID;
 		while(res == this.ID) {
@@ -66,24 +79,32 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		}
 		return res;
 	}
-
+	
 	@Override
 	public boolean canMessageBeDelivered(Message message) {
 		Timestamp timestamp = new Timestamp(this.amountofprocesses);
 		timestamp.replaceWithTimestamp(this.timestamp);
 		timestamp.incrementProcessTimestampByOne(message.getSendingID());
-		System.out.println("it compares " + timestamp.toString() + " and " + message.getTimestamp().toString());
 		return timestamp.isLargerOrEqualToTimestamp(message.getTimestamp());
 	}
-
-	@Override
-	public void startSendingMessages() {
-		// TODO Auto-generated method stub
-		
+	
+	public void placeInBuffer(Message message) {
+		buffer.add(message);
+	}
+	
+	public void updateTimestampAfterDelivery(Message message) {
+		Timestamp timestamp2 = message.getTimestamp();
+		for(int i = 0; i < timestamp.getTimevector().length; i++) {
+			timestamp.getTimevector()[i] = Math.max(timestamp.getTimevector()[i], timestamp2.getTimevector()[i]);
+		}
 	}
 	
 	public Timestamp getTimestamp() {
 		return this.timestamp;
+	}
+	
+	public void printMessage(Message message) {
+		System.out.println(message.toString() + ". New timestamp of process " + ID + " is " + this.timestamp.toString());
 	}
 
 }
