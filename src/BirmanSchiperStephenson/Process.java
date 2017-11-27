@@ -14,7 +14,6 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	private int amountofprocesses;
 	private String host;
 	private PriorityQueue<Message> buffer = new PriorityQueue<Message>();
-	private ReentrantLock Lock = new ReentrantLock();
 	
 	protected Process(int ID, int amountofprocesses, String host) throws RemoteException {
 		super();
