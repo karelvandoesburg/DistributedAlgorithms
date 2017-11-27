@@ -25,7 +25,7 @@ public class Client implements Runnable {
 			addProcessToRegistry(process);
 		} 
 		catch (RemoteException e) {
-			System.out.println(e);
+			System.out.println("makank, er gaat iets fout: " + e);
 			e.printStackTrace();
 		}
 		
@@ -35,15 +35,17 @@ public class Client implements Runnable {
 		try {
 			Naming.bind(host + "/" + Integer.toString(ID), process);
 			System.out.println("Process " + ID + " added in " + host + "/" + Integer.toString(ID));
-//			
+			
 			TimeUnit.SECONDS.sleep(1);
-			Process process2 = new Process(11,10,host);
 			
-			String test = process2.getProcessFromRegistry(5).showYourself();
+			IFProcess test = (IFProcess) Naming.lookup(host + "/" + 1);
+			test.receiveMessage("would be nice if this works");
 			
-			IFProcess process3 = process2.getProcessFromRegistry(5);
+			TimeUnit.SECONDS.sleep(1);
 			
-			System.out.println(process3.showYourself());
+			IFProcess test2 = (IFProcess) Naming.lookup(host + "/" + 1);
+			test2.deliverMessage();
+
 			
 		}
 		
