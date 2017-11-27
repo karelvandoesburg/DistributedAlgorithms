@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
 	public static void main(String[] args) throws RemoteException, InterruptedException {
+		
 		int port = 1099;
 		String host = "rmi://127.0.0.1:" + port;
 		createLocalRegistry(port);

@@ -27,24 +27,40 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 
 	@Override
-	public void broadcastMessage(Message message) {
-		
+	public synchronized void broadcastMessage() {
+		try {
+			IFProcess receivingprocess = (IFProcess) this.getRandomProcessFromRegistry();
+			incrementOwnTimeStamp();
+			Message message = createMessage();
+			
+		}
+		catch(Exception e) {
+			System.out.println("Exception in broadcastMessage in Process: " + e);
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void receiveMessage(Message message) {
-				
+	public synchronized void receiveMessage(Message message) {
+		
 	}
 
 	@Override
 	public void incrementOwnTimeStamp() {
-		// TODO Auto-generated method stub
-		
+		timestamp.incrementProcessTimestampByOne(ID);
 	}
 
 	@Override
 	public int chooseRandomReceivingProcess() {
-		return (int )(Math.random() * this.amountofprocesses + 1); 
+		int res = this.amountofprocesses;
+		while(res == this.amountofprocesses) {
+			res = (int )(Math.random() * this.amountofprocesses + 1); 
+		}
+		return res;
+	}
+	
+	public static int createRandomNumberBetween(int smallest, int largest) {
+		return (int )(Math.random() * ((largest+1)-smallest) + smallest);
 	}
 
 	@Override
@@ -82,6 +98,12 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public IFProcess getRandomProcessFromRegistry() throws RemoteException{
+		int randomprocess = this.chooseRandomReceivingProcess();
+		return getProcessFromRegistry(randomprocess);
+	}
 
 	@Override
 	public IFProcess getProcessFromRegistry(int ID) {
@@ -98,9 +120,8 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 
 	@Override
-	public Message createMessage() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public Message createMessage() {
+		return new Message(ID,timestamp);
 	}
 
 }
