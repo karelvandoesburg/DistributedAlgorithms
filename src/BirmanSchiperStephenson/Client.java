@@ -25,7 +25,7 @@ public class Client implements Runnable {
 			addProcessToRegistry(process);
 		} 
 		catch (RemoteException e) {
-			System.out.println("makank, er gaat iets fout: " + e);
+			System.out.println("Exception in run in Client: " + e);
 			e.printStackTrace();
 		}
 		
@@ -41,8 +41,6 @@ public class Client implements Runnable {
 			IFProcess test = (IFProcess) Naming.lookup(host + "/" + 1);
 			test.receiveMessage("would be nice if this works");
 			
-			TimeUnit.SECONDS.sleep(1);
-			
 			IFProcess test2 = (IFProcess) Naming.lookup(host + "/" + 1);
 			test2.deliverMessage();
 
@@ -50,7 +48,7 @@ public class Client implements Runnable {
 		}
 		
 		catch(Exception e) {
-			System.out.println(e);
+			System.out.println("Exception in addProcessToRegistry in Client: " + e);
 			e.printStackTrace();
 		}
 	}

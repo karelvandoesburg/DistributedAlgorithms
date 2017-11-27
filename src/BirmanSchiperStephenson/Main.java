@@ -26,6 +26,7 @@ public class Main {
 			System.out.println("Server ready!");
 		}
 		catch(Exception e) {
+			System.out.println("Exception in createLocalRegistry in Main: " + e);
 			e.printStackTrace();
 		}
 	}

@@ -106,7 +106,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 			return process;
 		}
 		catch(Exception e) {
-			System.out.println(e);
+			System.out.println("Exception in getProcessFromRegistry in Process: " + e);
 			e.printStackTrace();
 		}
 		return null;
