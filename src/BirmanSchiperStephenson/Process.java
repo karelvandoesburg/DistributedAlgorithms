@@ -24,14 +24,13 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 
 	@Override
 	public synchronized void deliverMessage(Message message) {
-		this.incrementOwnTimeStamp();
-		message.replaceTimestamp(this.timestamp);
-		System.out.println(message.toString());
+		this.timestamp.incrementProcessTimestampByOne(message.getSendingID());
+		System.out.println(message.toString() + ". Own timestamp (" + ID + ") is " + this.timestamp.toString());
 	}
 
 	@Override
-	public void broadcastMessage() {
-		if(this.ID == 1) {
+	public synchronized void broadcastMessage() {
+		if(ID == 1) {
 			incrementOwnTimeStamp();
 			Message message = createMessage();
 			message.send();
@@ -39,7 +38,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 
 	@Override
-	public void receiveMessage(Message message) {
+	public synchronized void receiveMessage(Message message) {
 		if(canMessageBeDelivered(message)) {
 			deliverMessage(message);
 		}
@@ -47,7 +46,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 
 	@Override
-	public void incrementOwnTimeStamp() {
+	public synchronized void incrementOwnTimeStamp() {
 		timestamp.incrementProcessTimestampByOne(ID);
 	}
 
@@ -68,13 +67,6 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		return timestamp.isLargerOrEqualToTimestamp(message.getTimestamp());
 	}
 
-	public void updateTimestampAfterDelivery(Timestamp timestamp) {
-		int owntime = this.timestamp.getTimevector()[ID-1];
-		this.timestamp.replaceTimestamp(timestamp);
-		this.timestamp.getTimevector()[ID-1] = owntime;
-		this.incrementOwnTimeStamp();
-	}
-
 	@Override
 	public void startSendingMessages() {
 		// TODO Auto-generated method stub
@@ -82,7 +74,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 
 	@Override
-	public Message createMessage() {
+	public synchronized Message createMessage() {
 		int receivingprocess = this.chooseRandomReceivingProcess();
 		return new Message(ID,receivingprocess,timestamp,host);
 	}

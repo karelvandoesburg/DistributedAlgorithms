@@ -40,7 +40,11 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 		}
 	}
 	
-	public IFProcess getProcessFromRegistry(int ID) {
+	
+	
+	
+	
+	public synchronized IFProcess getProcessFromRegistry(int ID) {
 		try{
 			String id = Integer.toString(ID);
 			IFProcess process = (IFProcess) Naming.lookup(host + "/" + id);
@@ -58,7 +62,7 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	}
 	
 	public void createMessageText() {
-		this.message = "This message is sent from process " + this.sendingID + " to process " + receiverID + ", with timestamp " + this.timestamp.toString();
+		this.message = "This message is sent from process " + this.sendingID + " to process " + receiverID + " with message timestamp " + this.timestamp.toString();
 	}
 	
 	public String toString() {

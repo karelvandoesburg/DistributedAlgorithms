@@ -13,28 +13,30 @@ public class Timestamp implements Serializable {
 		}
 	}
 	
-	public boolean isLargerOrEqualToTimestamp (Timestamp othertimestamp) {
+	public synchronized boolean isLargerOrEqualToTimestamp (Timestamp othertimestamp) {
 		for (int i=0; i< timevector.length;i++)
 			if (timevector[i] < othertimestamp.timevector[i])
 				return false;
 		return true;
 	}
 	
-	public void incrementProcessTimestampByOne(int ID) {
+	public synchronized void incrementProcessTimestampByOne(int ID) {
 		ID = ID - 1;
 		timevector[ID] = timevector[ID] + 1;
 	}
 	
-	public void replaceTimestamp (Timestamp timestamp) {
-		this.timevector = timestamp.getTimevector();
+	public synchronized void replaceTimestamp (Timestamp timestamp) {
+		for (int i = 0; i < timevector.length; i++) {
+			this.timevector[i] = timestamp.getTimevector()[i];
+		}
 	}
 	
-	public int[] getTimevector() {
+	public synchronized int[] getTimevector() {
 		return timevector;
 	}
 	
 	public String toString(){
-		String text = "Vector is (";
+		String text = "(";
 		for(int i=0;i<timevector.length;i++) {
 			text+=timevector[i] + ",";
 		}
