@@ -18,16 +18,21 @@ public class Client implements Runnable {
 	
 	
 	public void run() {
-		
+		System.out.println("the start of the clients should follow each other");
 		Process process;
 		try {
 			process = new Process(ID,amountofprocesses,host);
 			addProcessToRegistry(process);
+			
+			
+			for(int i = 0; i < 3; i++) {
+				process.broadcastMessage();
+			}
 		} 
 		catch (RemoteException e) {
 			System.out.println("Exception in run in Client: " + e);
 			e.printStackTrace();
-		}
+		} 
 		
 	}
 	
@@ -35,10 +40,6 @@ public class Client implements Runnable {
 		try {
 			Naming.bind(host + "/" + Integer.toString(ID), process);
 			System.out.println("Process " + ID + " added in " + host + "/" + Integer.toString(ID));	
-			
-			TimeUnit.SECONDS.sleep(1);
-			
-			process.broadcastMessage();
 		}
 		
 		catch(Exception e) {

@@ -25,18 +25,25 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	@Override
 	public synchronized void deliverMessage(Message message) {
 		System.out.println(message.toString());
+		this.updateTimestampAfterDelivery(message.getTimestamp());
 	}
 
 	@Override
 	public void broadcastMessage() {
-		incrementOwnTimeStamp();
-		Message message = createMessage();
-		message.send();
+		if(this.ID == 1) {
+			incrementOwnTimeStamp();
+			Message message = createMessage();
+			message.send();
+		}
 	}
 
 	@Override
 	public void receiveMessage(Message message) {
-		System.out.println(message.toString());
+		if(canMessageBeDelivered(message)) {
+			System.out.println("this is not the problem");
+			deliverMessage(message);
+		}
+		else {System.out.println("cannot be delivered");}
 	}
 
 	@Override
@@ -54,20 +61,18 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 
 	@Override
 	public boolean canMessageBeDelivered(Message message) {
-		// TODO Auto-generated method stub
-		return false;
+		Timestamp timestamp = new Timestamp(this.amountofprocesses);
+		timestamp.replaceTimestamp(this.timestamp);
+		timestamp.incrementProcessTimestampByOne(ID);
+		System.out.println("it compares " + timestamp.toString() + " and " + message.getTimestamp().toString());
+		return timestamp.isLargerOrEqualToTimestamp(message.getTimestamp());
 	}
 
-	@Override
-	public boolean compareMessageTimeStampToOwn(Timestamp timestamp) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void updateTimestamp(Timestamp timestamp) {
-		// TODO Auto-generated method stub
-		
+	public void updateTimestampAfterDelivery(Timestamp timestamp) {
+		int owntime = this.timestamp.getTimevector()[ID-1];
+		this.timestamp.replaceTimestamp(timestamp);
+		this.timestamp.getTimevector()[ID-1] = owntime;
+		this.incrementOwnTimeStamp();
 	}
 
 	@Override

@@ -13,9 +13,9 @@ public class Timestamp implements Serializable {
 		}
 	}
 	
-	public boolean isLargerOrEqualToTimestamp (Timestamp SendingProcess, Timestamp ReceivingProcess) {
-		for (int i=0; i<SendingProcess.timevector.length;i++)
-			if (SendingProcess.timevector[i]<=ReceivingProcess.timevector[i])
+	public boolean isLargerOrEqualToTimestamp (Timestamp othertimestamp) {
+		for (int i=0; i< timevector.length;i++)
+			if (timevector[i] < othertimestamp.timevector[i])
 				return false;
 		return true;
 	}
@@ -25,7 +25,7 @@ public class Timestamp implements Serializable {
 		timevector[ID] = timevector[ID] + 1;
 	}
 	
-	public void updateTimestamp (Timestamp timestamp) {
+	public void replaceTimestamp (Timestamp timestamp) {
 		this.timevector = timestamp.getTimevector();
 	}
 	

@@ -1,5 +1,7 @@
 package BirmanSchiperStephenson;
 
+import java.time.Instant;
+
 public class Calculate {
 
 	public static int createRandomNumberBetween(int smallest, int largest) {

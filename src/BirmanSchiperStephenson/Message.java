@@ -2,9 +2,10 @@ package BirmanSchiperStephenson;
 
 import java.io.Serializable;
 import java.rmi.Naming;
+import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
-public class Message implements Runnable, Serializable{
+public class Message implements Runnable, Serializable, Comparable<Message>{
 
 	private int receiverID;
 	private String message;
@@ -22,18 +23,16 @@ public class Message implements Runnable, Serializable{
 	}
 	
 	public void send() {
-		this.run();
+		new Thread(this).start();
 	}
 	
 	@Override
 	public void run() {
 		try {
-			TimeUnit.SECONDS.sleep(delay);
+			System.out.println("these should follow each other");
+			Thread.sleep(delay);
 			IFProcess receivingprocess = (IFProcess) getProcessFromRegistry(this.receiverID);
-			System.out.println("up to here it works, delay is: " + delay);
-//			System.out.println(message);
 			receivingprocess.receiveMessage(this);
-//			receivingprocess.test();
 		}
 		catch(Exception e) {
 			System.out.println("Exception in run in Message: " + e);
@@ -55,7 +54,7 @@ public class Message implements Runnable, Serializable{
 	}
 
 	public void createRandomDelay() {
-		this.delay = Calculate.createRandomNumberBetween(1,5);
+		this.delay = Calculate.createRandomNumberBetween(1,500);
 	}
 	
 	public void createMessageText() {
@@ -72,6 +71,15 @@ public class Message implements Runnable, Serializable{
 	
 	public Timestamp getTimestamp() {
 		return this.timestamp;
+	}
+
+	@Override
+	public int compareTo(Message message) {
+		Timestamp timestamp1 = this.timestamp;
+		Timestamp timestamp2 = message.getTimestamp();
+		if(!timestamp1.isLargerOrEqualToTimestamp(timestamp2)) {return -1;};
+		if(timestamp1.isLargerOrEqualToTimestamp(timestamp2)) {return 1;};
+		return 0;
 	}
 
 }
