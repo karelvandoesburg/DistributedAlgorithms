@@ -31,11 +31,9 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	@Override
 	public void run() {
 		try {
-			System.out.println(this.timestamp.toString());
-//			Thread.sleep(delay);
-//			System.out.println("in message itself: " + this.timestamp.toString());
-//			IFProcess receivingprocess = (IFProcess) getProcessFromRegistry(this.receiverID);
-//			receivingprocess.receiveMessage(this);
+			Thread.sleep(delay);
+			IFProcess receivingprocess = (IFProcess) getProcessFromRegistry(this.receiverID);
+			receivingprocess.receiveMessage(this);
 		}
 		catch(Exception e) {
 			System.out.println("Exception in run in Message: " + e);

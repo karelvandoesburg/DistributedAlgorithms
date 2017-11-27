@@ -53,7 +53,6 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 
 	@Override
 	public void receiveMessage(Message message) {
-		System.out.println("after receivemessage: " + message.getTimestamp().toString());
 		if(canMessageBeDelivered(message)) {
 			deliverMessage(message);
 		}
