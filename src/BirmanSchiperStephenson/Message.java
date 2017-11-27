@@ -18,21 +18,24 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	public Message(int sendingID, int receiverID, Timestamp timestamp, String host) {
 		this.sendingID = sendingID;
 		this.receiverID = receiverID;
-		this.timestamp = timestamp;
+		this.timestamp = new Timestamp(timestamp.getTimevector().length);
+		this.timestamp.replaceWithTimestamp(timestamp);
 		this.host = host;
 		createRandomDelay();
 	}
 	
-	public void send() {
+	public synchronized void send() {
 		new Thread(this).start();
 	}
 	
 	@Override
 	public void run() {
 		try {
-			Thread.sleep(delay);
-			IFProcess receivingprocess = (IFProcess) getProcessFromRegistry(this.receiverID);
-			receivingprocess.receiveMessage(this);
+			System.out.println(this.timestamp.toString());
+//			Thread.sleep(delay);
+//			System.out.println("in message itself: " + this.timestamp.toString());
+//			IFProcess receivingprocess = (IFProcess) getProcessFromRegistry(this.receiverID);
+//			receivingprocess.receiveMessage(this);
 		}
 		catch(Exception e) {
 			System.out.println("Exception in run in Message: " + e);
@@ -44,7 +47,7 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	
 	
 	
-	public synchronized IFProcess getProcessFromRegistry(int ID) {
+	public IFProcess getProcessFromRegistry(int ID) {
 		try{
 			String id = Integer.toString(ID);
 			IFProcess process = (IFProcess) Naming.lookup(host + "/" + id);
