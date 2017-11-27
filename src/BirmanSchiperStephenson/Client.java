@@ -34,17 +34,7 @@ public class Client implements Runnable {
 	public void addProcessToRegistry(Process process) {
 		try {
 			Naming.bind(host + "/" + Integer.toString(ID), process);
-			System.out.println("Process " + ID + " added in " + host + "/" + Integer.toString(ID));
-			
-			TimeUnit.SECONDS.sleep(1);
-			
-			IFProcess test = (IFProcess) Naming.lookup(host + "/" + 1);
-			test.receiveMessage("would be nice if this works");
-			
-			IFProcess test2 = (IFProcess) Naming.lookup(host + "/" + 1);
-			test2.deliverMessage();
-
-			
+			System.out.println("Process " + ID + " added in " + host + "/" + Integer.toString(ID));			
 		}
 		
 		catch(Exception e) {

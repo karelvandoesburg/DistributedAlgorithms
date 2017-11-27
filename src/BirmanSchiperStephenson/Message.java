@@ -9,6 +9,11 @@ public class Message {
 	public Message(int receiverID, Timestamp timestamp) {
 		this.receiverID = receiverID;
 		this.timestamp = timestamp;
+		createMessageText();
+	}
+	
+	public void createMessageText() {
+		this.message = "This message is sent to process " + receiverID + ", with timestamp " + timestamp.toString();
 	}
 	
 	public String toString() {

@@ -14,8 +14,6 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	private String host;
 	private PriorityQueue<Message> buffer = new PriorityQueue<Message>();
 	
-	private String testReceiving;
-	
 	protected Process(int ID, int amountofprocesses, String host) throws RemoteException {
 		super();
 		this.ID = ID;
@@ -24,19 +22,18 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 
 	@Override
-	public void deliverMessage() {
-		System.out.println(this.testReceiving);
+	public void deliverMessage(Message message) {
+		System.out.println(message.toString());
 	}
 
 	@Override
-	public void broadcastMessage() {
-		// TODO Auto-generated method stub
+	public void broadcastMessage(Message message) {
 		
 	}
 
 	@Override
-	public void receiveMessage(String message) {
-		this.testReceiving = message;		
+	public void receiveMessage(Message message) {
+				
 	}
 
 	@Override
@@ -54,18 +51,6 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	public double createRandomDelay() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public String createMessage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void receiveMessage(Message message) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -111,9 +96,11 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		}
 		return null;
 	}
-	
-	public String showYourself() {
-		return "this is process" + ID;
+
+	@Override
+	public Message createMessage() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
