@@ -1,15 +1,35 @@
 package BirmanSchiperStephenson;
 
-public class Message {
+import java.util.concurrent.TimeUnit;
+
+public class Message implements Runnable{
 
 	private int receiverID;
 	private String message;
 	private Timestamp timestamp;
+	private int delay;
 	
-	public Message(int receiverID, Timestamp timestamp) {
+	public Message(int receiverID, Timestamp timestamp, int delay) {
 		this.receiverID = receiverID;
 		this.timestamp = timestamp;
+		this.delay = delay;
 		createMessageText();
+	}
+	
+	public void send() {
+		this.run();
+	}
+	
+	@Override
+	public void run() {
+		try {
+			TimeUnit.SECONDS.sleep(delay);
+			
+		}
+		catch(Exception e) {
+			System.out.println("Exception in run in Message: " + e);
+			e.printStackTrace();
+		}
 	}
 	
 	public void createMessageText() {
@@ -27,4 +47,5 @@ public class Message {
 	public Timestamp getTimestamp() {
 		return this.timestamp;
 	}
+
 }

@@ -2,7 +2,6 @@ package BirmanSchiperStephenson;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.util.concurrent.TimeUnit;
 
 public class Client implements Runnable {
 	

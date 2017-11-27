@@ -18,6 +18,6 @@ public interface IFProcess extends Remote {
 	public double createRandomIntervalBetweenMessages() 							throws java.rmi.RemoteException;
 	public IFProcess getRandomProcessFromRegistry() 								throws java.rmi.RemoteException;
 	public IFProcess getProcessFromRegistry(int ID) 								throws java.rmi.RemoteException;
-	public double createRandomDelay()												throws java.rmi.RemoteException;
+//	public double createRandomDelay()												throws java.rmi.RemoteException;
 	
 }

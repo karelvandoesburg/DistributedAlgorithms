@@ -28,16 +28,9 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 
 	@Override
 	public synchronized void broadcastMessage() {
-		try {
-			IFProcess receivingprocess = (IFProcess) this.getRandomProcessFromRegistry();
-			incrementOwnTimeStamp();
-			Message message = createMessage();
-			
-		}
-		catch(Exception e) {
-			System.out.println("Exception in broadcastMessage in Process: " + e);
-			e.printStackTrace();
-		}
+		incrementOwnTimeStamp();
+		Message message = createMessage();
+		message.send();
 	}
 
 	@Override
@@ -59,14 +52,12 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		return res;
 	}
 	
-	public static int createRandomNumberBetween(int smallest, int largest) {
+	public int createRandomNumberBetween(int smallest, int largest) {
 		return (int )(Math.random() * ((largest+1)-smallest) + smallest);
 	}
 
-	@Override
-	public double createRandomDelay() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int createRandomDelay() {
+		return this.createRandomNumberBetween(1,5);
 	}
 
 	@Override
@@ -121,7 +112,8 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 
 	@Override
 	public Message createMessage() {
-		return new Message(ID,timestamp);
+		int delay = this.createRandomDelay();
+		return new Message(ID,timestamp,delay);
 	}
 
 }
