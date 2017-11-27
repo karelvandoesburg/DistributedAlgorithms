@@ -59,7 +59,7 @@ public class Message implements Runnable, Serializable{
 	}
 	
 	public void createMessageText() {
-		this.message = "This message is sent to process " + receiverID + ", with timestamp ";
+		this.message = "This message is sent to process " + receiverID + ", with timestamp " + this.timestamp.toString();
 	}
 	
 	public String toString() {

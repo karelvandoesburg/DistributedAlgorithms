@@ -1,7 +1,10 @@
 package BirmanSchiperStephenson;
 
-public class Timestamp {
+import java.io.Serializable;
+
+public class Timestamp implements Serializable {
 	private int[] timevector;
+	private static final long serialVersionUID = 1326472295622776147L;
 	
 	public Timestamp(int newVector){
 		timevector = new int[newVector];
@@ -30,7 +33,7 @@ public class Timestamp {
 		return timevector;
 	}
 	
-	public String GoToString(){
+	public String toString(){
 		String text = "Vector is (";
 		for(int i=0;i<timevector.length;i++) {
 			text+=timevector[i] + ",";

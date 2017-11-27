@@ -19,20 +19,17 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		this.ID = ID;
 		this.amountofprocesses = amountofprocesses;
 		this.host = host;
+		this.timestamp = new Timestamp(amountofprocesses);
 	}
 
 	@Override
-	public void deliverMessage(Message message) {
+	public synchronized void deliverMessage(Message message) {
 		System.out.println(message.toString());
-	}
-	
-	public synchronized void test() {
-		System.out.println("it is the passing of the parameters");
 	}
 
 	@Override
 	public void broadcastMessage() {
-//		incrementOwnTimeStamp();
+		incrementOwnTimeStamp();
 		Message message = createMessage();
 		message.send();
 	}
