@@ -4,6 +4,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class Process extends UnicastRemoteObject implements IFProcess{
@@ -13,7 +14,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	private int ID;
 	private int amountofprocesses;
 	private String host;
-	private PriorityQueue<Message> buffer = new PriorityQueue<Message>();
+	private ArrayList<Message> buffer = new ArrayList<Message>();
 	
 	protected Process(int ID, int amountofprocesses, String host) throws RemoteException {
 		super();
@@ -37,6 +38,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		}
 		else {
 			placeInBuffer(message);
+			deliverMessagesBuffer();
 			System.out.println(message.getTimestamp().toString() + "Sent from " + message.getSendingID() + ". Is placed in buffer. Number of message in buffer of process " + ID + " is: " + this.buffer.size());
 		}
 	}
@@ -49,22 +51,14 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	}
 	
 	public synchronized void deliverMessagesBuffer() {
-		if(!buffer.isEmpty()) {
-			if(buffer.peek().isOverBufferTime()) {
-				Message message = buffer.poll();
-				this.deliverMessage(message);
-			}
-			else if(this.canMessageBeDelivered(buffer.peek())) {
-				Message message = buffer.poll();
+		for(int i = 0; i < buffer.size(); i++) {
+			Message message = buffer.get(i);
+			if(this.canMessageBeDelivered(message) || message.isOverBufferTime()) {
+				message = buffer.remove(i);
 				System.out.println("Following delivery is from buffer " + ID + ":");
 				this.deliverMessage(message);
 			}
 		}
-//		if(!buffer.isEmpty() && canMessageBeDelivered(buffer.peek())) {
-//			Message message = buffer.poll();
-//			System.out.println("Following delivery is from buffer " + ID + ":");
-//			this.deliverMessage(message);
-//		}
 	}
 	
 	
@@ -102,9 +96,9 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		long now = Instant.now().toEpochMilli();
 		message.setTimetobuffer(now);
 		buffer.add(message);
-		if(buffer.peek().isOverBufferTime()) {
-			this.deliverMessagesBuffer();
-		}
+//		if(buffer.peek().isOverBufferTime()) {
+//			this.deliverMessagesBuffer();
+//		}
 	}
 	
 	public void updateTimestampAfterDelivery(Message message) {

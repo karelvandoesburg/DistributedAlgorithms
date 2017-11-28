@@ -26,8 +26,8 @@ public class Client implements Runnable {
 			
 			Thread.sleep(1000);
 			
-			for(int i = 0; i < 10; i++) {
-				Thread.sleep(Calculate.createRandomNumberBetween(0, 1000));
+			for(int i = 0; i < 1000; i++) {
+				Thread.sleep(500);
 				process.broadcastMessage();
 			}
 		} 
