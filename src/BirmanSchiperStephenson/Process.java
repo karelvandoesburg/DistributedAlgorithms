@@ -27,8 +27,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	@Override
 	public synchronized void broadcastMessage() {
 		incrementOwnTimeStamp();
-		Message message = createMessage();
-		message.send();
+		sendMessageToAllProcesses();
 	}
 	
 	@Override
@@ -64,16 +63,20 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	
 	
 	
+	public void sendMessageToAllProcesses() {
+		for(int i = 0; i < this.amountofprocesses; i++) {
+			Message message = createMessage(i+1);
+			message.send();
+		}
+	}
 	
 	@Override
 	public void incrementOwnTimeStamp() {
 		timestamp.incrementProcessTimestampByOne(ID);
 	}
 	
-	@Override
-	public Message createMessage() {
-		int receivingprocess = this.chooseRandomReceivingProcess();
-		return new Message(ID,receivingprocess,timestamp,host);
+	public Message createMessage(int receivingprocessID) {
+		return new Message(ID,receivingprocessID,timestamp,host);
 	}
 	
 	public int chooseRandomReceivingProcess() {
@@ -96,9 +99,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		long now = Instant.now().toEpochMilli();
 		message.setTimetobuffer(now);
 		buffer.add(message);
-//		if(buffer.peek().isOverBufferTime()) {
-//			this.deliverMessagesBuffer();
-//		}
+		this.deliverMessagesBuffer();
 	}
 	
 	public void updateTimestampAfterDelivery(Message message) {
