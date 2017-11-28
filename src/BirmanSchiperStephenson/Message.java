@@ -15,7 +15,7 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	private String host;
 	private static final long serialVersionUID = 7526472295622776147L;
 	private long timeintobuffer;
-	private int millisecondstoemptymessagefrombuffer = 5000;
+	private int millisecondstoemptymessagefrombuffer = 10000;
 	
 	public Message(int sendingID, int receiverID, Timestamp timestamp, String host) {
 		this.sendingID = sendingID;

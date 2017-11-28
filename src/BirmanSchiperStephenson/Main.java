@@ -12,7 +12,7 @@ public class Main {
 		int port = 1099;
 		String host = "rmi://127.0.0.1:" + port;
 		createLocalRegistry(port);
-		int amountofprocesses = 3;
+		int amountofprocesses = 6;
 		
 		for (int i = 0; i < amountofprocesses; i++) {
 			Client client = new Client(i+1,amountofprocesses,host);
