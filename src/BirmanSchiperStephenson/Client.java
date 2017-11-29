@@ -21,7 +21,7 @@ public class Client implements Runnable {
 	
 	public void run() {
 		try {
-			Process process = new Process(ID,amountofprocesses,host);
+			Process process = new Process(ID,amountofprocesses, amountofmessages, host);
 			addProcessToRegistry(process);
 			Thread.sleep(1000);
 			

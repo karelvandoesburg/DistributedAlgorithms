@@ -75,6 +75,10 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 		return this.message;
 	}
 	
+	public int getMessageID() {
+		return this.messageID;
+	}
+	
 	public int getSendingID() {
 		return this.sendingID;
 	}
