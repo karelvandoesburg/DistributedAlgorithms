@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 
+import com.sun.glass.ui.Timer;
+
 public class Main {
 
 public static void main(String[] args) throws RemoteException, InterruptedException {
@@ -13,33 +15,20 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 		String host = "rmi://localhost:" + port;
 		createLocalRegistry(port);
 		int amountofcomponents = 6;
-		ArrayList<Integer> componentIDs= new ArrayList<Integer>(amountofcomponents);
-		ArrayList<Integer> rightIDs= new ArrayList<Integer>(amountofcomponents);
+		
+		Server server = new Server(host);
 		
 		for(int i = 0; i < amountofcomponents; i++) {
-			componentIDs.add(i);
-			rightIDs.add(i);
+			Component component = new Component(i);
+			server.addComponentToServer(component);
 		}
 		
-		int firstcomponentID = Calculate.createRandomNumberBetween(0, amountofcomponents-1);
-		System.out.println(firstcomponentID);
-		componentIDs.remove(firstcomponentID);
-		int getter = Calculate.createRandomNumberBetween(0, componentIDs.size()-1);
-		int rightID = componentIDs.remove(getter);
-		Client client = new Client(firstcomponentID,rightID,host);
-		new Thread(client).start();
-		int componentID;
-		for(int i = 0; i < amountofcomponents-2; i++) {
-			getter = Calculate.createRandomNumberBetween(0, componentIDs.size()-1);
-			componentID = rightID;
-			rightID = componentIDs.remove(getter);
-			System.out.println(componentID);
-			client = new Client(componentID,rightID,host);
-			new Thread(client).start();
+		Thread.sleep(1000);
+		
+		for(int i = 0; i < amountofcomponents; i++) {
+			ComponentIF neighbour = (ComponentIF) Server.getComponentFromServer(i, host);
+			System.out.println("component " + neighbour.getComponentID() + " has right ID " + neighbour.getRightID() + " left " + neighbour.getLeftID());
 		}
-		System.out.println(rightID);
-		client = new Client(rightID,firstcomponentID,host);
-		new Thread(client).start();
 		
 	}
 	

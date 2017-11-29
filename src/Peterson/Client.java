@@ -18,7 +18,7 @@ public class Client implements Runnable {
 	
 	public void run() {
 		try {
-			Component component = new Component(this.componentID, this.rightID);
+			Component component = new Component(this.componentID);
 			addProcessToRegistry(component);
 		} 
 		catch (RemoteException e) {
@@ -39,4 +39,5 @@ public class Client implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	
 }
