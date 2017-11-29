@@ -1,5 +1,7 @@
 package BirmanSchiperStephenson;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -9,23 +11,28 @@ import java.util.PriorityQueue;
 
 public class Process extends UnicastRemoteObject implements IFProcess{
 
+	private int messageID;
 	private static final long serialVersionUID = 1L;
 	private Timestamp timestamp;
-	private int ID;
+	private int processID;
 	private int amountofprocesses;
 	private String host;
 	private ArrayList<Message> buffer = new ArrayList<Message>();
+	private PrintWriter printwriter;
 	
 	protected Process(int ID, int amountofprocesses, String host) throws RemoteException {
 		super();
-		this.ID = ID;
+		this.processID = ID;
+		this.messageID = 0;
 		this.amountofprocesses = amountofprocesses;
 		this.host = host;
 		this.timestamp = new Timestamp(amountofprocesses);
+		installPrintwriter();
 	}
 
 	@Override
 	public synchronized void broadcastMessage() {
+		messageID++;
 		incrementOwnTimeStamp();
 		sendMessageToAllProcesses();
 	}
@@ -38,14 +45,15 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		else {
 			placeInBuffer(message);
 			deliverMessagesBuffer();
-			System.out.println(message.getTimestamp().toString() + "Sent from " + message.getSendingID() + ". Is placed in buffer. Number of message in buffer of process " + ID + " is: " + this.buffer.size());
+			System.out.println(message.getTimestamp().toString() + "Sent from " + message.getSendingID() + ". Is placed in buffer. Number of message in buffer of process " + processID + " is: " + this.buffer.size());
 		}
 	}
 	
 	@Override
 	public synchronized void deliverMessage(Message message) {
 		this.updateTimestampAfterDelivery(message);
-		printMessage(message);
+		printMessageToConsole(message);
+		printMessageToFile(message);
 		deliverMessagesBuffer();
 	}
 	
@@ -54,7 +62,7 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 			Message message = buffer.get(i);
 			if(this.canMessageBeDelivered(message) || message.isOverBufferTime()) {
 				message = buffer.remove(i);
-				System.out.println("Following delivery is from buffer " + ID + ":");
+				System.out.println("Following delivery is from buffer " + processID + ":");
 				this.deliverMessage(message);
 			}
 		}
@@ -66,17 +74,19 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	
 	public void sendMessageToAllProcesses() {
 		for(int i = 0; i < this.amountofprocesses; i++) {
-			Message message = createMessage(i+1);
-			message.send();
+			if(i+1 != this.processID) {
+				Message message = createMessage(i+1);
+				message.send();
+			}
 		}
 	}
 	
 	public void incrementOwnTimeStamp() {
-		timestamp.incrementProcessTimestampByOne(ID);
+		timestamp.incrementProcessTimestampByOne(processID);
 	}
 	
 	public Message createMessage(int receivingprocessID) {
-		return new Message(ID,receivingprocessID,timestamp,host);
+		return new Message(this.messageID, processID,receivingprocessID,timestamp,host);
 	}
 	
 	public boolean canMessageBeDelivered(Message message) {
@@ -105,12 +115,31 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		}
 	}
 	
+	public void installPrintwriter() {
+		try {
+			this.printwriter = new PrintWriter("MessagesProccess" + this.processID + ".txt");
+		}
+		catch(IOException e) {
+			System.out.println("Exception in install printwriter: " + e);
+			e.printStackTrace();
+		}
+	}
+	
 	public Timestamp getTimestamp() {
 		return this.timestamp;
 	}
 	
-	public void printMessage(Message message) {
-		System.out.println(message.toString() + ". New timestamp of process " + ID + " is " + this.timestamp.toString());
+	public String messageToOutputString(Message message) {
+		return message.toString() + ". New timestamp of process " + processID + " is " + this.timestamp.toString();
+	}
+	
+	public void printMessageToConsole(Message message) {
+		System.out.println(this.messageToOutputString(message));
+	}
+	
+	public void printMessageToFile(Message message) {
+		printwriter.println(this.messageToOutputString(message));
+		printwriter.flush();
 	}
 
 }

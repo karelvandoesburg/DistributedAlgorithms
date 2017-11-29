@@ -9,24 +9,23 @@ public class Client implements Runnable {
 	private int ID;
 	private int amountofprocesses;
 	private String host;
+	private int amountofmessages;
 	
 	public Client(int ID, int amountofprocesses, String host) {
 		this.ID = ID;
 		this.amountofprocesses = amountofprocesses;
 		this.host = host;
+		this.amountofmessages = 30;
 	}
 	
 	
 	public void run() {
-		Process process;
 		try {
-			process = new Process(ID,amountofprocesses,host);
-			
+			Process process = new Process(ID,amountofprocesses,host);
 			addProcessToRegistry(process);
-			
 			Thread.sleep(1000);
 			
-			for(int i = 0; i < 50; i++) {
+			for(int i = 0; i < this.amountofmessages; i++) {
 				Thread.sleep(Calculate.createRandomNumberBetween(0, 500));
 				process.broadcastMessage();
 			}

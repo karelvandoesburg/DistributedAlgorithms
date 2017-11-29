@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Message implements Runnable, Serializable, Comparable<Message>{
 
+	private int messageID;
 	private int sendingID;
 	private int receiverID;
 	private String message;
@@ -17,7 +18,8 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	private long timeintobuffer;
 	private int millisecondstoemptymessagefrombuffer = 10000;
 	
-	public Message(int sendingID, int receiverID, Timestamp timestamp, String host) {
+	public Message(int messageID, int sendingID, int receiverID, Timestamp timestamp, String host) {
+		this.messageID = messageID;
 		this.sendingID = sendingID;
 		this.receiverID = receiverID;
 		this.timestamp = new Timestamp(timestamp.getTimevector().length);
@@ -65,7 +67,7 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	}
 	
 	public void createMessageText() {
-		this.message = "This message is sent from process " + this.sendingID + " to process " + receiverID + " with message timestamp " + this.timestamp.toString();
+		this.message = "This is message " + this.messageID + " sent from process " + this.sendingID + " to process " + receiverID + " with message timestamp " + this.timestamp.toString();
 	}
 	
 	public String toString() {
