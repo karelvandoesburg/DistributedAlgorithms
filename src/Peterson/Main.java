@@ -1,10 +1,12 @@
 package Peterson;
 
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 
 import BirmanSchiperStephenson.Client;
+import BirmanSchiperStephenson.Process;
 
 public class Main {
 
@@ -17,24 +19,24 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 		ArrayList<Integer> componentIDs= new ArrayList<Integer>(amountofcomponents);
 		ArrayList<Integer> rightIDs= new ArrayList<Integer>(amountofcomponents);
 		
-		for(int i = 1; i <= amountofcomponents; i++) {
+		for(int i = 0; i < amountofcomponents; i++) {
 			componentIDs.add(i);
 			rightIDs.add(i);
 		}
 		
-		for (int i = 0; i < amountofcomponents; i++) {
-			int gettercomponentID = Calculate.createRandomNumberBetween(0, componentIDs.size()-1);
-			int componentID = componentIDs.remove(gettercomponentID);
-			int rightID = componentID;
-			int getterrightID = Integer.MAX_VALUE;
-			while(rightID == componentID) {
-				getterrightID = Calculate.createRandomNumberBetween(0, rightIDs.size()-1);
-				rightID = rightIDs.get(getterrightID);
-			}
-			rightID = rightIDs.remove(getterrightID);
-			Component component = new Component(componentID, rightID);
-			new Thread(component).start();
+		int firstcomponentID = Calculate.createRandomNumberBetween(0, amountofcomponents-1);
+		componentIDs.remove(firstcomponentID);
+		int rightID = Calculate.createRandomNumberBetween(0, componentIDs.size()-1);
+		componentIDs.remove(rightID);
+		createComponent(firstcomponentID,rightID);
+		int componentID;
+		for(int i = 0; i < amountofcomponents-2; i++) {
+			int getter = Calculate.createRandomNumberBetween(0, componentIDs.size()-1);
+			componentID = rightID;
+			rightID = componentIDs.remove(getter);
+			createComponent(componentID,rightID);
 		}
+		createComponent(rightID, firstcomponentID);
 		
 	}
 	
@@ -48,5 +50,22 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 			e.printStackTrace();
 		}
 	}
+	
+	public static void createComponent(int componentID, int rightID) {
+		Component component = new Component(componentID,rightID);
+		new Thread(component).start();
+	}
+	
+//	public void addProcessToRegistry(Component component, String host, int componentID) {
+//		try {
+//			Naming.bind(host + "/" + Integer.toString(componentID), component);
+//			System.out.println("Process " + componentID + " added in " + host + "/" + Integer.toString(componentID));	
+//		}
+//		
+//		catch(Exception e) {
+//			System.out.println("Exception in addProcessToRegistry in Client: " + e);
+//			e.printStackTrace();
+//		}
+//	}
 	
 }
