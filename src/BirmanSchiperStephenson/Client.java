@@ -26,7 +26,7 @@ public class Client implements Runnable {
 			Thread.sleep(1000);
 			
 			for(int i = 0; i < this.amountofmessages; i++) {
-				Thread.sleep(Calculate.createRandomNumberBetween(0, 500));
+				this.createIntervalBetweenMessages();
 				process.broadcastMessage();
 			}
 		} 
@@ -48,6 +48,15 @@ public class Client implements Runnable {
 		
 		catch(Exception e) {
 			System.out.println("Exception in addProcessToRegistry in Client: " + e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void createIntervalBetweenMessages() {
+		try {
+			Thread.sleep(Calculate.createRandomNumberBetween(0, 500));
+		} 
+		catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
