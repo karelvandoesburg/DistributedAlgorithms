@@ -5,9 +5,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 
-import BirmanSchiperStephenson.Client;
-import BirmanSchiperStephenson.Process;
-
 public class Main {
 
 public static void main(String[] args) throws RemoteException, InterruptedException {
@@ -25,18 +22,24 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 		}
 		
 		int firstcomponentID = Calculate.createRandomNumberBetween(0, amountofcomponents-1);
+		System.out.println(firstcomponentID);
 		componentIDs.remove(firstcomponentID);
-		int rightID = Calculate.createRandomNumberBetween(0, componentIDs.size()-1);
-		componentIDs.remove(rightID);
-		createComponent(firstcomponentID,rightID);
+		int getter = Calculate.createRandomNumberBetween(0, componentIDs.size()-1);
+		int rightID = componentIDs.remove(getter);
+		Client client = new Client(firstcomponentID,rightID,host);
+		new Thread(client).start();
 		int componentID;
 		for(int i = 0; i < amountofcomponents-2; i++) {
-			int getter = Calculate.createRandomNumberBetween(0, componentIDs.size()-1);
+			getter = Calculate.createRandomNumberBetween(0, componentIDs.size()-1);
 			componentID = rightID;
 			rightID = componentIDs.remove(getter);
-			createComponent(componentID,rightID);
+			System.out.println(componentID);
+			client = new Client(componentID,rightID,host);
+			new Thread(client).start();
 		}
-		createComponent(rightID, firstcomponentID);
+		System.out.println(rightID);
+		client = new Client(rightID,firstcomponentID,host);
+		new Thread(client).start();
 		
 	}
 	
@@ -50,22 +53,5 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 			e.printStackTrace();
 		}
 	}
-	
-	public static void createComponent(int componentID, int rightID) {
-		Component component = new Component(componentID,rightID);
-		new Thread(component).start();
-	}
-	
-//	public void addProcessToRegistry(Component component, String host, int componentID) {
-//		try {
-//			Naming.bind(host + "/" + Integer.toString(componentID), component);
-//			System.out.println("Process " + componentID + " added in " + host + "/" + Integer.toString(componentID));	
-//		}
-//		
-//		catch(Exception e) {
-//			System.out.println("Exception in addProcessToRegistry in Client: " + e);
-//			e.printStackTrace();
-//		}
-//	}
 	
 }

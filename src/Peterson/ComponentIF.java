@@ -1,5 +1,7 @@
 package Peterson;
 
-public interface ComponentIF {
+import java.rmi.Remote;
+
+public interface ComponentIF extends Remote{
 
 }
