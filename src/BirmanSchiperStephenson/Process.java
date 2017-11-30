@@ -9,6 +9,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class Process extends UnicastRemoteObject implements IFProcess{
 
 	private int messageID;
@@ -92,14 +94,15 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		return new Message(this.messageID, processID,receivingprocessID,timestamp,host);
 	}
 	
-	public boolean canMessageBeDelivered(Message message) {
+	public synchronized boolean canMessageBeDelivered(Message message) {
 		Timestamp timestamp = this.incrementOwnTimestampToMakeComparison(message);
 		return timestamp.isLargerOrEqualToTimestamp(message.getTimestamp());
 	}
 	
-	public Timestamp incrementOwnTimestampToMakeComparison(Message message) {
+	public synchronized Timestamp incrementOwnTimestampToMakeComparison(Message message) {
 		Timestamp timestamp = new Timestamp(this.amountofprocesses);
 		timestamp.replaceWithTimestamp(this.timestamp);
+		System.out.println(timestamp.toString());
 		timestamp.incrementProcessTimestampByOne(message.getSendingID());
 		return timestamp;
 	}

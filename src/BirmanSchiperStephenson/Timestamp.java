@@ -21,8 +21,11 @@ public class Timestamp implements Serializable {
 	}
 	
 	public synchronized void incrementProcessTimestampByOne(int ID) {
-		ID = ID - 1;
-		this.timevector[ID] = this.timevector[ID] + 1;
+		this.timevector[ID-1]++;
+	}
+	
+	public synchronized void decrementProcessTimestampByOne(int ID) {
+		this.timevector[ID-1]--;
 	}
 	
 	public void replaceWithTimestamp (Timestamp timestamp) {
