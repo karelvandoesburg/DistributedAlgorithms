@@ -26,7 +26,7 @@ public class Server {
 		System.out.println("The elected component, is component: " + elected);
 	}
 	
-	public synchronized int executeElectionRound() {
+	public int executeElectionRound() {
 		this.passValuesToNeighbours("tid");
 		int elected = this.checkIfElected();
 		if(elected != Integer.MIN_VALUE) {
@@ -41,7 +41,7 @@ public class Server {
 		return Integer.MIN_VALUE;
 	}
 	
-	public synchronized void passValuesToNeighbours(String value) {
+	public void passValuesToNeighbours(String value) {
 		for(Integer componentID: components) {
 			ComponentIF component = (ComponentIF) Server.getComponentFromServer(componentID, host);
 			try {
@@ -49,6 +49,7 @@ public class Server {
 					int rightID = component.getRightID();
 					ComponentIF rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
 					while(!rightneighbour.isActive()) {
+						this.passTidValueToNeighbour(component, rightneighbour);
 						rightID = rightneighbour.getRightID();
 						rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
 					}
@@ -64,7 +65,7 @@ public class Server {
 		}
 	}
 	
-	public synchronized void passTidValueToNeighbour(ComponentIF component, ComponentIF rightneighbour) {
+	public void passTidValueToNeighbour(ComponentIF component, ComponentIF rightneighbour) {
 		try {
 			rightneighbour.setNtid(component.getTid());
 			System.out.println("passing the tid value");
@@ -76,7 +77,7 @@ public class Server {
 		}
 	}
 		
-	public synchronized void passNNtidValueToNeighbour(ComponentIF component, ComponentIF rightneighbour) {
+	public void passNNtidValueToNeighbour(ComponentIF component, ComponentIF rightneighbour) {
 		try {
 				int nntid = Math.max(component.getTid(), component.getNtid());
 				rightneighbour.setNNtid(nntid);
@@ -89,15 +90,20 @@ public class Server {
 		}
 	}
 	
-	public synchronized int checkIfElected() {
+	public int checkIfElected() {
 		for(Integer componentID: components) {
 			ComponentIF component = (ComponentIF) Server.getComponentFromServer(componentID, host);
 			try {
-				if(component.isActive()) {
+				if (component.isActive()) {
 					if((component.getNtid() == component.getComponentID()) || component.getNNtid() == component.getComponentID()) {
 						return component.getComponentID();
 					}
-				}	
+				}
+				else {
+					if(component.getNtid() == component.getComponentID()) {
+						return component.getComponentID();
+					}
+				}
 			} 
 			catch (RemoteException e) {
 				System.out.println("Exception is the executeElectionRound: " + e);
@@ -107,18 +113,18 @@ public class Server {
 		return Integer.MIN_VALUE;
 	}
 	
-	public synchronized void checkActivity() {
+	public void checkActivity() {
 		for(Integer componentID: components) {
 			ComponentIF component = (ComponentIF) Server.getComponentFromServer(componentID, host);
 			try {
 				if(component.isActive()) {
-					if((component.getNtid() >= component.getTid()) || component.getNtid() >= component.getNNtid()) {
+					if((component.getNtid() >= component.getTid()) && component.getNtid() >= component.getNNtid()) {
 						component.setTid(component.getNtid());
 					}
 					else {
 						component.setComponentToRelay();
-					}
-				}	
+					}	
+				}
 			} 
 			catch (RemoteException e) {
 				System.out.println("Exception is the executeElectionRound: " + e);

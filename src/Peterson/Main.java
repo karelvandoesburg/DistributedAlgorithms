@@ -14,7 +14,7 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 		int port = 1099;
 		String host = "rmi://localhost:" + port;
 		createLocalRegistry(port);
-		int amountofcomponents = 20;
+		int amountofcomponents = 90;
 		
 		Server server = new Server(host);
 		
