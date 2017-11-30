@@ -7,8 +7,9 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 	
 	public int componentID;
 	public int rightID;
-	public int leftID;
-	public int MaxID;
+	public int tid;
+	public int ntid;
+	public int nntid;
 	private boolean isactive;
 	
 	public Component(int componentID) throws RemoteException {
@@ -33,21 +34,6 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 	}
 
 	@Override
-	public void setLeftID(int leftID) {
-		this.leftID = leftID;
-	}
-
-	@Override
-	public int getLeftID() throws RemoteException {
-		return this.leftID;
-	}
-
-	@Override
-	public int getMaxID() throws RemoteException {
-		return this.MaxID;
-	}
-
-	@Override
 	public boolean isActive() throws RemoteException {
 		return this.isactive;
 	}
@@ -58,8 +44,33 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 	}
 
 	@Override
-	public void setMaxID(int MaxID) throws RemoteException {
-		this.MaxID = MaxID;
+	public int getTid() throws RemoteException {
+		return this.tid;
+	}
+
+	@Override
+	public int getNtid() throws RemoteException {
+		return this.ntid;
+	}
+
+	@Override
+	public int getNNtid() throws RemoteException {
+		return this.nntid;
+	}
+
+	@Override
+	public void setTid(int tid) throws RemoteException {
+		this.tid = tid;
+	}
+
+	@Override
+	public void setNtid(int ntid) throws RemoteException {
+		this.ntid = ntid;
+	}
+
+	@Override
+	public void setNNtid(int nntid) throws RemoteException {
+		this.nntid = nntid;
 	}
 
 }

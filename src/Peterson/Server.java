@@ -17,20 +17,19 @@ public class Server {
 	}
 	
 	public void startElection() {
-		this.executeElectionRound();
+		int elected = Integer.MIN_VALUE;
+		while(elected == Integer.MIN_VALUE) {
+			this.executeElectionRound();
+		}
+		System.out.println("The elected component, is component: " + elected);
 	}
 	
-	public synchronized void executeElectionRound() {
-		this.passValuesToNeighbours();
+	public synchronized int executeElectionRound() {
+		int elected = Integer.MAX_VALUE;
+		
 	}
 	
-	public synchronized void passValuesToNeighbours() {
-		this.passLeftValuesToNeighbours();
-		this.passMaxValuesToNeighbours();
-		this.checkActivity();
-	}
-	
-	public synchronized void passLeftValuesToNeighbours() {
+	public synchronized void passValuesToNeighbours(String value) {
 		for(Integer componentID: components) {
 			ComponentIF component = (ComponentIF) this.getComponentFromServer(componentID, host);
 			try {
@@ -42,28 +41,6 @@ public class Server {
 						rightneighbour = (ComponentIF) this.getComponentFromServer(rightID, host);
 					}
 					rightneighbour.setLeftID(component.getComponentID());
-				}
-				
-			} 
-			catch (RemoteException e) {
-				System.out.println("Exception is the executeElectionRound: " + e);
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public synchronized void passMaxValuesToNeighbours() {
-		for(Integer componentID: components) {
-			ComponentIF component = (ComponentIF) this.getComponentFromServer(componentID, host);
-			try {
-				if(component.isActive()) {
-					int rightID = component.getRightID();
-					ComponentIF rightneighbour = (ComponentIF) this.getComponentFromServer(rightID, host);
-					while(!rightneighbour.isActive()) {
-						rightID = rightneighbour.getRightID();
-						rightneighbour = (ComponentIF) this.getComponentFromServer(rightID, host);
-					}
-					rightneighbour.setMaxID(Math.max(component.getComponentID(), component.getLeftID()));
 				}
 				
 			} 
@@ -111,10 +88,7 @@ public class Server {
 				int rightID = neighbour.getRightID();
 				neighbour.setRightID(component.getComponentID());
 				component.setRightID(rightID);
-				component.setLeftID(neighbour.getComponentID());
 				this.components.add(component.getComponentID());
-				ComponentIF neighbour2 = (ComponentIF) this.getComponentFromServer(rightID, host);
-				neighbour2.setLeftID(component.getComponentID());
 				addProcessToRegistry(component);
 			} catch (RemoteException e) {
 				System.out.println("Exception in bindComponentInCirle in server: "+ e);

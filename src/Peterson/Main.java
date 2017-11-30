@@ -25,10 +25,10 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 		
 		Thread.sleep(1000);
 		
-//		for(int i = 0; i < amountofcomponents; i++) {
-//			ComponentIF neighbour = (ComponentIF) Server.getComponentFromServer(i, host);
-//			System.out.println("component " + neighbour.getComponentID() + " has right ID " + neighbour.getRightID() + " left " + neighbour.getLeftID());
-//		}
+		for(int i = 0; i < amountofcomponents; i++) {
+			ComponentIF neighbour = (ComponentIF) Server.getComponentFromServer(i, host);
+			System.out.println("component " + neighbour.getComponentID() + " has right ID " + neighbour.getRightID());
+		}
 		
 		server.startElection();
 		
