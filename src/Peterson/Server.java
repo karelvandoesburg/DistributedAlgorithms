@@ -19,28 +19,41 @@ public class Server {
 	public void startElection() {
 		int elected = Integer.MIN_VALUE;
 		while(elected == Integer.MIN_VALUE) {
-			this.executeElectionRound();
+			elected = this.executeElectionRound();
+			System.out.println("");
+			System.out.println("");
 		}
 		System.out.println("The elected component, is component: " + elected);
 	}
 	
 	public synchronized int executeElectionRound() {
-		int elected = Integer.MAX_VALUE;
-		
+		this.passValuesToNeighbours("tid");
+		int elected = this.checkIfElected();
+		if(elected != Integer.MIN_VALUE) {
+			return elected;
+		}
+		this.passValuesToNeighbours("nntid");
+		elected = this.checkIfElected();
+		if(elected != Integer.MIN_VALUE) {
+			return elected;
+		}
+		this.checkActivity();
+		return Integer.MIN_VALUE;
 	}
 	
 	public synchronized void passValuesToNeighbours(String value) {
 		for(Integer componentID: components) {
-			ComponentIF component = (ComponentIF) this.getComponentFromServer(componentID, host);
+			ComponentIF component = (ComponentIF) Server.getComponentFromServer(componentID, host);
 			try {
 				if(component.isActive()) {
 					int rightID = component.getRightID();
-					ComponentIF rightneighbour = (ComponentIF) this.getComponentFromServer(rightID, host);
+					ComponentIF rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
 					while(!rightneighbour.isActive()) {
 						rightID = rightneighbour.getRightID();
-						rightneighbour = (ComponentIF) this.getComponentFromServer(rightID, host);
+						rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
 					}
-					rightneighbour.setLeftID(component.getComponentID());
+					if(value == "tid") {this.passTidValueToNeighbour(component,rightneighbour);}
+					else {this.passNNtidValueToNeighbour(component,rightneighbour);}
 				}
 				
 			} 
@@ -51,16 +64,61 @@ public class Server {
 		}
 	}
 	
-	public synchronized void checkActivity() {
+	public synchronized void passTidValueToNeighbour(ComponentIF component, ComponentIF rightneighbour) {
+		try {
+			rightneighbour.setNtid(component.getTid());
+			System.out.println("passing the tid value");
+			System.out.println(rightneighbour.componentToString());
+		} 
+		catch (RemoteException e) {
+			System.out.println("Exception in passNNtidValueToNeighbour in Server: " + e);
+			e.printStackTrace();
+		}
+	}
+		
+	public synchronized void passNNtidValueToNeighbour(ComponentIF component, ComponentIF rightneighbour) {
+		try {
+				int nntid = Math.max(component.getTid(), component.getNtid());
+				rightneighbour.setNNtid(nntid);
+				System.out.println("passing the NNtid value");
+				System.out.println(rightneighbour.componentToString());
+			} 
+		catch (RemoteException e) {
+			System.out.println("Exception in passTidValueToNeighbour in Server: " + e);
+			e.printStackTrace();
+		}
+	}
+	
+	public synchronized int checkIfElected() {
 		for(Integer componentID: components) {
-			ComponentIF component = (ComponentIF) this.getComponentFromServer(componentID, host);
+			ComponentIF component = (ComponentIF) Server.getComponentFromServer(componentID, host);
 			try {
 				if(component.isActive()) {
-					if((component.getLeftID() < component.getComponentID()) && (component.getLeftID() < component.getComponentID())) {
+					if((component.getNtid() == component.getComponentID()) || component.getNNtid() == component.getComponentID()) {
+						return component.getComponentID();
+					}
+				}	
+			} 
+			catch (RemoteException e) {
+				System.out.println("Exception is the executeElectionRound: " + e);
+				e.printStackTrace();
+			}
+		}
+		return Integer.MIN_VALUE;
+	}
+	
+	public synchronized void checkActivity() {
+		for(Integer componentID: components) {
+			ComponentIF component = (ComponentIF) Server.getComponentFromServer(componentID, host);
+			try {
+				if(component.isActive()) {
+					if((component.getNtid() >= component.getTid()) || component.getNtid() >= component.getNNtid()) {
+						component.setTid(component.getNtid());
+					}
+					else {
 						component.setComponentToRelay();
 					}
-				}
-				
+				}	
 			} 
 			catch (RemoteException e) {
 				System.out.println("Exception is the executeElectionRound: " + e);

@@ -15,7 +15,10 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 	public Component(int componentID) throws RemoteException {
 		super();
 		this.componentID = componentID;
+		this.tid = componentID;
 		this.isactive = true;
+		this.ntid = Integer.MAX_VALUE;
+		this.nntid = Integer.MAX_VALUE;
 	}
 	
 	@Override
@@ -71,6 +74,11 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 	@Override
 	public void setNNtid(int nntid) throws RemoteException {
 		this.nntid = nntid;
+	}
+
+	@Override
+	public String componentToString() throws RemoteException {
+		return "Component: " + this.componentID  + ", tid: " + this.tid + ", ntid: " + this.ntid + ", nntid: " + this.nntid + ", active: " + this.isactive;
 	}
 
 }

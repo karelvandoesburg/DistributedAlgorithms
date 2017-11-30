@@ -15,5 +15,6 @@ public interface ComponentIF extends Remote{
 	public int getComponentID()							throws java.rmi.RemoteException;
 	public boolean isActive()							throws java.rmi.RemoteException;
 	public void setComponentToRelay()					throws java.rmi.RemoteException;
+	public String componentToString()							throws java.rmi.RemoteException;
 	
 }
