@@ -16,6 +16,7 @@ public class RecordCausalOrdening {
 			return "the message ordening is causal";
 		}
 		else {
+			System.out.println("hier gaat het fout 2");
 			counter[sendingID-1] = Integer.MAX_VALUE;
 			return "the message ordening is NOT causal";
 		}

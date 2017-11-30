@@ -10,17 +10,17 @@ public class Main {
 	public static void main(String[] args) throws RemoteException, InterruptedException {
 		
 		int port = 1099;
-		String host = "rmi://localhost:" + port;
+		String host = "rmi://127.0.0.1:" + port;
 		createLocalRegistry(port);
 		int amountofprocesses = 6;
 		
 		Process counter = new Process(0,0,host);
 		Client.addProcessToRegistry(counter, host);
 		
-		for (int i = 0; i < amountofprocesses; i++) {
-			Client client = new Client(i+1,amountofprocesses,host);
-			new Thread(client).start();
-		}
+//		for (int i = 0; i < amountofprocesses; i++) {
+//			Client client = new Client(i+1);
+//			new Thread(client).start();
+//		}
 		
 	}
 	

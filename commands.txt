@@ -1,6 +1,7 @@
 cd Documents\Technische_Informatica\Master\IN4150-Distributed-Algorithms\Code2\src
 
 java -Djava.security.policy=my.policy BirmanSchiperStephenson.Main
+java -Djava.security.policy=my.policy BirmanSchiperStephenson.Client
 
 cd Documents\Technische_Informatica\Master\IN4150-Distributed-Algorithms\Code2\src\BirmanSchiperStephenson javac *.java
 

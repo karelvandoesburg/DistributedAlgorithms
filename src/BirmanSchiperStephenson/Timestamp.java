@@ -21,8 +21,11 @@ public class Timestamp implements Serializable {
 	}
 	
 	public void incrementProcessTimestampByOne(int ID) {
+//		Thread.sleep(100);
 		ID = ID - 1;
+		System.out.println("TimestampID: " + ID + ", Timestamp length: " + timevector.length + " value " + timevector[ID]);
 		timevector[ID] = timevector[ID] + 1;
+		System.out.println("this worked");
 	}
 	
 	public void replaceWithTimestamp (Timestamp timestamp) {

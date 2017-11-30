@@ -1,450 +1,450 @@
-This is message 1 sent from process 1 to process 6 with message timestamp (1,0,0,0,0,0). New timestamp of process 6 is (1,0,0,0,0,6)
+This is message 1 sent from process 4 to process 6 with message timestamp (0,0,0,1,0,0). New timestamp of process 6 is (0,0,0,1,0,0)
 the message ordening is causal
 
-This is message 1 sent from process 2 to process 6 with message timestamp (0,1,0,0,0,0). New timestamp of process 6 is (1,1,0,0,0,6)
+This is message 1 sent from process 1 to process 6 with message timestamp (1,0,0,0,0,0). New timestamp of process 6 is (1,0,0,1,0,1)
 the message ordening is causal
 
-This is message 1 sent from process 3 to process 6 with message timestamp (0,0,1,0,0,0). New timestamp of process 6 is (1,1,1,0,0,8)
+This is message 2 sent from process 4 to process 6 with message timestamp (0,0,0,2,0,0). New timestamp of process 6 is (1,0,0,2,0,7)
 the message ordening is causal
 
-This is message 1 sent from process 4 to process 6 with message timestamp (0,0,0,1,0,0). New timestamp of process 6 is (1,1,1,1,0,12)
+This is message 3 sent from process 4 to process 6 with message timestamp (0,0,0,3,0,0). New timestamp of process 6 is (1,0,0,3,0,7)
 the message ordening is causal
 
-This is message 2 sent from process 1 to process 6 with message timestamp (2,0,0,0,0,0). New timestamp of process 6 is (2,1,1,1,0,12)
+This is message 1 sent from process 2 to process 6 with message timestamp (0,1,0,0,0,0). New timestamp of process 6 is (1,1,0,3,0,12)
 the message ordening is causal
 
-This is message 3 sent from process 1 to process 6 with message timestamp (3,0,0,0,0,0). New timestamp of process 6 is (3,1,1,1,0,12)
+This is message 2 sent from process 2 to process 6 with message timestamp (0,2,0,0,0,0). New timestamp of process 6 is (1,2,0,3,0,12)
 the message ordening is causal
 
-This is message 4 sent from process 1 to process 6 with message timestamp (4,0,0,0,0,0). New timestamp of process 6 is (4,1,1,1,0,12)
+This is message 3 sent from process 2 to process 6 with message timestamp (0,3,0,0,0,0). New timestamp of process 6 is (1,3,0,3,0,12)
 the message ordening is causal
 
-This is message 2 sent from process 3 to process 6 with message timestamp (0,0,2,0,0,0). New timestamp of process 6 is (4,1,2,1,0,14)
+This is message 4 sent from process 2 to process 6 with message timestamp (0,4,0,0,0,0). New timestamp of process 6 is (1,4,0,3,0,12)
 the message ordening is causal
 
-This is message 3 sent from process 3 to process 6 with message timestamp (0,0,3,0,0,0). New timestamp of process 6 is (4,1,3,1,0,14)
+This is message 1 sent from process 5 to process 6 with message timestamp (0,0,0,0,1,0). New timestamp of process 6 is (1,4,0,3,1,13)
 the message ordening is causal
 
-This is message 4 sent from process 3 to process 6 with message timestamp (0,0,4,0,0,0). New timestamp of process 6 is (4,1,4,1,0,14)
+This is message 2 sent from process 5 to process 6 with message timestamp (0,0,0,0,2,0). New timestamp of process 6 is (1,4,0,3,2,13)
 the message ordening is causal
 
-This is message 5 sent from process 3 to process 6 with message timestamp (0,0,5,0,0,0). New timestamp of process 6 is (4,1,5,1,0,14)
+This is message 3 sent from process 5 to process 6 with message timestamp (0,0,0,0,3,0). New timestamp of process 6 is (1,4,0,3,3,13)
 the message ordening is causal
 
-This is message 6 sent from process 3 to process 6 with message timestamp (0,0,6,0,0,0). New timestamp of process 6 is (4,1,6,1,0,14)
+This is message 4 sent from process 5 to process 6 with message timestamp (0,0,0,1,4,0). New timestamp of process 6 is (1,4,0,3,4,13)
 the message ordening is causal
 
-This is message 7 sent from process 3 to process 6 with message timestamp (0,0,7,0,0,0). New timestamp of process 6 is (4,1,7,1,0,14)
+This is message 5 sent from process 5 to process 6 with message timestamp (0,0,0,1,5,0). New timestamp of process 6 is (1,4,0,3,5,13)
 the message ordening is causal
 
-This is message 2 sent from process 2 to process 6 with message timestamp (0,2,0,0,0,0). New timestamp of process 6 is (4,2,7,1,0,14)
+This is message 4 sent from process 4 to process 6 with message timestamp (0,0,0,4,0,0). New timestamp of process 6 is (1,4,0,4,5,14)
 the message ordening is causal
 
-This is message 3 sent from process 2 to process 6 with message timestamp (0,3,0,0,0,0). New timestamp of process 6 is (4,3,7,1,0,14)
+This is message 1 sent from process 3 to process 6 with message timestamp (0,0,1,0,0,0). New timestamp of process 6 is (1,4,1,4,5,14)
 the message ordening is causal
 
-This is message 4 sent from process 2 to process 6 with message timestamp (0,4,0,0,0,0). New timestamp of process 6 is (4,4,7,1,0,14)
+This is message 2 sent from process 1 to process 6 with message timestamp (2,0,1,0,0,0). New timestamp of process 6 is (2,4,1,4,5,14)
 the message ordening is causal
 
-This is message 5 sent from process 2 to process 6 with message timestamp (0,5,0,0,0,0). New timestamp of process 6 is (4,5,7,1,0,14)
+This is message 3 sent from process 1 to process 6 with message timestamp (3,0,1,0,0,0). New timestamp of process 6 is (3,4,1,4,5,14)
 the message ordening is causal
 
-This is message 1 sent from process 5 to process 6 with message timestamp (0,0,0,0,1,0). New timestamp of process 6 is (4,5,7,1,1,15)
+This is message 4 sent from process 1 to process 6 with message timestamp (4,0,1,0,0,0). New timestamp of process 6 is (4,4,1,4,5,14)
 the message ordening is causal
 
-This is message 2 sent from process 5 to process 6 with message timestamp (0,2,1,0,2,0). New timestamp of process 6 is (4,5,7,1,2,15)
+This is message 5 sent from process 1 to process 6 with message timestamp (5,0,1,0,0,0). New timestamp of process 6 is (5,4,1,4,5,14)
 the message ordening is causal
 
-This is message 2 sent from process 4 to process 6 with message timestamp (0,0,0,2,0,0). New timestamp of process 6 is (4,5,7,2,2,15)
+This is message 5 sent from process 4 to process 6 with message timestamp (0,0,0,5,1,0). New timestamp of process 6 is (5,4,1,5,5,15)
 the message ordening is causal
 
-This is message 3 sent from process 4 to process 6 with message timestamp (0,0,0,3,0,0). New timestamp of process 6 is (4,5,7,3,2,15)
+This is message 6 sent from process 4 to process 6 with message timestamp (0,0,0,6,1,0). New timestamp of process 6 is (5,4,1,6,5,15)
 the message ordening is causal
 
-This is message 6 sent from process 2 to process 6 with message timestamp (0,6,0,0,0,0). New timestamp of process 6 is (4,6,7,3,2,18)
+This is message 6 sent from process 1 to process 6 with message timestamp (6,0,1,0,0,0). New timestamp of process 6 is (6,4,1,6,5,19)
 the message ordening is causal
 
-This is message 3 sent from process 5 to process 6 with message timestamp (0,2,1,0,3,0). New timestamp of process 6 is (4,6,7,3,3,19)
+This is message 7 sent from process 1 to process 6 with message timestamp (7,0,1,0,0,0). New timestamp of process 6 is (7,4,1,6,5,19)
 the message ordening is causal
 
-This is message 8 sent from process 3 to process 6 with message timestamp (0,0,8,0,0,0). New timestamp of process 6 is (4,6,8,3,3,19)
+This is message 8 sent from process 1 to process 6 with message timestamp (8,0,1,0,0,0). New timestamp of process 6 is (8,4,1,6,5,19)
 the message ordening is causal
 
-This is message 9 sent from process 3 to process 6 with message timestamp (0,2,9,0,1,0). New timestamp of process 6 is (4,6,9,3,3,19)
+This is message 9 sent from process 1 to process 6 with message timestamp (9,0,1,0,0,0). New timestamp of process 6 is (9,4,1,6,5,19)
 the message ordening is causal
 
-This is message 4 sent from process 4 to process 6 with message timestamp (1,0,0,4,0,0). New timestamp of process 6 is (4,6,9,4,3,19)
+This is message 10 sent from process 1 to process 6 with message timestamp (10,0,1,4,0,0). New timestamp of process 6 is (10,4,1,6,5,19)
 the message ordening is causal
 
-This is message 5 sent from process 4 to process 6 with message timestamp (1,0,0,5,0,0). New timestamp of process 6 is (4,6,9,5,3,19)
+This is message 11 sent from process 1 to process 6 with message timestamp (11,0,1,4,0,0). New timestamp of process 6 is (11,4,1,6,5,19)
 the message ordening is causal
 
-This is message 6 sent from process 4 to process 6 with message timestamp (2,0,0,6,0,0). New timestamp of process 6 is (4,6,9,6,3,19)
+This is message 5 sent from process 2 to process 6 with message timestamp (0,5,0,0,0,0). New timestamp of process 6 is (11,5,1,6,5,19)
 the message ordening is causal
 
-This is message 7 sent from process 4 to process 6 with message timestamp (2,0,0,7,0,0). New timestamp of process 6 is (4,6,9,7,3,19)
+This is message 6 sent from process 2 to process 6 with message timestamp (0,6,0,0,0,0). New timestamp of process 6 is (11,6,1,6,5,19)
 the message ordening is causal
 
-This is message 8 sent from process 4 to process 6 with message timestamp (2,0,0,8,0,0). New timestamp of process 6 is (4,6,9,8,3,19)
+This is message 7 sent from process 2 to process 6 with message timestamp (0,7,0,0,0,0). New timestamp of process 6 is (11,7,1,6,5,19)
 the message ordening is causal
 
-This is message 4 sent from process 5 to process 6 with message timestamp (0,2,1,0,4,0). New timestamp of process 6 is (4,6,9,8,4,19)
+This is message 2 sent from process 3 to process 6 with message timestamp (0,0,2,1,0,0). New timestamp of process 6 is (11,7,2,6,5,19)
 the message ordening is causal
 
-This is message 5 sent from process 5 to process 6 with message timestamp (0,2,1,0,5,0). New timestamp of process 6 is (4,6,9,8,5,19)
+This is message 3 sent from process 3 to process 6 with message timestamp (0,0,3,1,0,0). New timestamp of process 6 is (11,7,3,6,5,19)
 the message ordening is causal
 
-This is message 6 sent from process 5 to process 6 with message timestamp (0,2,1,0,6,0). New timestamp of process 6 is (4,6,9,8,6,19)
+This is message 4 sent from process 3 to process 6 with message timestamp (0,0,4,1,0,0). New timestamp of process 6 is (11,7,4,6,5,19)
 the message ordening is causal
 
-This is message 7 sent from process 2 to process 6 with message timestamp (0,7,3,1,0,0). New timestamp of process 6 is (4,7,9,8,6,19)
+This is message 5 sent from process 3 to process 6 with message timestamp (0,0,5,1,0,0). New timestamp of process 6 is (11,7,5,6,5,19)
 the message ordening is causal
 
-This is message 8 sent from process 2 to process 6 with message timestamp (0,8,3,1,1,2). New timestamp of process 6 is (4,8,9,8,6,19)
+This is message 6 sent from process 3 to process 6 with message timestamp (0,0,6,1,0,0). New timestamp of process 6 is (11,7,6,6,5,19)
 the message ordening is causal
 
-This is message 10 sent from process 3 to process 6 with message timestamp (1,2,10,0,1,0). New timestamp of process 6 is (4,8,10,8,6,20)
+This is message 7 sent from process 4 to process 6 with message timestamp (0,0,0,7,1,0). New timestamp of process 6 is (11,7,6,7,5,20)
 the message ordening is causal
 
-This is message 5 sent from process 1 to process 6 with message timestamp (5,0,0,0,0,0). New timestamp of process 6 is (5,8,10,8,6,20)
+This is message 8 sent from process 4 to process 6 with message timestamp (0,0,0,8,1,0). New timestamp of process 6 is (11,7,6,8,5,20)
 the message ordening is causal
 
-This is message 9 sent from process 2 to process 6 with message timestamp (1,9,3,1,2,2). New timestamp of process 6 is (5,9,10,8,6,20)
+This is message 9 sent from process 4 to process 6 with message timestamp (0,0,1,9,1,0). New timestamp of process 6 is (11,7,6,9,5,20)
 the message ordening is causal
 
-This is message 7 sent from process 5 to process 6 with message timestamp (0,2,1,0,7,0). New timestamp of process 6 is (5,9,10,8,7,20)
+This is message 10 sent from process 4 to process 6 with message timestamp (0,0,1,10,1,1). New timestamp of process 6 is (11,7,6,10,5,20)
 the message ordening is causal
 
-This is message 8 sent from process 5 to process 6 with message timestamp (0,2,1,0,8,0). New timestamp of process 6 is (5,9,10,8,8,20)
+This is message 11 sent from process 4 to process 6 with message timestamp (0,0,1,11,1,1). New timestamp of process 6 is (11,7,6,11,5,20)
 the message ordening is causal
 
-This is message 6 sent from process 1 to process 6 with message timestamp (6,0,0,0,0,0). New timestamp of process 6 is (6,9,10,8,8,21)
+This is message 12 sent from process 4 to process 6 with message timestamp (0,0,1,12,1,1). New timestamp of process 6 is (11,7,6,12,5,20)
 the message ordening is causal
 
-This is message 7 sent from process 1 to process 6 with message timestamp (7,0,0,0,0,0). New timestamp of process 6 is (7,9,10,8,8,21)
+This is message 13 sent from process 4 to process 6 with message timestamp (0,0,1,13,1,1). New timestamp of process 6 is (11,7,6,13,5,20)
 the message ordening is causal
 
-This is message 8 sent from process 1 to process 6 with message timestamp (8,0,2,1,0,0). New timestamp of process 6 is (8,9,10,8,8,21)
+This is message 14 sent from process 4 to process 6 with message timestamp (0,0,1,14,1,1). New timestamp of process 6 is (11,7,6,14,5,20)
 the message ordening is causal
 
-This is message 9 sent from process 1 to process 6 with message timestamp (9,0,2,1,0,0). New timestamp of process 6 is (9,9,10,8,8,21)
+This is message 7 sent from process 3 to process 6 with message timestamp (0,0,7,1,0,0). New timestamp of process 6 is (11,7,7,14,5,21)
 the message ordening is causal
 
-This is message 10 sent from process 1 to process 6 with message timestamp (10,0,2,1,0,0). New timestamp of process 6 is (10,9,10,8,8,21)
+This is message 8 sent from process 3 to process 6 with message timestamp (0,0,8,1,0,0). New timestamp of process 6 is (11,7,8,14,5,21)
 the message ordening is causal
 
-This is message 11 sent from process 1 to process 6 with message timestamp (11,0,2,1,0,0). New timestamp of process 6 is (11,9,10,8,8,21)
+This is message 9 sent from process 3 to process 6 with message timestamp (0,0,9,1,0,1). New timestamp of process 6 is (11,7,9,14,5,21)
 the message ordening is causal
 
-This is message 12 sent from process 1 to process 6 with message timestamp (12,1,2,1,0,0). New timestamp of process 6 is (12,9,10,8,8,21)
+This is message 6 sent from process 5 to process 6 with message timestamp (0,0,0,1,6,0). New timestamp of process 6 is (11,7,9,14,6,22)
 the message ordening is causal
 
-This is message 9 sent from process 5 to process 6 with message timestamp (0,2,1,0,9,0). New timestamp of process 6 is (12,9,10,8,9,22)
+This is message 7 sent from process 5 to process 6 with message timestamp (0,0,0,1,7,0). New timestamp of process 6 is (11,7,9,14,7,22)
 the message ordening is causal
 
-This is message 10 sent from process 5 to process 6 with message timestamp (0,2,1,0,10,1). New timestamp of process 6 is (12,9,10,8,10,22)
+This is message 8 sent from process 5 to process 6 with message timestamp (0,0,0,1,8,0). New timestamp of process 6 is (11,7,9,14,8,22)
 the message ordening is causal
 
-This is message 11 sent from process 5 to process 6 with message timestamp (0,2,1,0,11,1). New timestamp of process 6 is (12,9,10,8,11,22)
+This is message 9 sent from process 5 to process 6 with message timestamp (0,0,0,1,9,0). New timestamp of process 6 is (11,7,9,14,9,22)
 the message ordening is causal
 
-This is message 12 sent from process 5 to process 6 with message timestamp (0,2,1,0,12,1). New timestamp of process 6 is (12,9,10,8,12,22)
+This is message 10 sent from process 5 to process 6 with message timestamp (0,1,0,1,10,0). New timestamp of process 6 is (11,7,9,14,10,22)
 the message ordening is causal
 
-This is message 13 sent from process 5 to process 6 with message timestamp (0,3,1,3,13,1). New timestamp of process 6 is (12,9,10,8,13,22)
+This is message 11 sent from process 5 to process 6 with message timestamp (1,1,0,1,11,0). New timestamp of process 6 is (11,7,9,14,11,22)
 the message ordening is causal
 
-This is message 14 sent from process 5 to process 6 with message timestamp (0,3,1,3,14,1). New timestamp of process 6 is (12,9,10,8,14,22)
+This is message 15 sent from process 4 to process 6 with message timestamp (0,0,1,15,1,1). New timestamp of process 6 is (11,7,9,15,11,25)
 the message ordening is causal
 
-This is message 15 sent from process 5 to process 6 with message timestamp (0,3,1,3,15,1). New timestamp of process 6 is (12,9,10,8,15,22)
+This is message 16 sent from process 4 to process 6 with message timestamp (0,0,1,16,1,1). New timestamp of process 6 is (11,7,9,16,11,25)
 the message ordening is causal
 
-This is message 11 sent from process 3 to process 6 with message timestamp (1,2,11,0,1,0). New timestamp of process 6 is (12,9,11,8,15,22)
+This is message 17 sent from process 4 to process 6 with message timestamp (6,2,1,17,1,1). New timestamp of process 6 is (11,7,9,17,11,25)
 the message ordening is causal
 
-This is message 12 sent from process 3 to process 6 with message timestamp (1,2,12,0,4,0). New timestamp of process 6 is (12,9,12,8,15,22)
+This is message 18 sent from process 4 to process 6 with message timestamp (6,2,1,18,1,2). New timestamp of process 6 is (11,7,9,18,11,25)
 the message ordening is causal
 
-This is message 13 sent from process 3 to process 6 with message timestamp (1,2,13,0,4,0). New timestamp of process 6 is (12,9,13,8,15,22)
+This is message 19 sent from process 4 to process 6 with message timestamp (6,2,1,19,1,2). New timestamp of process 6 is (11,7,9,19,11,25)
 the message ordening is causal
 
-This is message 14 sent from process 3 to process 6 with message timestamp (1,3,14,0,6,0). New timestamp of process 6 is (12,9,14,8,15,22)
+This is message 10 sent from process 3 to process 6 with message timestamp (2,0,10,1,0,1). New timestamp of process 6 is (11,7,10,19,11,27)
 the message ordening is causal
 
-This is message 15 sent from process 3 to process 6 with message timestamp (1,3,15,0,7,0). New timestamp of process 6 is (12,9,15,8,15,22)
+This is message 11 sent from process 3 to process 6 with message timestamp (3,0,11,1,0,1). New timestamp of process 6 is (11,7,11,19,11,27)
 the message ordening is causal
 
-This is message 10 sent from process 2 to process 6 with message timestamp (1,10,3,1,2,2). New timestamp of process 6 is (12,10,15,8,15,24)
+This is message 12 sent from process 3 to process 6 with message timestamp (3,0,12,1,0,1). New timestamp of process 6 is (11,7,12,19,11,27)
 the message ordening is causal
 
-This is message 13 sent from process 1 to process 6 with message timestamp (13,1,2,1,0,0). New timestamp of process 6 is (13,10,15,8,15,28)
+This is message 12 sent from process 1 to process 6 with message timestamp (12,0,1,5,1,1). New timestamp of process 6 is (12,7,12,19,11,27)
 the message ordening is causal
 
-This is message 14 sent from process 1 to process 6 with message timestamp (14,1,2,1,0,0). New timestamp of process 6 is (14,10,15,8,15,28)
+This is message 20 sent from process 4 to process 6 with message timestamp (6,2,1,20,1,2). New timestamp of process 6 is (12,7,12,20,11,27)
 the message ordening is causal
 
-This is message 15 sent from process 1 to process 6 with message timestamp (15,1,2,1,0,0). New timestamp of process 6 is (15,10,15,8,15,28)
+This is message 12 sent from process 5 to process 6 with message timestamp (1,1,0,1,12,0). New timestamp of process 6 is (12,7,12,20,12,28)
 the message ordening is causal
 
-This is message 16 sent from process 1 to process 6 with message timestamp (16,1,2,1,0,0). New timestamp of process 6 is (16,10,15,8,15,28)
+This is message 13 sent from process 1 to process 6 with message timestamp (13,0,1,5,1,1). New timestamp of process 6 is (13,7,12,20,12,28)
 the message ordening is causal
 
-This is message 17 sent from process 1 to process 6 with message timestamp (17,1,2,3,0,0). New timestamp of process 6 is (17,10,15,8,15,28)
+This is message 14 sent from process 1 to process 6 with message timestamp (14,0,1,5,1,1). New timestamp of process 6 is (14,7,12,20,12,28)
 the message ordening is causal
 
-This is message 18 sent from process 1 to process 6 with message timestamp (18,1,2,3,0,0). New timestamp of process 6 is (18,10,15,8,15,28)
+This is message 15 sent from process 1 to process 6 with message timestamp (15,0,1,5,1,1). New timestamp of process 6 is (15,7,12,20,12,28)
 the message ordening is causal
 
-This is message 9 sent from process 4 to process 6 with message timestamp (2,0,0,9,0,0). New timestamp of process 6 is (18,10,15,9,15,29)
+This is message 13 sent from process 5 to process 6 with message timestamp (1,1,0,1,13,0). New timestamp of process 6 is (15,7,12,20,13,28)
 the message ordening is causal
 
-This is message 10 sent from process 4 to process 6 with message timestamp (2,1,0,10,0,0). New timestamp of process 6 is (18,10,15,10,15,29)
+This is message 14 sent from process 5 to process 6 with message timestamp (1,1,0,1,14,0). New timestamp of process 6 is (15,7,12,20,14,28)
 the message ordening is causal
 
-This is message 11 sent from process 4 to process 6 with message timestamp (2,1,0,11,0,3). New timestamp of process 6 is (18,10,15,11,15,29)
+This is message 15 sent from process 5 to process 6 with message timestamp (1,1,0,1,15,0). New timestamp of process 6 is (15,7,12,20,15,28)
 the message ordening is causal
 
-This is message 12 sent from process 4 to process 6 with message timestamp (2,1,0,12,0,7). New timestamp of process 6 is (18,10,15,12,15,29)
+This is message 13 sent from process 3 to process 6 with message timestamp (3,0,13,1,0,2). New timestamp of process 6 is (15,7,13,20,15,29)
 the message ordening is causal
 
-This is message 19 sent from process 1 to process 6 with message timestamp (19,1,2,3,0,0). New timestamp of process 6 is (19,10,15,12,15,29)
+This is message 14 sent from process 3 to process 6 with message timestamp (3,0,14,4,0,2). New timestamp of process 6 is (15,7,14,20,15,29)
 the message ordening is causal
 
-This is message 20 sent from process 1 to process 6 with message timestamp (20,4,2,3,0,5). New timestamp of process 6 is (20,10,15,12,15,29)
+This is message 15 sent from process 3 to process 6 with message timestamp (3,0,15,4,0,2). New timestamp of process 6 is (15,7,15,20,15,29)
 the message ordening is causal
 
-This is message 21 sent from process 1 to process 6 with message timestamp (21,4,2,3,0,5). New timestamp of process 6 is (21,10,15,12,15,29)
+This is message 16 sent from process 3 to process 6 with message timestamp (4,0,16,6,1,2). New timestamp of process 6 is (15,7,16,20,15,29)
 the message ordening is causal
 
-This is message 22 sent from process 1 to process 6 with message timestamp (22,4,2,3,0,5). New timestamp of process 6 is (22,10,15,12,15,29)
+This is message 17 sent from process 3 to process 6 with message timestamp (6,3,17,6,6,2). New timestamp of process 6 is (15,7,17,20,15,29)
 the message ordening is causal
 
-This is message 23 sent from process 1 to process 6 with message timestamp (23,4,2,3,0,5). New timestamp of process 6 is (23,10,15,12,15,29)
+This is message 21 sent from process 4 to process 6 with message timestamp (6,2,1,21,1,2). New timestamp of process 6 is (15,7,17,21,15,29)
 the message ordening is causal
 
-This is message 24 sent from process 1 to process 6 with message timestamp (24,4,2,3,0,5). New timestamp of process 6 is (24,10,15,12,15,29)
+This is message 22 sent from process 4 to process 6 with message timestamp (9,2,1,22,1,2). New timestamp of process 6 is (15,7,17,22,15,29)
 the message ordening is causal
 
-This is message 25 sent from process 1 to process 6 with message timestamp (25,4,9,3,3,5). New timestamp of process 6 is (25,10,15,12,15,29)
+This is message 8 sent from process 2 to process 6 with message timestamp (0,8,0,0,1,0). New timestamp of process 6 is (15,8,17,22,15,29)
 the message ordening is causal
 
-This is message 11 sent from process 2 to process 6 with message timestamp (1,11,3,1,2,2). New timestamp of process 6 is (25,11,15,12,15,29)
+This is message 16 sent from process 5 to process 6 with message timestamp (1,1,0,1,16,0). New timestamp of process 6 is (15,8,17,22,16,30)
 the message ordening is causal
 
-This is message 12 sent from process 2 to process 6 with message timestamp (5,12,3,1,6,2). New timestamp of process 6 is (25,12,15,12,15,29)
+This is message 17 sent from process 5 to process 6 with message timestamp (1,3,0,1,17,0). New timestamp of process 6 is (15,8,17,22,17,30)
 the message ordening is causal
 
-This is message 13 sent from process 2 to process 6 with message timestamp (5,13,3,1,6,2). New timestamp of process 6 is (25,13,15,12,15,29)
+This is message 9 sent from process 2 to process 6 with message timestamp (0,9,0,0,3,0). New timestamp of process 6 is (15,9,17,22,17,30)
 the message ordening is causal
 
-This is message 14 sent from process 2 to process 6 with message timestamp (5,14,3,7,6,2). New timestamp of process 6 is (25,14,15,12,15,29)
+This is message 10 sent from process 2 to process 6 with message timestamp (0,10,0,0,3,0). New timestamp of process 6 is (15,10,17,22,17,30)
 the message ordening is causal
 
-This is message 15 sent from process 2 to process 6 with message timestamp (5,15,7,7,6,2). New timestamp of process 6 is (25,15,15,12,15,29)
+This is message 11 sent from process 2 to process 6 with message timestamp (0,11,0,0,3,0). New timestamp of process 6 is (15,11,17,22,17,30)
 the message ordening is causal
 
-This is message 16 sent from process 2 to process 6 with message timestamp (5,16,10,7,6,3). New timestamp of process 6 is (25,16,15,12,15,29)
+This is message 12 sent from process 2 to process 6 with message timestamp (0,12,0,0,3,0). New timestamp of process 6 is (15,12,17,22,17,30)
 the message ordening is causal
 
-This is message 16 sent from process 3 to process 6 with message timestamp (1,3,16,0,7,0). New timestamp of process 6 is (25,16,16,12,15,30)
+This is message 13 sent from process 2 to process 6 with message timestamp (0,13,0,0,3,0). New timestamp of process 6 is (15,13,17,22,17,30)
 the message ordening is causal
 
-This is message 17 sent from process 3 to process 6 with message timestamp (1,3,17,0,7,0). New timestamp of process 6 is (25,16,17,12,15,30)
+This is message 16 sent from process 1 to process 6 with message timestamp (16,0,1,12,1,1). New timestamp of process 6 is (16,13,17,22,17,30)
 the message ordening is causal
 
-This is message 18 sent from process 3 to process 6 with message timestamp (1,3,18,2,8,0). New timestamp of process 6 is (25,16,18,12,15,30)
+This is message 17 sent from process 1 to process 6 with message timestamp (17,0,1,14,1,1). New timestamp of process 6 is (17,13,17,22,17,30)
 the message ordening is causal
 
-This is message 16 sent from process 5 to process 6 with message timestamp (4,3,1,3,16,1). New timestamp of process 6 is (25,16,18,12,16,30)
+This is message 18 sent from process 1 to process 6 with message timestamp (18,0,1,14,2,1). New timestamp of process 6 is (18,13,17,22,17,30)
 the message ordening is causal
 
-This is message 17 sent from process 5 to process 6 with message timestamp (4,3,1,3,17,1). New timestamp of process 6 is (25,16,18,12,17,30)
+This is message 19 sent from process 1 to process 6 with message timestamp (19,0,1,14,2,1). New timestamp of process 6 is (19,13,17,22,17,30)
 the message ordening is causal
 
-This is message 18 sent from process 5 to process 6 with message timestamp (4,3,1,3,18,1). New timestamp of process 6 is (25,16,18,12,18,30)
+This is message 20 sent from process 1 to process 6 with message timestamp (20,0,1,14,2,1). New timestamp of process 6 is (20,13,17,22,17,30)
 the message ordening is causal
 
-This is message 19 sent from process 5 to process 6 with message timestamp (4,3,6,3,19,1). New timestamp of process 6 is (25,16,18,12,19,30)
+This is message 21 sent from process 1 to process 6 with message timestamp (21,6,2,14,6,1). New timestamp of process 6 is (21,13,17,22,17,30)
 the message ordening is causal
 
-This is message 20 sent from process 5 to process 6 with message timestamp (11,3,6,3,20,2). New timestamp of process 6 is (25,16,18,12,20,30)
+This is message 22 sent from process 1 to process 6 with message timestamp (22,9,2,14,6,1). New timestamp of process 6 is (22,13,17,22,17,30)
 the message ordening is causal
 
-This is message 26 sent from process 1 to process 6 with message timestamp (26,4,9,3,3,5). New timestamp of process 6 is (26,16,18,12,20,30)
+This is message 18 sent from process 5 to process 6 with message timestamp (7,3,1,7,18,2). New timestamp of process 6 is (22,13,17,22,18,30)
 the message ordening is causal
 
-This is message 27 sent from process 1 to process 6 with message timestamp (27,4,11,4,3,8). New timestamp of process 6 is (27,16,18,12,20,30)
+This is message 19 sent from process 5 to process 6 with message timestamp (7,7,1,7,19,2). New timestamp of process 6 is (22,13,17,22,19,30)
 the message ordening is causal
 
-This is message 28 sent from process 1 to process 6 with message timestamp (28,5,11,7,4,8). New timestamp of process 6 is (28,16,18,12,20,30)
+This is message 14 sent from process 2 to process 6 with message timestamp (1,14,0,0,3,0). New timestamp of process 6 is (22,14,17,22,19,30)
 the message ordening is causal
 
-This is message 13 sent from process 4 to process 6 with message timestamp (4,2,7,13,7,7). New timestamp of process 6 is (28,16,18,13,20,30)
+This is message 15 sent from process 2 to process 6 with message timestamp (1,15,0,0,3,0). New timestamp of process 6 is (22,15,17,22,19,30)
 the message ordening is causal
 
-This is message 14 sent from process 4 to process 6 with message timestamp (9,2,12,14,11,7). New timestamp of process 6 is (28,16,18,14,20,30)
+This is message 16 sent from process 2 to process 6 with message timestamp (1,16,0,0,3,0). New timestamp of process 6 is (22,16,17,22,19,30)
 the message ordening is causal
 
-This is message 15 sent from process 4 to process 6 with message timestamp (9,4,12,15,11,7). New timestamp of process 6 is (28,16,18,15,20,30)
+This is message 17 sent from process 2 to process 6 with message timestamp (1,17,0,7,3,0). New timestamp of process 6 is (22,17,17,22,19,30)
 the message ordening is causal
 
-This is message 16 sent from process 4 to process 6 with message timestamp (9,8,12,16,11,9). New timestamp of process 6 is (28,16,18,16,20,30)
+This is message 18 sent from process 2 to process 6 with message timestamp (1,18,0,8,3,0). New timestamp of process 6 is (22,18,17,22,19,30)
 the message ordening is causal
 
-This is message 17 sent from process 4 to process 6 with message timestamp (9,8,14,17,11,9). New timestamp of process 6 is (28,16,18,17,20,30)
+This is message 18 sent from process 3 to process 6 with message timestamp (6,3,18,6,6,2). New timestamp of process 6 is (22,18,18,22,19,30)
 the message ordening is causal
 
-This is message 17 sent from process 2 to process 6 with message timestamp (5,17,10,7,6,3). New timestamp of process 6 is (28,17,18,17,20,30)
+This is message 23 sent from process 4 to process 6 with message timestamp (9,2,8,23,6,2). New timestamp of process 6 is (22,18,18,23,19,30)
 the message ordening is causal
 
-This is message 18 sent from process 2 to process 6 with message timestamp (5,18,10,9,8,6). New timestamp of process 6 is (28,18,18,17,20,30)
+This is message 24 sent from process 4 to process 6 with message timestamp (9,6,10,24,6,2). New timestamp of process 6 is (22,18,18,24,19,30)
 the message ordening is causal
 
-This is message 19 sent from process 3 to process 6 with message timestamp (2,5,19,9,8,0). New timestamp of process 6 is (28,18,19,17,20,30)
+This is message 25 sent from process 4 to process 6 with message timestamp (9,6,10,25,10,9). New timestamp of process 6 is (22,18,18,25,19,30)
 the message ordening is causal
 
-This is message 20 sent from process 3 to process 6 with message timestamp (3,5,20,9,8,0). New timestamp of process 6 is (28,18,20,17,20,30)
+This is message 26 sent from process 4 to process 6 with message timestamp (9,6,10,26,10,9). New timestamp of process 6 is (22,18,18,26,19,30)
 the message ordening is causal
 
-This is message 21 sent from process 3 to process 6 with message timestamp (3,5,21,9,8,5). New timestamp of process 6 is (28,18,21,17,20,30)
+This is message 19 sent from process 2 to process 6 with message timestamp (8,19,3,9,10,0). New timestamp of process 6 is (22,19,18,26,19,30)
 the message ordening is causal
 
-This is message 22 sent from process 3 to process 6 with message timestamp (7,5,22,9,10,5). New timestamp of process 6 is (28,18,22,17,20,30)
+This is message 20 sent from process 2 to process 6 with message timestamp (8,20,3,9,10,0). New timestamp of process 6 is (22,20,18,26,19,30)
 the message ordening is causal
 
-This is message 23 sent from process 3 to process 6 with message timestamp (11,5,23,11,10,5). New timestamp of process 6 is (28,18,23,17,20,30)
+This is message 21 sent from process 2 to process 6 with message timestamp (8,21,7,10,10,3). New timestamp of process 6 is (22,21,18,26,19,30)
 the message ordening is causal
 
-This is message 29 sent from process 1 to process 6 with message timestamp (29,5,11,9,4,8). New timestamp of process 6 is (29,18,23,17,20,30)
+This is message 20 sent from process 5 to process 6 with message timestamp (7,7,6,7,20,2). New timestamp of process 6 is (22,21,18,26,20,30)
 the message ordening is causal
 
-This is message 30 sent from process 1 to process 6 with message timestamp (30,5,11,9,11,8). New timestamp of process 6 is (30,18,23,17,20,30)
+This is message 21 sent from process 5 to process 6 with message timestamp (7,7,6,7,21,2). New timestamp of process 6 is (22,21,18,26,21,30)
 the message ordening is causal
 
-This is message 18 sent from process 4 to process 6 with message timestamp (9,8,14,18,11,9). New timestamp of process 6 is (30,18,23,18,20,30)
+This is message 19 sent from process 3 to process 6 with message timestamp (6,3,19,6,6,3). New timestamp of process 6 is (22,21,19,26,21,30)
 the message ordening is causal
 
-This is message 19 sent from process 4 to process 6 with message timestamp (9,8,14,19,11,9). New timestamp of process 6 is (30,18,23,19,20,30)
+This is message 20 sent from process 3 to process 6 with message timestamp (6,3,20,6,6,3). New timestamp of process 6 is (22,21,20,26,21,30)
 the message ordening is causal
 
-This is message 19 sent from process 2 to process 6 with message timestamp (5,19,10,9,8,6). New timestamp of process 6 is (30,19,23,19,20,30)
+This is message 21 sent from process 3 to process 6 with message timestamp (6,3,21,6,6,3). New timestamp of process 6 is (22,21,21,26,21,30)
 the message ordening is causal
 
-This is message 20 sent from process 2 to process 6 with message timestamp (17,20,10,9,9,12). New timestamp of process 6 is (30,20,23,19,20,30)
+This is message 22 sent from process 3 to process 6 with message timestamp (8,11,22,6,11,3). New timestamp of process 6 is (22,21,22,26,21,30)
 the message ordening is causal
 
-This is message 21 sent from process 2 to process 6 with message timestamp (17,21,10,11,9,12). New timestamp of process 6 is (30,21,23,19,20,30)
+This is message 22 sent from process 2 to process 6 with message timestamp (8,22,7,10,10,3). New timestamp of process 6 is (22,22,22,26,21,30)
 the message ordening is causal
 
-This is message 20 sent from process 4 to process 6 with message timestamp (11,8,14,20,15,12). New timestamp of process 6 is (30,21,23,20,20,30)
+This is message 23 sent from process 2 to process 6 with message timestamp (10,23,7,10,10,6). New timestamp of process 6 is (22,23,22,26,21,30)
 the message ordening is causal
 
-This is message 21 sent from process 4 to process 6 with message timestamp (11,8,14,21,15,12). New timestamp of process 6 is (30,21,23,21,20,30)
+This is message 24 sent from process 2 to process 6 with message timestamp (10,24,7,10,10,6). New timestamp of process 6 is (22,24,22,26,21,30)
 the message ordening is causal
 
-This is message 22 sent from process 4 to process 6 with message timestamp (18,9,14,22,15,12). New timestamp of process 6 is (30,21,23,22,20,30)
+This is message 25 sent from process 2 to process 6 with message timestamp (10,25,11,10,10,6). New timestamp of process 6 is (22,25,22,26,21,30)
 the message ordening is causal
 
-This is message 23 sent from process 4 to process 6 with message timestamp (18,9,14,23,15,12). New timestamp of process 6 is (30,21,23,23,20,30)
+This is message 26 sent from process 2 to process 6 with message timestamp (13,26,11,10,10,7). New timestamp of process 6 is (22,26,22,26,21,30)
 the message ordening is causal
 
-This is message 24 sent from process 4 to process 6 with message timestamp (18,9,14,24,15,12). New timestamp of process 6 is (30,21,23,24,20,30)
+This is message 23 sent from process 1 to process 6 with message timestamp (23,9,10,14,6,1). New timestamp of process 6 is (23,26,22,26,21,30)
 the message ordening is causal
 
-This is message 25 sent from process 4 to process 6 with message timestamp (18,12,14,25,15,12). New timestamp of process 6 is (30,21,23,25,20,30)
+This is message 24 sent from process 1 to process 6 with message timestamp (24,9,10,14,6,1). New timestamp of process 6 is (24,26,22,26,21,30)
 the message ordening is causal
 
-This is message 21 sent from process 5 to process 6 with message timestamp (11,3,10,3,21,4). New timestamp of process 6 is (30,21,23,25,21,30)
+This is message 25 sent from process 1 to process 6 with message timestamp (25,9,10,14,6,1). New timestamp of process 6 is (25,26,22,26,21,30)
 the message ordening is causal
 
-This is message 22 sent from process 5 to process 6 with message timestamp (11,4,12,3,22,9). New timestamp of process 6 is (30,21,23,25,22,30)
+This is message 26 sent from process 1 to process 6 with message timestamp (26,9,10,14,6,7). New timestamp of process 6 is (26,26,22,26,21,30)
 the message ordening is causal
 
-This is message 24 sent from process 3 to process 6 with message timestamp (11,5,24,11,10,5). New timestamp of process 6 is (30,21,24,25,22,30)
+This is message 27 sent from process 1 to process 6 with message timestamp (27,9,10,14,6,7). New timestamp of process 6 is (27,26,22,26,21,30)
 the message ordening is causal
 
-This is message 25 sent from process 3 to process 6 with message timestamp (13,6,25,11,10,5). New timestamp of process 6 is (30,21,25,25,22,30)
+This is message 28 sent from process 1 to process 6 with message timestamp (28,10,10,14,6,7). New timestamp of process 6 is (28,26,22,26,21,30)
 the message ordening is causal
 
-This is message 26 sent from process 3 to process 6 with message timestamp (13,6,26,11,10,5). New timestamp of process 6 is (30,21,26,25,22,30)
+This is message 22 sent from process 5 to process 6 with message timestamp (7,9,6,7,22,2). New timestamp of process 6 is (28,26,22,26,22,30)
 the message ordening is causal
 
-This is message 27 sent from process 3 to process 6 with message timestamp (13,6,27,11,10,9). New timestamp of process 6 is (30,21,27,25,22,30)
+This is message 23 sent from process 5 to process 6 with message timestamp (7,9,6,7,23,2). New timestamp of process 6 is (28,26,22,26,23,30)
 the message ordening is causal
 
-This is message 28 sent from process 3 to process 6 with message timestamp (13,6,28,11,10,9). New timestamp of process 6 is (30,21,28,25,22,30)
+This is message 24 sent from process 5 to process 6 with message timestamp (12,9,6,11,24,2). New timestamp of process 6 is (28,26,22,26,24,30)
 the message ordening is causal
 
-This is message 29 sent from process 3 to process 6 with message timestamp (18,7,29,11,10,9). New timestamp of process 6 is (30,21,29,25,22,30)
+This is message 25 sent from process 5 to process 6 with message timestamp (12,13,8,11,25,11). New timestamp of process 6 is (28,26,22,26,25,30)
 the message ordening is causal
 
-This is message 30 sent from process 3 to process 6 with message timestamp (21,7,30,11,15,15). New timestamp of process 6 is (30,21,30,25,22,30)
+This is message 27 sent from process 4 to process 6 with message timestamp (9,6,10,27,13,9). New timestamp of process 6 is (28,26,22,27,25,30)
 the message ordening is causal
 
-This is message 23 sent from process 5 to process 6 with message timestamp (11,4,12,7,23,9). New timestamp of process 6 is (30,21,30,25,23,30)
+This is message 26 sent from process 5 to process 6 with message timestamp (15,13,11,15,26,11). New timestamp of process 6 is (28,26,22,27,26,30)
 the message ordening is causal
 
-This is message 24 sent from process 5 to process 6 with message timestamp (11,10,12,7,24,10). New timestamp of process 6 is (30,21,30,25,24,30)
+This is message 27 sent from process 5 to process 6 with message timestamp (15,13,11,15,27,11). New timestamp of process 6 is (28,26,22,27,27,30)
 the message ordening is causal
 
-This is message 25 sent from process 5 to process 6 with message timestamp (11,10,14,7,25,10). New timestamp of process 6 is (30,21,30,25,25,30)
+This is message 28 sent from process 5 to process 6 with message timestamp (15,13,11,15,28,14). New timestamp of process 6 is (28,26,22,27,28,30)
 the message ordening is causal
 
-This is message 26 sent from process 5 to process 6 with message timestamp (11,10,14,7,26,10). New timestamp of process 6 is (30,21,30,25,26,30)
+This is message 29 sent from process 5 to process 6 with message timestamp (15,13,11,15,29,14). New timestamp of process 6 is (28,26,22,27,29,30)
 the message ordening is causal
 
-This is message 27 sent from process 5 to process 6 with message timestamp (11,10,14,7,27,10). New timestamp of process 6 is (30,21,30,25,27,30)
+This is message 23 sent from process 3 to process 6 with message timestamp (8,11,23,6,11,3). New timestamp of process 6 is (28,26,23,27,29,30)
 the message ordening is causal
 
-This is message 22 sent from process 2 to process 6 with message timestamp (17,22,10,11,9,14). New timestamp of process 6 is (30,22,30,25,27,30)
+This is message 24 sent from process 3 to process 6 with message timestamp (8,11,24,6,11,3). New timestamp of process 6 is (28,26,24,27,29,30)
 the message ordening is causal
 
-This is message 23 sent from process 2 to process 6 with message timestamp (20,23,10,11,9,14). New timestamp of process 6 is (30,23,30,25,27,30)
+This is message 25 sent from process 3 to process 6 with message timestamp (8,11,25,16,11,3). New timestamp of process 6 is (28,26,25,27,29,30)
 the message ordening is causal
 
-This is message 24 sent from process 2 to process 6 with message timestamp (20,24,11,11,17,14). New timestamp of process 6 is (30,24,30,25,27,30)
+This is message 26 sent from process 3 to process 6 with message timestamp (8,11,26,16,11,3). New timestamp of process 6 is (28,26,26,27,29,30)
 the message ordening is causal
 
-This is message 25 sent from process 2 to process 6 with message timestamp (20,25,11,11,17,14). New timestamp of process 6 is (30,25,30,25,27,30)
+This is message 27 sent from process 3 to process 6 with message timestamp (15,11,27,16,11,6). New timestamp of process 6 is (28,26,27,27,29,30)
 the message ordening is causal
 
-This is message 26 sent from process 2 to process 6 with message timestamp (20,26,18,12,17,14). New timestamp of process 6 is (30,26,30,25,27,30)
+This is message 28 sent from process 3 to process 6 with message timestamp (15,11,28,16,11,6). New timestamp of process 6 is (28,26,28,27,29,30)
 the message ordening is causal
 
-This is message 27 sent from process 2 to process 6 with message timestamp (22,27,19,12,17,14). New timestamp of process 6 is (30,27,30,25,27,30)
+This is message 29 sent from process 3 to process 6 with message timestamp (15,11,29,16,11,6). New timestamp of process 6 is (28,26,29,27,29,30)
 the message ordening is causal
 
-This is message 28 sent from process 5 to process 6 with message timestamp (11,10,14,7,28,10). New timestamp of process 6 is (30,27,30,25,28,30)
+This is message 30 sent from process 3 to process 6 with message timestamp (15,11,30,16,12,6). New timestamp of process 6 is (28,26,30,27,29,30)
 the message ordening is causal
 
-This is message 29 sent from process 5 to process 6 with message timestamp (19,14,14,9,29,10). New timestamp of process 6 is (30,27,30,25,29,30)
+This is message 30 sent from process 5 to process 6 with message timestamp (17,13,15,15,30,14). New timestamp of process 6 is (28,26,30,27,30,30)
 the message ordening is causal
 
-This is message 30 sent from process 5 to process 6 with message timestamp (19,14,14,11,30,13). New timestamp of process 6 is (30,27,30,25,30,30)
+This is message 28 sent from process 4 to process 6 with message timestamp (10,7,10,28,13,17). New timestamp of process 6 is (28,26,30,28,30,30)
 the message ordening is causal
 
-This is message 26 sent from process 4 to process 6 with message timestamp (18,16,15,26,15,12). New timestamp of process 6 is (30,27,30,26,30,30)
+This is message 29 sent from process 1 to process 6 with message timestamp (29,10,10,14,15,7). New timestamp of process 6 is (29,26,30,28,30,30)
 the message ordening is causal
 
-This is message 27 sent from process 4 to process 6 with message timestamp (18,16,15,27,15,12). New timestamp of process 6 is (30,27,30,27,30,30)
+This is message 30 sent from process 1 to process 6 with message timestamp (30,12,10,16,15,12). New timestamp of process 6 is (30,26,30,28,30,30)
 the message ordening is causal
 
-This is message 28 sent from process 4 to process 6 with message timestamp (18,16,15,28,15,12). New timestamp of process 6 is (30,27,30,28,30,30)
+This is message 27 sent from process 2 to process 6 with message timestamp (16,27,11,15,10,12). New timestamp of process 6 is (30,27,30,28,30,30)
 the message ordening is causal
 
-This is message 29 sent from process 4 to process 6 with message timestamp (26,16,15,29,15,12). New timestamp of process 6 is (30,27,30,29,30,30)
+This is message 28 sent from process 2 to process 6 with message timestamp (16,28,11,18,10,12). New timestamp of process 6 is (30,28,30,28,30,30)
 the message ordening is causal
 
-This is message 28 sent from process 2 to process 6 with message timestamp (24,28,19,12,17,14). New timestamp of process 6 is (30,28,30,29,30,30)
+This is message 29 sent from process 2 to process 6 with message timestamp (16,29,11,18,10,12). New timestamp of process 6 is (30,29,30,28,30,30)
 the message ordening is causal
 
-This is message 29 sent from process 2 to process 6 with message timestamp (24,29,19,13,17,15). New timestamp of process 6 is (30,29,30,29,30,30)
+This is message 29 sent from process 4 to process 6 with message timestamp (10,7,10,29,13,17). New timestamp of process 6 is (30,29,30,29,30,30)
 the message ordening is causal
 
-This is message 30 sent from process 2 to process 6 with message timestamp (24,30,19,13,17,15). New timestamp of process 6 is (30,30,30,29,30,30)
+This is message 30 sent from process 4 to process 6 with message timestamp (13,7,10,30,13,17). New timestamp of process 6 is (30,29,30,30,30,30)
 the message ordening is causal
 
-This is message 30 sent from process 4 to process 6 with message timestamp (26,16,22,30,21,14). New timestamp of process 6 is (30,30,30,30,30,30)
+This is message 30 sent from process 2 to process 6 with message timestamp (16,30,14,18,15,17). New timestamp of process 6 is (30,30,30,30,30,30)
 the message ordening is causal
 

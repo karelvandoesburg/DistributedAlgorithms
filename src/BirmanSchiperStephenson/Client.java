@@ -7,17 +7,20 @@ import java.util.concurrent.TimeUnit;
 public class Client implements Runnable {
 	
 	private int ID;
-	private int amountofprocesses;
-	private String host;
-	private int amountofmessages;
+	private String host = "rmi://127.0.0.1:1099";
+	private int amountofmessages = 10;
 	
-	public Client(int ID, int amountofprocesses, String host) {
+	public Client(int ID) {
 		this.ID = ID;
-		this.amountofprocesses = amountofprocesses;
-		this.host = host;
-		this.amountofmessages = 30;
 	}
 	
+	public static void main(String[] args) {
+		String host = "rmi://127.0.0.1:1099";
+		int id = Client.getRightIdFromServer(host);
+		
+		Client client = new Client(id);
+		new Thread(client).start();
+	}
 	
 	public void run() {
 		try {
@@ -25,7 +28,7 @@ public class Client implements Runnable {
 			addProcessToRegistry(process, host);
 			this.incrementServerCounter();
 			
-			Thread.sleep(1000);
+			Thread.sleep(5000);
 			
 			this.updateProcessWithRightAmountofprocesses();
 			for(int i = 0; i < this.amountofmessages; i++) {
@@ -83,6 +86,18 @@ public class Client implements Runnable {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static int getRightIdFromServer(String host) {
+		IFProcess counter = (IFProcess) Message.getProcessFromRegistry(0,host);
+		try {
+			int ID = counter.getAmountofprocesses() + 1;
+			return ID;
+		} 
+		catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return Integer.MAX_VALUE;
 	}
 
 }
