@@ -10,24 +10,79 @@ public class Server {
 
 	private String host;
 	private ArrayList<Integer> components;
-	private boolean isactive;
 	
 	public Server(String host) {
 		this.host = host;
 		this.components = new ArrayList<Integer>();
-		this.isactive = true;
 	}
 	
 	public void startElection() {
-		
+		this.executeElectionRound();
 	}
 	
-	public void executeElectionRound() {
+	public synchronized void executeElectionRound() {
+		this.passValuesToNeighbours();
+	}
+	
+	public synchronized void passValuesToNeighbours() {
+		this.passLeftValuesToNeighbours();
+		this.passMaxValuesToNeighbours();
+		this.checkActivity();
+	}
+	
+	public synchronized void passLeftValuesToNeighbours() {
 		for(Integer componentID: components) {
 			ComponentIF component = (ComponentIF) this.getComponentFromServer(componentID, host);
 			try {
-				int neightbourID = component.getRightID();
-				ComponentIF neighbour = (ComponentIF) this.getComponentFromServer(componentID, host);
+				if(component.isActive()) {
+					int rightID = component.getRightID();
+					ComponentIF rightneighbour = (ComponentIF) this.getComponentFromServer(rightID, host);
+					while(!rightneighbour.isActive()) {
+						rightID = rightneighbour.getRightID();
+						rightneighbour = (ComponentIF) this.getComponentFromServer(rightID, host);
+					}
+					rightneighbour.setLeftID(component.getComponentID());
+				}
+				
+			} 
+			catch (RemoteException e) {
+				System.out.println("Exception is the executeElectionRound: " + e);
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public synchronized void passMaxValuesToNeighbours() {
+		for(Integer componentID: components) {
+			ComponentIF component = (ComponentIF) this.getComponentFromServer(componentID, host);
+			try {
+				if(component.isActive()) {
+					int rightID = component.getRightID();
+					ComponentIF rightneighbour = (ComponentIF) this.getComponentFromServer(rightID, host);
+					while(!rightneighbour.isActive()) {
+						rightID = rightneighbour.getRightID();
+						rightneighbour = (ComponentIF) this.getComponentFromServer(rightID, host);
+					}
+					rightneighbour.setMaxID(Math.max(component.getComponentID(), component.getLeftID()));
+				}
+				
+			} 
+			catch (RemoteException e) {
+				System.out.println("Exception is the executeElectionRound: " + e);
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public synchronized void checkActivity() {
+		for(Integer componentID: components) {
+			ComponentIF component = (ComponentIF) this.getComponentFromServer(componentID, host);
+			try {
+				if(component.isActive()) {
+					if((component.getLeftID() < component.getComponentID()) && (component.getLeftID() < component.getComponentID())) {
+						component.setComponentToRelay();
+					}
+				}
 				
 			} 
 			catch (RemoteException e) {

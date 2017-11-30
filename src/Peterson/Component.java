@@ -9,10 +9,12 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 	public int rightID;
 	public int leftID;
 	public int MaxID;
+	private boolean isactive;
 	
 	public Component(int componentID) throws RemoteException {
 		super();
 		this.componentID = componentID;
+		this.isactive = true;
 	}
 	
 	@Override
@@ -43,6 +45,21 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 	@Override
 	public int getMaxID() throws RemoteException {
 		return this.MaxID;
+	}
+
+	@Override
+	public boolean isActive() throws RemoteException {
+		return this.isactive;
+	}
+
+	@Override
+	public void setComponentToRelay() throws RemoteException {
+		this.isactive = false;
+	}
+
+	@Override
+	public void setMaxID(int MaxID) throws RemoteException {
+		this.MaxID = MaxID;
 	}
 
 }
