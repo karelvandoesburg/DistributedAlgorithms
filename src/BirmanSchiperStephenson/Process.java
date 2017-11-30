@@ -22,15 +22,13 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	private int amountofmessages;
 	private RecordCausalOrdening recordcausalordening;
 	
-	protected Process(int ID, int amountofprocesses, int amountofmessages, String host) throws RemoteException {
+	protected Process(int ID, int amountofmessages, String host) throws RemoteException {
 		super();
 		this.processID = ID;
 		this.messageID = 0;
-		this.amountofprocesses = amountofprocesses;
 		this.host = host;
-		this.timestamp = new Timestamp(amountofprocesses);
+		this.amountofprocesses = 0;
 		this.amountofmessages = amountofmessages;
-		this.recordcausalordening = new RecordCausalOrdening(amountofprocesses);
 		installPrintwriter();
 	}
 
@@ -152,6 +150,24 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 		printwriter.println(iscausalornot);
 		printwriter.println();
 		printwriter.flush();
+	}
+	
+	public int getProcessID() {
+		return this.processID;
+	}
+	
+	public void incrementAmountofprocesses() {
+		this.amountofprocesses++;
+	}
+	
+	public int getAmountofprocesses() {
+		return this.amountofprocesses;
+	}
+	
+	public void setAmountofprocesses(int amountofprocesses) {
+		this.amountofprocesses = amountofprocesses;
+		this.timestamp = new Timestamp(amountofprocesses);
+		this.recordcausalordening = new RecordCausalOrdening(amountofprocesses);
 	}
 
 }

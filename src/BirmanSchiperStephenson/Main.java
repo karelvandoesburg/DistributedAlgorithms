@@ -14,6 +14,9 @@ public class Main {
 		createLocalRegistry(port);
 		int amountofprocesses = 6;
 		
+		Process counter = new Process(0,0,host);
+		Client.addProcessToRegistry(counter, host);
+		
 		for (int i = 0; i < amountofprocesses; i++) {
 			Client client = new Client(i+1,amountofprocesses,host);
 			new Thread(client).start();

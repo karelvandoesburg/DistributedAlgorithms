@@ -36,7 +36,7 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	public void run() {
 		try {
 			Thread.sleep(delay);
-			IFProcess receivingprocess = (IFProcess) getProcessFromRegistry(this.receiverID);
+			IFProcess receivingprocess = (IFProcess) Message.getProcessFromRegistry(this.receiverID,this.host);
 			receivingprocess.receiveMessage(this);
 		}
 		catch(Exception e) {
@@ -49,7 +49,7 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	
 	
 	
-	public IFProcess getProcessFromRegistry(int ID) {
+	public static IFProcess getProcessFromRegistry(int ID, String host) {
 		try{
 			String id = Integer.toString(ID);
 			IFProcess process = (IFProcess) Naming.lookup(host + "/" + id);

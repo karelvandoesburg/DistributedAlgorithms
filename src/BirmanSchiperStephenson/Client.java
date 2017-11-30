@@ -21,9 +21,17 @@ public class Client implements Runnable {
 	
 	public void run() {
 		try {
-			Process process = new Process(ID,amountofprocesses, amountofmessages, host);
-			addProcessToRegistry(process);
+			Process process = new Process(ID,amountofmessages, host);
+			addProcessToRegistry(process, host);
+			
+			IFProcess counter = (IFProcess) Message.getProcessFromRegistry(0,this.host);
+			counter.incrementAmountofprocesses();
+			
 			Thread.sleep(1000);
+			
+			counter = (IFProcess) Message.getProcessFromRegistry(0,this.host);
+			IFProcess thisprocess = (IFProcess) Message.getProcessFromRegistry(ID,this.host);
+			thisprocess.setAmountofprocesses(counter.getAmountofprocesses());
 			
 			for(int i = 0; i < this.amountofmessages; i++) {
 				this.createIntervalBetweenMessages();
@@ -40,7 +48,8 @@ public class Client implements Runnable {
 		
 	}
 	
-	public void addProcessToRegistry(Process process) {
+	public static void addProcessToRegistry(Process process, String host) {
+		int ID = process.getProcessID();
 		try {
 			Naming.bind(host + "/" + Integer.toString(ID), process);
 			System.out.println("Process " + ID + " added in " + host + "/" + Integer.toString(ID));	
