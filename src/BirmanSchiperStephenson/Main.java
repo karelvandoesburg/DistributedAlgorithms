@@ -21,7 +21,7 @@ public class Main {
 //			Client client = new Client(i+1);
 //			new Thread(client).start();
 //		}
-		
+//		
 	}
 	
 	public static void createLocalRegistry(int port) {

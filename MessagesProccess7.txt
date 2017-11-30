@@ -1,0 +1,99 @@
+This is message 1 sent from process 5 to process 7 with message timestamp (0,0,0,0,1,0,0,0,0,0). New timestamp of process 7 is (0,0,0,0,1,0,10,0,0,0)
+the message ordening is causal
+
+This is message 2 sent from process 5 to process 7 with message timestamp (0,0,0,0,2,0,0,0,0,0). New timestamp of process 7 is (0,0,0,0,2,0,10,0,0,0)
+the message ordening is causal
+
+This is message 1 sent from process 6 to process 7 with message timestamp (0,0,0,0,0,1,0,0,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,0,0,0)
+the message ordening is causal
+
+This is message 1 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,1,0). New timestamp of process 7 is (0,0,0,0,2,1,10,0,1,0)
+the message ordening is causal
+
+This is message 2 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,2,0). New timestamp of process 7 is (0,0,0,0,2,1,10,0,2,0)
+the message ordening is causal
+
+This is message 1 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,0,1,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,1,2,0)
+the message ordening is causal
+
+This is message 2 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,0,2,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,2,2,0)
+the message ordening is causal
+
+This is message 1 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,0,1,0,1). New timestamp of process 7 is (0,0,0,0,2,1,10,2,2,1)
+the message ordening is causal
+
+This is message 3 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,0,3,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,3,2,1)
+the message ordening is causal
+
+This is message 4 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,0,4,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,4,2,1)
+the message ordening is causal
+
+This is message 2 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,0,1,0,2). New timestamp of process 7 is (0,0,0,0,2,1,10,4,2,2)
+the message ordening is causal
+
+This is message 3 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,0,1,0,3). New timestamp of process 7 is (0,0,0,0,2,1,10,4,2,3)
+the message ordening is causal
+
+This is message 5 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,0,5,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,5,2,3)
+the message ordening is causal
+
+This is message 6 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,0,6,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,6,2,3)
+the message ordening is causal
+
+This is message 7 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,0,7,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,7,2,3)
+the message ordening is causal
+
+This is message 8 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,0,8,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,8,2,3)
+the message ordening is causal
+
+This is message 3 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,3,0). New timestamp of process 7 is (0,0,0,0,2,1,10,8,3,3)
+the message ordening is causal
+
+This is message 4 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,4,0). New timestamp of process 7 is (0,0,0,0,2,1,10,8,4,3)
+the message ordening is causal
+
+This is message 5 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,5,0). New timestamp of process 7 is (0,0,0,0,2,1,10,8,5,3)
+the message ordening is causal
+
+This is message 6 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,6,0). New timestamp of process 7 is (0,0,0,0,2,1,10,8,6,3)
+the message ordening is causal
+
+This is message 7 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,7,0). New timestamp of process 7 is (0,0,0,0,2,1,10,8,7,3)
+the message ordening is causal
+
+This is message 9 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,1,9,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,9,7,3)
+the message ordening is causal
+
+This is message 4 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,1,1,0,4). New timestamp of process 7 is (0,0,0,0,2,1,10,9,7,4)
+the message ordening is causal
+
+This is message 5 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,1,1,0,5). New timestamp of process 7 is (0,0,0,0,2,1,10,9,7,5)
+the message ordening is causal
+
+This is message 6 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,1,1,0,6). New timestamp of process 7 is (0,0,0,0,2,1,10,9,7,6)
+the message ordening is causal
+
+This is message 10 sent from process 8 to process 7 with message timestamp (0,0,0,0,0,0,1,10,0,0). New timestamp of process 7 is (0,0,0,0,2,1,10,10,7,6)
+the message ordening is causal
+
+This is message 8 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,8,0). New timestamp of process 7 is (0,0,0,0,2,1,10,10,8,6)
+the message ordening is causal
+
+This is message 9 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,9,0). New timestamp of process 7 is (0,0,0,0,2,1,10,10,9,6)
+the message ordening is causal
+
+This is message 7 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,1,1,0,7). New timestamp of process 7 is (0,0,0,0,2,1,10,10,9,7)
+the message ordening is causal
+
+This is message 8 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,1,1,0,8). New timestamp of process 7 is (0,0,0,0,2,1,10,10,9,8)
+the message ordening is causal
+
+This is message 9 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,1,1,0,9). New timestamp of process 7 is (0,0,0,0,2,1,10,10,9,9)
+the message ordening is causal
+
+This is message 10 sent from process 10 to process 7 with message timestamp (0,0,0,0,0,0,1,1,0,10). New timestamp of process 7 is (0,0,0,0,2,1,10,10,9,10)
+the message ordening is causal
+
+This is message 10 sent from process 9 to process 7 with message timestamp (0,0,0,0,0,0,0,0,10,0). New timestamp of process 7 is (0,0,0,0,2,1,10,10,10,10)
+the message ordening is causal
+

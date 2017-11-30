@@ -8,7 +8,7 @@ public class RecordCausalOrdening {
 		this.counter = new int[amountofprocesses];
 	}
 	
-	public String incrementCounter(Message message) {
+	public synchronized String incrementCounter(Message message) {
 		int sendingID = message.getSendingID() - 1;
 		int messageID = message.getMessageID();
 		if(counter[sendingID]+1 == messageID) {

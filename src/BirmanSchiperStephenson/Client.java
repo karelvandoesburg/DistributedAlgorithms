@@ -28,7 +28,7 @@ public class Client implements Runnable {
 			addProcessToRegistry(process, host);
 			this.incrementServerCounter();
 			
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			
 			this.updateProcessWithRightAmountofprocesses();
 			for(int i = 0; i < this.amountofmessages; i++) {

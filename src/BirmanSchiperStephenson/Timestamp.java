@@ -20,12 +20,9 @@ public class Timestamp implements Serializable {
 		return true;
 	}
 	
-	public void incrementProcessTimestampByOne(int ID) {
-//		Thread.sleep(100);
+	public synchronized void incrementProcessTimestampByOne(int ID) {
 		ID = ID - 1;
-		System.out.println("TimestampID: " + ID + ", Timestamp length: " + timevector.length + " value " + timevector[ID]);
-		timevector[ID] = timevector[ID] + 1;
-		System.out.println("this worked");
+		this.timevector[ID] = this.timevector[ID] + 1;
 	}
 	
 	public void replaceWithTimestamp (Timestamp timestamp) {

@@ -1,0 +1,15 @@
+This is message 1 sent from process 8 to process 9 with message timestamp (0,0,0,0,0,0,0,1,0,0). New timestamp of process 9 is (0,0,0,0,0,0,0,1,10,0)
+the message ordening is causal
+
+This is message 2 sent from process 8 to process 9 with message timestamp (0,0,0,0,0,0,0,2,0,0). New timestamp of process 9 is (0,0,0,0,0,0,0,2,10,0)
+the message ordening is causal
+
+This is message 1 sent from process 10 to process 9 with message timestamp (0,0,0,0,0,0,0,1,0,1). New timestamp of process 9 is (0,0,0,0,0,0,0,2,10,1)
+the message ordening is causal
+
+This is message 2 sent from process 10 to process 9 with message timestamp (0,0,0,0,0,0,0,1,0,2). New timestamp of process 9 is (0,0,0,0,0,0,0,2,10,2)
+the message ordening is causal
+
+This is message 3 sent from process 10 to process 9 with message timestamp (0,0,0,0,0,0,0,1,0,3). New timestamp of process 9 is (0,0,0,0,0,0,0,2,10,3)
+the message ordening is causal
+

@@ -1,0 +1,60 @@
+This is message 1 sent from process 2 to process 1 with message timestamp (0,1,0). New timestamp of process 1 is (10,1,0)
+the message ordening is causal
+
+This is message 2 sent from process 2 to process 1 with message timestamp (0,2,0). New timestamp of process 1 is (10,2,0)
+the message ordening is causal
+
+This is message 1 sent from process 3 to process 1 with message timestamp (0,0,1). New timestamp of process 1 is (10,2,1)
+the message ordening is causal
+
+This is message 2 sent from process 3 to process 1 with message timestamp (0,0,2). New timestamp of process 1 is (10,2,2)
+the message ordening is causal
+
+This is message 3 sent from process 3 to process 1 with message timestamp (1,0,3). New timestamp of process 1 is (10,2,3)
+the message ordening is causal
+
+This is message 4 sent from process 3 to process 1 with message timestamp (1,1,4). New timestamp of process 1 is (10,2,4)
+the message ordening is causal
+
+This is message 5 sent from process 3 to process 1 with message timestamp (1,1,5). New timestamp of process 1 is (10,2,5)
+the message ordening is causal
+
+This is message 6 sent from process 3 to process 1 with message timestamp (1,1,6). New timestamp of process 1 is (10,2,6)
+the message ordening is causal
+
+This is message 7 sent from process 3 to process 1 with message timestamp (1,1,7). New timestamp of process 1 is (10,2,7)
+the message ordening is causal
+
+This is message 3 sent from process 2 to process 1 with message timestamp (0,3,0). New timestamp of process 1 is (10,3,7)
+the message ordening is causal
+
+This is message 4 sent from process 2 to process 1 with message timestamp (0,4,0). New timestamp of process 1 is (10,4,7)
+the message ordening is causal
+
+This is message 5 sent from process 2 to process 1 with message timestamp (0,5,0). New timestamp of process 1 is (10,5,7)
+the message ordening is causal
+
+This is message 6 sent from process 2 to process 1 with message timestamp (0,6,0). New timestamp of process 1 is (10,6,7)
+the message ordening is causal
+
+This is message 7 sent from process 2 to process 1 with message timestamp (0,7,0). New timestamp of process 1 is (10,7,7)
+the message ordening is causal
+
+This is message 8 sent from process 2 to process 1 with message timestamp (0,8,0). New timestamp of process 1 is (10,8,7)
+the message ordening is causal
+
+This is message 9 sent from process 2 to process 1 with message timestamp (0,9,0). New timestamp of process 1 is (10,9,7)
+the message ordening is causal
+
+This is message 10 sent from process 2 to process 1 with message timestamp (0,10,0). New timestamp of process 1 is (10,10,7)
+the message ordening is causal
+
+This is message 8 sent from process 3 to process 1 with message timestamp (1,1,8). New timestamp of process 1 is (10,10,8)
+the message ordening is causal
+
+This is message 9 sent from process 3 to process 1 with message timestamp (1,2,9). New timestamp of process 1 is (10,10,9)
+the message ordening is causal
+
+This is message 10 sent from process 3 to process 1 with message timestamp (2,2,10). New timestamp of process 1 is (10,10,10)
+the message ordening is causal
+

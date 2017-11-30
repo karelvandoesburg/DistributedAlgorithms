@@ -36,8 +36,10 @@ public class Message implements Runnable, Serializable, Comparable<Message>{
 	public void run() {
 		try {
 			Thread.sleep(delay);
-			IFProcess receivingprocess = (IFProcess) Message.getProcessFromRegistry(this.receiverID,this.host);
-			receivingprocess.receiveMessage(this);
+			synchronized(this) {
+				IFProcess receivingprocess = (IFProcess) Message.getProcessFromRegistry(this.receiverID,this.host);
+				receivingprocess.receiveMessage(this);
+			}
 		}
 		catch(Exception e) {
 			System.out.println("Exception in run in Message: " + e);
