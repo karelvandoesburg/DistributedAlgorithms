@@ -23,16 +23,11 @@ public class Client implements Runnable {
 		try {
 			Process process = new Process(ID,amountofmessages, host);
 			addProcessToRegistry(process, host);
-			
-			IFProcess counter = (IFProcess) Message.getProcessFromRegistry(0,this.host);
-			counter.incrementAmountofprocesses();
+			this.incrementServerCounter();
 			
 			Thread.sleep(1000);
 			
-			counter = (IFProcess) Message.getProcessFromRegistry(0,this.host);
-			IFProcess thisprocess = (IFProcess) Message.getProcessFromRegistry(ID,this.host);
-			thisprocess.setAmountofprocesses(counter.getAmountofprocesses());
-			
+			this.updateProcessWithRightAmountofprocesses();
 			for(int i = 0; i < this.amountofmessages; i++) {
 				this.createIntervalBetweenMessages();
 				process.broadcastMessage();
@@ -66,6 +61,26 @@ public class Client implements Runnable {
 			Thread.sleep(Calculate.createRandomNumberBetween(0, 500));
 		} 
 		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void incrementServerCounter() {
+		IFProcess counter = (IFProcess) Message.getProcessFromRegistry(0,this.host);
+		try {
+			counter.incrementAmountofprocesses();
+		} 
+		catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateProcessWithRightAmountofprocesses() {
+		IFProcess counter = (IFProcess) Message.getProcessFromRegistry(0,this.host);
+		IFProcess thisprocess = (IFProcess) Message.getProcessFromRegistry(ID,this.host);
+		try {
+			thisprocess.setAmountofprocesses(counter.getAmountofprocesses());
+		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}
