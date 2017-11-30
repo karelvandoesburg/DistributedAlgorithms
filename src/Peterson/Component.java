@@ -1,9 +1,13 @@
 package Peterson;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
-public class Component extends UnicastRemoteObject implements ComponentIF{
+public class Component extends UnicastRemoteObject implements ComponentIF, Runnable{
 	
 	public int componentID;
 	public int rightID;
@@ -11,6 +15,7 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 	public int ntid;
 	public int nntid;
 	private boolean isactive;
+	private String host = "rmi://127.0.0.1:1099";
 	
 	public Component(int componentID) throws RemoteException {
 		super();
@@ -19,6 +24,28 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 		this.isactive = true;
 		this.ntid = Integer.MAX_VALUE;
 		this.nntid = Integer.MAX_VALUE;
+	}
+	
+	@Override
+	public void run() {
+		try {
+			Component component = this;
+			ServerIF server = (ServerIF) Naming.lookup(host + "/server");
+			this.bindComponentInCircle(server);
+			
+			
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@Override
@@ -79,6 +106,29 @@ public class Component extends UnicastRemoteObject implements ComponentIF{
 	@Override
 	public String componentToString() throws RemoteException {
 		return "Component: " + this.componentID  + ", tid: " + this.tid + ", ntid: " + this.ntid + ", nntid: " + this.nntid + ", active: " + this.isactive;
+	}
+	
+	public void bindComponentInCircle(ServerIF server) throws RemoteException {
+		ArrayList<Integer> components = server.getComponents();
+		if(components.isEmpty()) {
+			server.addComponent(this.componentID);
+			Main.addComponentToRegistry(this, host);
+		}
+		else {
+			int getter = Calculate.createRandomNumberBetween(0, components.size()-1);
+			int neighbourID = components.get(getter);
+			ComponentIF neighbour = (ComponentIF) Server.getComponentFromServer(neighbourID, host);
+			try {
+				int rightID = neighbour.getRightID();
+				neighbour.setRightID(this.componentID);
+				this.setRightID(rightID);
+				server.addComponent(this.componentID);
+				Main.addComponentToRegistry(this, host);
+			} catch (RemoteException e) {
+				System.out.println("Exception in bindComponentInCirle in server: "+ e);
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

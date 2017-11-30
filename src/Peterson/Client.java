@@ -1,6 +1,8 @@
 package Peterson;
 
+import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class Client implements Runnable {
@@ -9,9 +11,8 @@ public class Client implements Runnable {
 	private int rightID;
 	private String host;
 	
-	public Client(int componentID, int rightID, String host) {
+	public Client(int componentID, String host) {
 		this.componentID = componentID;
-		this.rightID = rightID;
 		this.host = host;
 	}
 	
@@ -19,7 +20,17 @@ public class Client implements Runnable {
 	public void run() {
 		try {
 			Component component = new Component(this.componentID);
-			addProcessToRegistry(component);
+			ServerIF serverready;
+			try {
+				serverready = (ServerIF) Naming.lookup(host + "/server");
+				serverready.addComponentToServer(component);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NotBoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} 
 		catch (RemoteException e) {
 			System.out.println("Exception in run in Client: " + e);

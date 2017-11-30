@@ -2,16 +2,17 @@ package Peterson;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import BirmanSchiperStephenson.IFProcess;
 
-public class Server {
+public class Server extends UnicastRemoteObject implements ServerIF{
 
 	private String host;
 	private ArrayList<Integer> components;
 	
-	public Server(String host) {
+	public Server(String host) throws RemoteException {
 		this.host = host;
 		this.components = new ArrayList<Integer>();
 	}
@@ -184,6 +185,18 @@ public class Server {
 			System.out.println("Exception in addProcessToRegistry in Client: " + e);
 			e.printStackTrace();
 		}
+	}
+	
+	public void test() {
+		System.out.println("hallo");
+	}
+	
+	public ArrayList<Integer> getComponents() {
+		return this.components;
+	}
+	
+	public void addComponent(int ID) {
+		components.add(ID);
 	}
 	
 }
