@@ -16,7 +16,7 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 		int port = 1099;
 		String host = "rmi://localhost:" + port;
 		createLocalRegistry(port);
-		int amountofcomponents = 5;
+		int amountofcomponents = 30;
 		
 		Server server = new Server(host);
 		Main.addServerToRegistry(server, host);
@@ -27,7 +27,7 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 			for(int i = 0; i < amountofcomponents; i++) {
 				Component component = new Component(i);
 				new Thread(component).start();
-				Thread.sleep(200);
+				Thread.sleep(40);
 			}
 			ServerIF serverready = (ServerIF) Naming.lookup(host + "/server");
 			serverready.startElection();

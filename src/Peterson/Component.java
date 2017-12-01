@@ -19,7 +19,6 @@ public class Component extends UnicastRemoteObject implements ComponentIF, Runna
 	
 	public Component(int componentID) throws RemoteException {
 		super();
-		this.componentID = componentID;
 		this.tid = componentID;
 		this.isactive = true;
 		this.ntid = Integer.MAX_VALUE;
@@ -29,12 +28,11 @@ public class Component extends UnicastRemoteObject implements ComponentIF, Runna
 	@Override
 	public void run() {
 		try {
-			Component component = this;
 			ServerIF server = (ServerIF) Naming.lookup(host + "/server");
+//			int componentID = server.getComponents().size();
+//			this.componentID = componentID;
 			this.bindComponentInCircle(server);
-			
-			
-			
+
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
