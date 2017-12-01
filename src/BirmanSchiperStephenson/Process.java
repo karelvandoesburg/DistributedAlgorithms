@@ -102,7 +102,6 @@ public class Process extends UnicastRemoteObject implements IFProcess{
 	public synchronized Timestamp incrementOwnTimestampToMakeComparison(Message message) {
 		Timestamp timestamp = new Timestamp(this.amountofprocesses);
 		timestamp.replaceWithTimestamp(this.timestamp);
-		System.out.println(timestamp.toString());
 		timestamp.incrementProcessTimestampByOne(message.getSendingID());
 		return timestamp;
 	}

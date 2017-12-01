@@ -16,11 +16,12 @@ public class Main {
 		
 		Process counter = new Process(0,0,host);
 		Client.addProcessToRegistry(counter, host);
-		
-		for (int i = 0; i < amountofprocesses; i++) {
-			Client client = new Client(i+1);
-			new Thread(client).start();
-		}
+
+//		for (int i = 0; i < amountofprocesses; i++) {
+//			Thread.sleep(100);
+//			Client client = new Client(i+1);
+//			new Thread(client).start();
+//		}
 		
 	}
 	

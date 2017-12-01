@@ -24,17 +24,18 @@ public class Client implements Runnable {
 	
 	public void run() {
 		try {
-			Process process = new Process(ID,amountofmessages, host);
-			addProcessToRegistry(process, host);
-			this.incrementServerCounter();
-			
-			Thread.sleep(4000);
-			
-			this.updateProcessWithRightAmountofprocesses();
-			for(int i = 0; i < this.amountofmessages; i++) {
-				this.createIntervalBetweenMessages();
-				process.broadcastMessage();
-			}
+				int id = Client.getRightIdFromServer(host);
+				Process process = new Process(id,amountofmessages, host);
+				addProcessToRegistry(process, host);
+				this.incrementServerCounter();
+				
+				Thread.sleep(8000);
+				this.updateProcessWithRightAmountofprocesses();
+				Thread.sleep(8000);
+				for(int i = 0; i < this.amountofmessages; i++) {
+					this.createIntervalBetweenMessages();
+					process.broadcastMessage();
+				}
 		} 
 		catch (RemoteException e) {
 			System.out.println("Exception in run in Client: " + e);
