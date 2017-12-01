@@ -12,16 +12,16 @@ public class Main {
 		int port = 1099;
 		String host = "rmi://127.0.0.1:" + port;
 		createLocalRegistry(port);
-		int amountofprocesses = 6;
+		int amountofprocesses = 4;
 		
 		Process counter = new Process(0,0,host);
 		Client.addProcessToRegistry(counter, host);
 
-//		for (int i = 0; i < amountofprocesses; i++) {
-//			Thread.sleep(100);
-//			Client client = new Client(i+1);
-//			new Thread(client).start();
-//		}
+		for (int i = 0; i < amountofprocesses; i++) {
+			Thread.sleep(40);
+			Client client = new Client(i+1);
+			new Thread(client).start();
+		}
 		
 	}
 	

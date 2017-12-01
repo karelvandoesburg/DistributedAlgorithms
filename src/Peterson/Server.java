@@ -28,6 +28,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	
 	public int executeElectionRound() {
+		System.out.println("The circle is full: " + this.isCircleStillFull());
 		this.passValuesToNeighbours("tid");
 		int elected = this.checkIfElected();
 		if(elected != Integer.MIN_VALUE) {
@@ -50,7 +51,9 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 					int rightID = component.getRightID();
 					ComponentIF rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
 					while(!rightneighbour.isActive()) {
-						this.passTidValueToNeighbour(component, rightneighbour);
+						if(value == "tid") {
+							this.passTidValueToNeighbour(component, rightneighbour);
+						}
 						rightID = rightneighbour.getRightID();
 						rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
 					}
@@ -197,6 +200,57 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	
 	public void addComponent(int ID) {
 		components.add(ID);
+	}
+	
+	public boolean isCircleStillFull() {
+		ComponentIF component = (ComponentIF) Server.getComponentFromServer(0, host);
+		int activecounter = 0;
+		int relaycounter = 0;
+		int rightID;
+		try {
+			while(!component.isActive()) {
+				rightID = component.getRightID();
+				component = (ComponentIF) Server.getComponentFromServer(rightID, host);
+			}
+			activecounter++;
+			int firstID = component.getComponentID();
+			rightID = component.getRightID();
+			
+			while(rightID != firstID) {
+				ComponentIF rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
+				rightID = rightneighbour.getRightID();
+				while(!rightneighbour.isActive() && rightneighbour.getComponentID() != firstID) {
+					System.out.println("loop 1");
+					relaycounter++;
+					rightID = rightneighbour.getRightID();
+					rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
+				}
+				activecounter++;
+				rightID = rightneighbour.getRightID();
+			}
+			
+//			while(rightID != firstID) {
+//				ComponentIF rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
+//				if(rightneighbour.getComponentID() == firstID) {
+//					break;
+//				}
+//				rightID = rightneighbour.getRightID();
+//				while(!rightneighbour.isActive()) {
+//					relaycounter++;
+//					rightID = rightneighbour.getRightID();
+//					rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
+//				}
+//				if(rightID == firstID) {
+//					break;
+//				}
+//				activecounter++;
+//			}
+			System.out.println("active nodes: " + activecounter + ", relay nodes: " + relaycounter);
+			return activecounter + relaycounter == components.size();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }

@@ -17,10 +17,8 @@ public class Component extends UnicastRemoteObject implements ComponentIF, Runna
 	private boolean isactive;
 	private String host = "rmi://127.0.0.1:1099";
 	
-	public Component(int componentID) throws RemoteException {
+	public Component() throws RemoteException {
 		super();
-		this.componentID = componentID;
-		this.tid = componentID;
 		this.isactive = true;
 		this.ntid = Integer.MAX_VALUE;
 		this.nntid = Integer.MAX_VALUE;
@@ -30,8 +28,6 @@ public class Component extends UnicastRemoteObject implements ComponentIF, Runna
 	public void run() {
 		try {
 			ServerIF server = (ServerIF) Naming.lookup(host + "/server");
-//			int componentID = server.getComponents().size();
-//			this.componentID = componentID;
 			this.bindComponentInCircle(server);
 
 		} catch (MalformedURLException e) {
@@ -104,11 +100,13 @@ public class Component extends UnicastRemoteObject implements ComponentIF, Runna
 
 	@Override
 	public String componentToString() throws RemoteException {
-		return "Component: " + this.componentID  + ", tid: " + this.tid + ", ntid: " + this.ntid + ", nntid: " + this.nntid + ", active: " + this.isactive;
+		return "Component: " + this.componentID  + ", rightID: " + this.rightID + ", tid: " + this.tid + ", ntid: " + this.ntid + ", nntid: " + this.nntid + ", active: " + this.isactive;
 	}
 	
 	public void bindComponentInCircle(ServerIF server) throws RemoteException {
 		ArrayList<Integer> components = server.getComponents();
+		this.componentID = components.size();
+		this.tid = this.componentID;
 		if(components.isEmpty()) {
 			server.addComponent(this.componentID);
 			Main.addComponentToRegistry(this, host);
