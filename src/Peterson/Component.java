@@ -19,6 +19,7 @@ public class Component extends UnicastRemoteObject implements ComponentIF, Runna
 	
 	public Component(int componentID) throws RemoteException {
 		super();
+		this.componentID = componentID;
 		this.tid = componentID;
 		this.isactive = true;
 		this.ntid = Integer.MAX_VALUE;

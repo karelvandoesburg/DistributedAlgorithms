@@ -59,7 +59,7 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 		}
 		
 		catch(Exception e) {
-			System.out.println("Exception in addProcessToRegistry in Client: " + e);
+			System.out.println("Exception in addServerToRegistry in Client: " + e);
 			e.printStackTrace();
 		}
 	}
