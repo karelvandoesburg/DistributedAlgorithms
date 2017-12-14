@@ -9,11 +9,37 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	private String host;
 	private static final long serialVersionUID = 1L;
 	private int amountofprocesses;
+	private int amountoffaultyprocesses;
 	
 	protected Server(String host) throws RemoteException {
 		super();
 		this.host = host;
 		this.amountofprocesses = 0;
+	}
+	
+	@Override
+	public void runSynchronousAlgorithm() throws RemoteException {
+		Boolean concensus = false;
+//		while(concensus == false) {
+			this.runSynchronousRound(concensus);
+//		}
+	}
+	
+	public void runSynchronousRound(Boolean concensus) {
+		for(int i = 0; i < amountofprocesses; i++) {
+			try {
+				ProcessIF process = Main.getProcess(host, i);
+				process.runRound();
+			}
+			catch (Exception e) {
+				
+			}
+		}
+	}
+	
+	@Override
+	public void runASynchronousAlgorithm() throws RemoteException {
+		
 	}
 	
 	@Override
@@ -23,6 +49,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 			Naming.bind(this.host + "/" + Integer.toString(process.getProcessID()), process);
 			System.out.println("Process " + process.getProcessID() + " added in " + host + "/" + Integer.toString(process.getProcessID()));
 			amountofprocesses++;
+			this.updateFaultyProcesses();
 		}
 		
 		catch(Exception e) {
@@ -35,10 +62,19 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	public int getNextID() {
 		return this.amountofprocesses;
 	}
+	
+	@Override
+	public int getAmountOfProcesses() {
+		return this.amountofprocesses;
+	}
 
 	@Override
 	public void incrementProcesses() throws RemoteException {
 		this.amountofprocesses++;
+	}
+	
+	public void updateFaultyProcesses() {
+		
 	}
 
 }

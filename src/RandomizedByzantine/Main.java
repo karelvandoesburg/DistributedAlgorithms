@@ -5,10 +5,11 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.Scanner;
 
 public class Main {
 
-public static void main(String[] args) throws RemoteException, InterruptedException {
+	public static void main(String[] args) throws RemoteException, InterruptedException {
 		
 		int port = 1099;
 		String host = "rmi://localhost:" + port;
@@ -18,7 +19,12 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 		Main.addServerToRegistry(server, host);
 		
 		Thread.sleep(1000);
+		
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Press 1 for the synchronous algorithm, press 2 for the asynchronous algorithm");
+		int choice = scanner.nextInt();
 
+		Main.runChosenAlgorithm(choice,host); 
 	}
 	
 	public static void createLocalRegistry(int port) {
@@ -41,6 +47,40 @@ public static void main(String[] args) throws RemoteException, InterruptedExcept
 			System.out.println("Exception in addServerToRegistry in Client: " + e);
 			e.printStackTrace();
 		}
+	}
+	
+	public static void runChosenAlgorithm(int choice, String host) {
+		ServerIF server = Main.getServer(host);
+		try {
+			if(choice == 1) {
+				server.runSynchronousAlgorithm();
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static ServerIF getServer(String host) {
+		try {
+			ServerIF server = (ServerIF) Naming.lookup(host + "/server");
+			return server;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static ProcessIF getProcess(String host, int processID) {
+		try {
+			ProcessIF process = (ProcessIF) Naming.lookup(host + "/" + processID);
+			return process;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }
