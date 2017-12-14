@@ -66,13 +66,13 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	public void receiveMessage(Message message) {
 		if(this.iswaitingformessages && (this.messagetype == message.getMessageType())) {
 			this.receivedmessages.add(message);
+			System.out.println(message.toString());
 		}
 	}
 	
 	public void awaitNmessages() {
 		this.iswaitingformessages = true;
 		Boolean receivedenoughmessages = false;
-//		while()
 	}
 	
 	public void setProcessID(int ID) {

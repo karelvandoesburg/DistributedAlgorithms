@@ -16,4 +16,8 @@ public class Message {
 		return this.messagetype;
 	}
 	
+	public String toString() {
+		return "(" + this.messagetype + ", " + this.round + ", " + this.v + ")";
+	}
+	
 }
