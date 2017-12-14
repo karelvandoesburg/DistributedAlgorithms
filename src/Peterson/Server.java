@@ -219,8 +219,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 			while(rightID != firstID) {
 				ComponentIF rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
 				rightID = rightneighbour.getRightID();
-				while(!rightneighbour.isActive() && rightneighbour.getComponentID() != firstID) {
-					System.out.println("loop 1");
+				while(!rightneighbour.isActive() && rightneighbour.getRightID() != firstID) {
 					relaycounter++;
 					rightID = rightneighbour.getRightID();
 					rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
@@ -228,23 +227,6 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 				activecounter++;
 				rightID = rightneighbour.getRightID();
 			}
-			
-//			while(rightID != firstID) {
-//				ComponentIF rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
-//				if(rightneighbour.getComponentID() == firstID) {
-//					break;
-//				}
-//				rightID = rightneighbour.getRightID();
-//				while(!rightneighbour.isActive()) {
-//					relaycounter++;
-//					rightID = rightneighbour.getRightID();
-//					rightneighbour = (ComponentIF) Server.getComponentFromServer(rightID, host);
-//				}
-//				if(rightID == firstID) {
-//					break;
-//				}
-//				activecounter++;
-//			}
 			System.out.println("active nodes: " + activecounter + ", relay nodes: " + relaycounter);
 			return activecounter + relaycounter == components.size();
 		} catch (RemoteException e) {
