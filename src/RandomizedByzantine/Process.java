@@ -132,7 +132,9 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	
 	public void decideNewValueProcess() {
 		int newP = this.checkNewValue("P");
-		if(newP == (0 | 1)) {
+		System.out.println(newP);
+		if((newP == 1) | (newP == 0)) {
+			System.out.println("newp in last loop: " + newP);
 			this.v = newP;
 			this.tryToDecide();
 		}
@@ -152,17 +154,20 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 		for(Message message : this.receivedmessages) {
 			if(this.compareMessageTypeAndRound(message, this.messagetype, this.round)) {
 				if(message.getMessageValue() == 0) {value0messages++;}
-				else {value1messages++;}
+				else if (message.getMessageValue() == 1) {value1messages++;}
 			}
 		}
 		if(value0messages == value1messages) {return Integer.MIN_VALUE;}
-		else if((value0messages | value1messages) > amountofneededprocesses) {return Math.max(value0messages, value1messages);}
+		else if((value0messages > amountofneededprocesses) | (value1messages > amountofneededprocesses)) {
+			if(value0messages > value1messages) {return 0;}
+			else {return 1;}
+		}
 		else return Integer.MIN_VALUE;
 	}
 	
 	public void tryToDecide() {
 		int decider = this.checkNewValue("Decide");
-		if(decider == (0|1)) {
+		if((decider == 0) | (decider == 1)) {
 			this.v = decider;
 			this.decidedvalue = decider;
 			this.processisdecided = true;

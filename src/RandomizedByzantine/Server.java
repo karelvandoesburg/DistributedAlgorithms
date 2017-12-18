@@ -24,21 +24,22 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 			this.setAmountOfProcessesInClients();
 			Boolean concensus = false;
 			while(concensus == false) {
-				this.runSynchronousRound(concensus);
+				concensus = this.runSynchronousRound();
 			}
-			this.showDecidedValue();
+			System.out.println("The decided value is: " + this.showDecidedValue());
 		} 
 		catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void runSynchronousRound(Boolean concensus) {
+	public boolean runSynchronousRound() {
 		this.broadcastNSynchronous();
 		this.processNSynchronous();
-		concensus = this.checkIfDecided();
-		if(concensus == true) {return;}
+		boolean concensus = this.checkIfDecided();
+		if(concensus == true) {return true;}
 		this.processPSynchronous();
+		return false;
 	}
 	
 	public void broadcastNSynchronous() {
@@ -115,7 +116,10 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 				e.printStackTrace();
 			}
 		}
-		if((value0decided | value1decided) >= totalneeded) {return Math.max(value0decided, value1decided);}
+		if((value0decided | value1decided) >= totalneeded) {
+			if(value0decided > value1decided) {return 0;}
+			else {return 1;}
+		}
 		else {return Integer.MIN_VALUE;}
 	}
 	
