@@ -35,6 +35,9 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	public void runSynchronousRound(Boolean concensus) {
 		this.broadcastNSynchronous();
 		this.processNSynchronous();
+		concensus = this.checkIfDecided();
+		if(concensus == true) {return;}
+		this.processPSynchronous();
 	}
 	
 	public void broadcastNSynchronous() {
@@ -63,7 +66,36 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		}
 	}
 	
+	public boolean checkIfDecided() {
+		int totalneeded = this.amountofprocesses - this.amountoffaultyprocesses;
+		int processesdecided = 0;
+		for(int i = 0; i < amountofprocesses; i++) {
+			try {
+				ProcessIF process = Main.getProcess(host, i);
+				if(process.isDecided()) {
+					processesdecided++;
+				}
+			}
+			catch (Exception e) {
+				System.out.println("error");
+				e.printStackTrace();
+			}
+		}
+		return processesdecided >= totalneeded;
+	}
 	
+	public void processPSynchronous() {
+		for(int i = 0; i < amountofprocesses; i++) {
+			try {
+				ProcessIF process = Main.getProcess(host, i);
+				process.processP();
+			}
+			catch (Exception e) {
+				System.out.println("error");
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	
 	@Override

@@ -19,6 +19,8 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	private String host = "rmi://localhost:1099";
 	private int amountofprocesses;
 	private int amountoffaultyprocesses;
+	private boolean processisdecided;
+	private int decidedvalue;
 	
 	protected Process() throws RemoteException {
 		super();
@@ -26,6 +28,8 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 		this.round = 1;
 		this.messagetype = "N";
 		this.receivedmessages = new ArrayList<Message>();
+		this.decidedvalue = Integer.MIN_VALUE;
+		this.processisdecided = false;
 	}
 	
 	
@@ -61,9 +65,11 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	
 	
 	
+	
+	
 	@Override
 	public void processN() throws RemoteException {
-		int amountofmessagesneeded = this.amountofprocesses/2;
+		int amountofmessagesneeded = (this.amountofprocesses+this.amountoffaultyprocesses)/2;
 		int valueforP = this.selectNewPValue(amountofmessagesneeded, this.messagetype, this.round);
 		this.messagetype = "P";
 		this.broadcastP(valueforP);
@@ -115,38 +121,62 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	
 	
 	
-
-	@Override
-	public void decide() throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	
+	
 	@Override
 	public void processP() throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		this.decideNewValueProcess();
 	}
+	
+	public void decideNewValueProcess() {
+		int newP = this.checkNewValue("P");
+		if(newP == (0 | 1)) {
+			this.v = newP;
+			this.tryToDecide();
+		}
+		else {
+			this.v = Process.createRandomNumberBetween(0, 1);
+		}
+		System.out.println(this.decidedvalue);
+		this.round++;
+		this.messagetype = "N";
+	}
+	
+	public int checkNewValue(String type) {
+		int amountofneededprocesses = this.amountoffaultyprocesses;
+		if(type.equals("Decide")) {amountofneededprocesses = 3*this.amountoffaultyprocesses;}
+		int value0messages = 0;
+		int value1messages = 0;
+		for(Message message : this.receivedmessages) {
+			if(this.compareMessageTypeAndRound(message, this.messagetype, this.round)) {
+				if(message.getMessageValue() == 0) {value0messages++;}
+				else {value1messages++;}
+			}
+		}
+		if(value0messages == value1messages) {return Integer.MIN_VALUE;}
+		else if((value0messages | value1messages) > amountofneededprocesses) {return Math.max(value0messages, value1messages);}
+		else return Integer.MIN_VALUE;
+	}
+	
+	public void tryToDecide() {
+		int decider = this.checkNewValue("Decide");
+		if(decider == (0|1)) {
+			this.v = decider;
+			this.decidedvalue = decider;
+			this.processisdecided = true;
+		}
+	}
+	
+	
+	
 	
 	@Override
 	public void runRound() {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
@@ -192,5 +222,19 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	public void setAmountOfFaultyProcesses(int amountoffaultyprocesses) throws RemoteException {
 		this.amountoffaultyprocesses = amountoffaultyprocesses;
 	}
+
+
+
+	@Override
+	public void decide() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isDecided() throws RemoteException {
+		return this.processisdecided;
+	}
+	
 	
 }
