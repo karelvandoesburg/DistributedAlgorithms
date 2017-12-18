@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Process extends UnicastRemoteObject implements ProcessIF{
+public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 
 	/**
 	 * 
@@ -33,7 +33,10 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	}
 	
 	
-	
+	/*
+	 * Synchronous code
+	 * 
+	 */
 	@Override
 	public void broadcastN() {
 		System.out.println("Amount of normal processes: " + this.amountofprocesses + " and faulty processes: " + this.amountoffaultyprocesses);
@@ -176,15 +179,25 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	
 	
 	
+	/*
+	 * ASynchronous code
+	 * 
+	 */
+	
+	@Override
+	public void startAsynchronousAlgorithm() {
+		new Thread(this).start();
+	}
+	
+	@Override
+	public void run() {
+		System.out.println("hallo");
+	}
 	
 	@Override
 	public void runRound() {
 		
 	}
-	
-
-	
-	
 	
 	public void awaitMessages() {
 		Boolean receivedenoughmessages = false;
@@ -207,6 +220,12 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	}
 	
 	
+	
+	
+	/*
+	 * getters etc.
+	 * 
+	 */
 	public void setProcessID(int ID) {
 		this.processID = ID;
 	}

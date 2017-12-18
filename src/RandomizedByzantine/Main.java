@@ -61,6 +61,9 @@ public class Main {
 			if(choice == 1) {
 				server.runSynchronousAlgorithm();
 			}
+			if(choice == 2) {
+				server.runASynchronousAlgorithm();
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();

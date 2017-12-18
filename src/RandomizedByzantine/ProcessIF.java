@@ -14,5 +14,6 @@ public interface ProcessIF extends Remote{
 	public void processP() throws java.rmi.RemoteException;
 	public boolean isDecided() throws java.rmi.RemoteException;
 	public int getDecidedValue() throws java.rmi.RemoteException;
+	public void startAsynchronousAlgorithm() throws java.rmi.RemoteException;
 	
 }
