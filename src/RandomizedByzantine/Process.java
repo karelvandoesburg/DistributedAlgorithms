@@ -36,6 +36,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	
 	@Override
 	public void broadcastN() {
+		System.out.println("Amount of normal processes: " + this.amountofprocesses + " and faulty processes: " + this.amountoffaultyprocesses);
 		System.out.println(this.createMessage());
 		for(int i = 0; i < this.amountofprocesses; i++) {
 			if(i != this.processID) {this.createAndSendMessage(i);}
@@ -234,6 +235,11 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	@Override
 	public boolean isDecided() throws RemoteException {
 		return this.processisdecided;
+	}
+	
+	@Override
+	public int getDecidedValue() throws RemoteException {
+		return this.decidedvalue;
 	}
 	
 	

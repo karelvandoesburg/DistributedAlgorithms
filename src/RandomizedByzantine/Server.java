@@ -23,9 +23,10 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 			Thread.sleep(50);
 			this.setAmountOfProcessesInClients();
 			Boolean concensus = false;
-//			while(concensus == false) {
+			while(concensus == false) {
 				this.runSynchronousRound(concensus);
-//			}
+			}
+			this.showDecidedValue();
 		} 
 		catch (InterruptedException e) {
 			e.printStackTrace();
@@ -95,6 +96,27 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public int showDecidedValue() {
+		int totalneeded = this.amountofprocesses - this.amountoffaultyprocesses;
+		int value0decided = 0;
+		int value1decided = 0;
+		for(int i = 0; i < amountofprocesses; i++) {
+			try {
+				ProcessIF process = Main.getProcess(host, i);
+				if(process.isDecided()) {
+					if(process.getDecidedValue() == 0) {value0decided++;}
+					else {value1decided++;}
+				}
+			}
+			catch (Exception e) {
+				System.out.println("error");
+				e.printStackTrace();
+			}
+		}
+		if((value0decided | value1decided) >= totalneeded) {return Math.max(value0decided, value1decided);}
+		else {return Integer.MIN_VALUE;}
 	}
 	
 	
