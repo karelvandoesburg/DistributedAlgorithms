@@ -129,6 +129,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	
 	@Override
 	public void runASynchronousAlgorithm() throws RemoteException {
+		this.setAmountOfProcessesInClients();
 		for(int i = 0; i < amountofprocesses; i++) {
 			try {
 				ProcessIF process = Main.getProcess(host, i);
