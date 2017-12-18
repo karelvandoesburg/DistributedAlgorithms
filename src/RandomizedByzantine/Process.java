@@ -28,20 +28,14 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 		this.receivedmessages = new ArrayList<Message>();
 	}
 	
-	@Override
-	public void runRound() {
-		this.broadcast();
-		this.processNMessages();
-	}
 	
-	public void broadcast() {
+	
+	@Override
+	public void broadcastN() {
+		System.out.println(this.createMessage());
 		for(int i = 0; i < this.amountofprocesses; i++) {
 			if(i != this.processID) {this.createAndSendMessage(i);}
 		}
-	}
-	
-	public void processNMessages() {
-		this.awaitMessages();
 	}
 	
 	public void createAndSendMessage(int i) {
@@ -62,9 +56,99 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	@Override
 	public void receiveMessage(Message message) {
 		this.receivedmessages.add(message);
-		System.out.println(receivedmessages.size());
-		System.out.println(message.toString());
 	}
+	
+	
+	
+	
+	@Override
+	public void processN() throws RemoteException {
+		int amountofmessagesneeded = this.amountofprocesses/2;
+		int valueforP = this.selectNewPValue(amountofmessagesneeded, this.messagetype, this.round);
+		this.messagetype = "P";
+		this.broadcastP(valueforP);
+	}
+	
+	public int selectNewPValue(int amount, String type, int round) {
+		int value0messages = 0;
+		int value1messages = 0;
+		for(Message message : this.receivedmessages) {
+			if(this.compareMessageTypeAndRound(message, type, round)) {
+				if(message.getMessageValue() == 0) {value0messages++;}
+				else {value1messages++;}
+			}
+		}
+		return this.choosePvalue(amount, value0messages, value1messages);
+	}
+	
+	public boolean compareMessageTypeAndRound(Message message, String type, int round) {
+		return ((message.getMessageType().equals(type)) && (message.getMessageRound() == round));
+	}
+	
+	public int choosePvalue(int amount, int value0messages, int value1messages) {
+		if (value0messages > amount) 		{return 0;}
+		else if (value1messages > amount) 	{return 1;}
+		else 								{return Integer.MIN_VALUE;}
+	}
+	
+	public void broadcastP(int w) {
+		System.out.println(this.createMessage(w));
+		for(int i = 0; i < this.amountofprocesses; i++) {
+			if(i != this.processID) {this.createAndSendMessage(i, w);}
+		}
+	}
+	
+	public void createAndSendMessage(int i, int value) {
+		try {
+			ProcessIF process = Main.getProcess(host, i);
+			Message message = createMessage(value);
+			process.receiveMessage(message);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Message createMessage(int value) {
+		return new Message(this.messagetype, this.round, value);
+	}
+	
+	
+	
+
+	@Override
+	public void decide() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void processP() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void runRound() {
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public void awaitMessages() {
 		Boolean receivedenoughmessages = false;
@@ -86,9 +170,6 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 		return false;
 	}
 	
-	public boolean compareMessageTypeAndRound(Message message, String type, int round) {
-		return ((message.getMessageType() == type) && (message.getMessageRound() == round));
-	}
 	
 	public void setProcessID(int ID) {
 		this.processID = ID;

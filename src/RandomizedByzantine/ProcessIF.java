@@ -8,5 +8,9 @@ public interface ProcessIF extends Remote{
 	public void receiveMessage(Message message) throws java.rmi.RemoteException;
 	public void setAmountOfProcesses(int amountofprocesses) throws java.rmi.RemoteException;
 	public void setAmountOfFaultyProcesses(int amountofprocesses) throws java.rmi.RemoteException;
+	public void broadcastN() throws java.rmi.RemoteException;
+	public void processN() throws java.rmi.RemoteException;
+	public void decide() throws java.rmi.RemoteException;
+	public void processP() throws java.rmi.RemoteException;
 	
 }

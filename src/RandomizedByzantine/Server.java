@@ -32,12 +32,16 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		}
 	}
 	
-	public synchronized void runSynchronousRound(Boolean concensus) {
+	public void runSynchronousRound(Boolean concensus) {
+		this.broadcastNSynchronous();
+		this.processNSynchronous();
+	}
+	
+	public void broadcastNSynchronous() {
 		for(int i = 0; i < amountofprocesses; i++) {
-			System.out.println(i);
 			try {
 				ProcessIF process = Main.getProcess(host, i);
-				process.runRound();
+				process.broadcastN();
 			}
 			catch (Exception e) {
 				System.out.println("error");
@@ -45,6 +49,22 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 			}
 		}
 	}
+	
+	public void processNSynchronous() {
+		for(int i = 0; i < amountofprocesses; i++) {
+			try {
+				ProcessIF process = Main.getProcess(host, i);
+				process.processN();
+			}
+			catch (Exception e) {
+				System.out.println("error");
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
 	
 	@Override
 	public void runASynchronousAlgorithm() throws RemoteException {

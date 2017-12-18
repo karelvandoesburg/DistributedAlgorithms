@@ -22,6 +22,10 @@ public class Message implements Serializable{
 		return this.round;
 	}
 	
+	public int getMessageValue() {
+		return this.v;
+	}
+	
 	public String toString() {
 		return "(" + this.messagetype + ", " + this.round + ", " + this.v + ")";
 	}
