@@ -58,12 +58,8 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	
 	@Override
 	public void receiveMessage(Message message) {
-		System.out.println(message.getMessageType());
-		if(this.messagetype.equals(message.getMessageType())) {
-			System.out.println("test");
-			this.receivedmessages.add(message);
-			System.out.println(message.toString());
-		}
+		this.receivedmessages.add(message);
+		System.out.println(message.toString());
 	}
 	
 	public void awaitNmessages() {
