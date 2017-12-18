@@ -18,7 +18,13 @@ public class Main {
 		Server server = new Server(host);
 		Main.addServerToRegistry(server, host);
 		
-		Thread.sleep(1000);
+		Thread.sleep(100);
+		
+		for(int i = 0; i < 3; i++) {
+			Client client = new Client();
+			new Thread(client).start();
+			Thread.sleep(50);
+		}
 		
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Press 1 for the synchronous algorithm, press 2 for the asynchronous algorithm");

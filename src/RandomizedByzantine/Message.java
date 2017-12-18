@@ -1,6 +1,8 @@
 package RandomizedByzantine;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable{
 
 	private String messagetype;
 	private int round;

@@ -19,10 +19,17 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	
 	@Override
 	public void runSynchronousAlgorithm() throws RemoteException {
-		Boolean concensus = false;
-//		while(concensus == false) {
-			this.runSynchronousRound(concensus);
-//		}
+		try {
+			Thread.sleep(50);
+			this.setAmountOfProcessesInClients();
+			Boolean concensus = false;
+//			while(concensus == false) {
+				this.runSynchronousRound(concensus);
+//			}
+		} 
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void runSynchronousRound(Boolean concensus) {
@@ -42,6 +49,9 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		
 	}
 	
+	
+	
+	
 	@Override
 	public void addProcessToServer(Process process) {
 		try {
@@ -55,6 +65,18 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		catch(Exception e) {
 			System.out.println("Exception in addProcessToRegistry in Client: " + e);
 			e.printStackTrace();
+		}
+	}
+	
+	public void setAmountOfProcessesInClients() {
+		for(int i = 0; i < amountofprocesses; i++) {
+			try {
+				ProcessIF process = Main.getProcess(host, i);
+				process.setAmountOfProcesses(amountofprocesses);
+			}
+			catch (Exception e) {
+				
+			}
 		}
 	}
 	

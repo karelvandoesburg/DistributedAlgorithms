@@ -18,6 +18,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	private boolean iswaitingformessages;
 	private ArrayList<Message> receivedmessages;
 	private String host = "rmi://localhost:1099";
+	private int amountofprocesses;
 	
 	protected Process() throws RemoteException {
 		super();
@@ -25,6 +26,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 		this.round = 1;
 		this.messagetype = "N";
 		this.iswaitingformessages = false;
+		this.receivedmessages = new ArrayList<Message>();
 	}
 	
 	@Override
@@ -34,27 +36,19 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	}
 	
 	public void broadcast() {
-		try {
-			ServerIF server = Main.getServer(host);
-			int amountofprocesses = server.getAmountOfProcesses();
-			for(int i = 0; i < amountofprocesses; i++) {
-				this.sendMessage(i);
-			}
-		}
-		catch (Exception e) {
-			System.out.println("Can't get the server from the RMI in broadcast method");
-			e.printStackTrace();
+		for(int i = 0; i < this.amountofprocesses; i++) {
+			this.createAndSendMessage(i);
 		}
 	}
 	
-	public void sendMessage(int i) {
+	public void createAndSendMessage(int i) {
 		try {
 			ProcessIF process = Main.getProcess(host, i);
 			Message message = createMessage();
 			process.receiveMessage(message);
 		}
 		catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 	
@@ -64,7 +58,9 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	
 	@Override
 	public void receiveMessage(Message message) {
-		if(this.iswaitingformessages && (this.messagetype == message.getMessageType())) {
+		System.out.println(message.getMessageType());
+		if(this.messagetype.equals(message.getMessageType())) {
+			System.out.println("test");
 			this.receivedmessages.add(message);
 			System.out.println(message.toString());
 		}
@@ -85,6 +81,11 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	
 	public static int createRandomNumberBetween(int smallest, int largest) {
 		return (int )(Math.random() * ((largest+1)-smallest) + smallest);
+	}
+
+	@Override
+	public void setAmountOfProcesses(int amountofprocesses) throws RemoteException {
+		this.amountofprocesses = amountofprocesses;
 	}
 	
 }
