@@ -134,16 +134,13 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	
 	public synchronized void decideNewValueProcess() {
 		int newP = this.checkNewValue("P");
-		System.out.println(newP);
 		if((newP == 1) | (newP == 0)) {
-			System.out.println("newp in last loop: " + newP);
 			this.v = newP;
 			this.tryToDecide();
 		}
 		else {
 			this.v = Process.createRandomNumberBetween(0, 1);
 		}
-		System.out.println(this.decidedvalue);
 		this.round++;
 		this.messagetype = "N";
 	}
