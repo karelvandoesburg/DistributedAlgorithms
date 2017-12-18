@@ -18,6 +18,10 @@ public class Message implements Serializable{
 		return this.messagetype;
 	}
 	
+	public int getMessageRound() {
+		return this.round;
+	}
+	
 	public String toString() {
 		return "(" + this.messagetype + ", " + this.round + ", " + this.v + ")";
 	}

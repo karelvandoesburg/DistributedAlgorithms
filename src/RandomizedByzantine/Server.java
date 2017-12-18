@@ -32,14 +32,16 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		}
 	}
 	
-	public void runSynchronousRound(Boolean concensus) {
+	public synchronized void runSynchronousRound(Boolean concensus) {
 		for(int i = 0; i < amountofprocesses; i++) {
+			System.out.println(i);
 			try {
 				ProcessIF process = Main.getProcess(host, i);
 				process.runRound();
 			}
 			catch (Exception e) {
-				
+				System.out.println("error");
+				e.printStackTrace();
 			}
 		}
 	}
@@ -69,10 +71,12 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	
 	public void setAmountOfProcessesInClients() {
-		for(int i = 0; i < amountofprocesses; i++) {
+		this.amountoffaultyprocesses = amountofprocesses/5;
+		for(int i = 0; i < this.amountofprocesses; i++) {
 			try {
 				ProcessIF process = Main.getProcess(host, i);
-				process.setAmountOfProcesses(amountofprocesses);
+				process.setAmountOfProcesses(this.amountofprocesses);
+				process.setAmountOfFaultyProcesses(this.amountoffaultyprocesses);
 			}
 			catch (Exception e) {
 				

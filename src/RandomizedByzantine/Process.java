@@ -15,30 +15,33 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	private int v;
 	private int round;
 	private String messagetype;
-	private boolean iswaitingformessages;
 	private ArrayList<Message> receivedmessages;
 	private String host = "rmi://localhost:1099";
 	private int amountofprocesses;
+	private int amountoffaultyprocesses;
 	
 	protected Process() throws RemoteException {
 		super();
 		this.v = Process.createRandomNumberBetween(0, 1);
 		this.round = 1;
 		this.messagetype = "N";
-		this.iswaitingformessages = false;
 		this.receivedmessages = new ArrayList<Message>();
 	}
 	
 	@Override
 	public void runRound() {
 		this.broadcast();
-//		this.awaitNmessages();
+		this.processNMessages();
 	}
 	
 	public void broadcast() {
 		for(int i = 0; i < this.amountofprocesses; i++) {
-			this.createAndSendMessage(i);
+			if(i != this.processID) {this.createAndSendMessage(i);}
 		}
+	}
+	
+	public void processNMessages() {
+		this.awaitMessages();
 	}
 	
 	public void createAndSendMessage(int i) {
@@ -59,12 +62,32 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	@Override
 	public void receiveMessage(Message message) {
 		this.receivedmessages.add(message);
+		System.out.println(receivedmessages.size());
 		System.out.println(message.toString());
 	}
 	
-	public void awaitNmessages() {
-		this.iswaitingformessages = true;
+	public void awaitMessages() {
 		Boolean receivedenoughmessages = false;
+		while(!receivedenoughmessages) {
+			receivedenoughmessages = this.checkIfEnoughMessagesAreReceived(this.messagetype, this.round);
+		}
+		System.out.println("process " + this.processID + " has received its messages");
+	}
+	
+	public synchronized Boolean checkIfEnoughMessagesAreReceived(String type, int round) {
+		int amountofmessagesthatshouldbereceived = this.amountofprocesses - this.amountoffaultyprocesses;
+		int amountofmessagesreceived = 0;
+		for(Message message : this.receivedmessages) {
+			if(this.compareMessageTypeAndRound(message, type, round)) {
+				amountofmessagesreceived++;
+				if(amountofmessagesreceived == amountofmessagesthatshouldbereceived) {return true;}
+			}
+		}
+		return false;
+	}
+	
+	public boolean compareMessageTypeAndRound(Message message, String type, int round) {
+		return ((message.getMessageType() == type) && (message.getMessageRound() == round));
 	}
 	
 	public void setProcessID(int ID) {
@@ -82,6 +105,11 @@ public class Process extends UnicastRemoteObject implements ProcessIF{
 	@Override
 	public void setAmountOfProcesses(int amountofprocesses) throws RemoteException {
 		this.amountofprocesses = amountofprocesses;
+	}
+	
+	@Override
+	public void setAmountOfFaultyProcesses(int amountoffaultyprocesses) throws RemoteException {
+		this.amountoffaultyprocesses = amountoffaultyprocesses;
 	}
 	
 }
