@@ -39,7 +39,6 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	 */
 	@Override
 	public void broadcastN() {
-		System.out.println("Amount of normal processes: " + this.amountofprocesses + " and faulty processes: " + this.amountoffaultyprocesses);
 		System.out.println(this.createMessage());
 		for(int i = 0; i < this.amountofprocesses; i++) {
 			if(i != this.processID) {this.createAndSendMessage(i);}
@@ -72,7 +71,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	
 	
 	@Override
-	public synchronized void processN() throws RemoteException {
+	public void processN() throws RemoteException {
 		int amountofmessagesneeded = (this.amountofprocesses+this.amountoffaultyprocesses)/2;
 		int valueforP = this.selectNewPValue(amountofmessagesneeded, this.messagetype, this.round);
 		this.messagetype = "P";
@@ -91,24 +90,24 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		return this.choosePvalue(amount, value0messages, value1messages);
 	}
 	
-	public synchronized boolean compareMessageTypeAndRound(Message message, String type, int round) {
+	public boolean compareMessageTypeAndRound(Message message, String type, int round) {
 		return ((message.getMessageType().equals(type)) && (message.getMessageRound() == round));
 	}
 	
-	public synchronized int choosePvalue(int amount, int value0messages, int value1messages) {
+	public int choosePvalue(int amount, int value0messages, int value1messages) {
 		if (value0messages > amount) 		{return 0;}
 		else if (value1messages > amount) 	{return 1;}
 		else 								{return Integer.MIN_VALUE;}
 	}
 	
-	public synchronized void broadcastP(int w) {
+	public void broadcastP(int w) {
 		System.out.println(this.createMessage(w));
 		for(int i = 0; i < this.amountofprocesses; i++) {
 			if(i != this.processID) {this.createAndSendMessage(i, w);}
 		}
 	}
 	
-	public synchronized void createAndSendMessage(int i, int value) {
+	public void createAndSendMessage(int i, int value) {
 		try {
 			ProcessIF process = Main.getProcess(host, i);
 			Message message = createMessage(value);
@@ -129,7 +128,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	
 	
 	@Override
-	public synchronized void processP() throws RemoteException {
+	public void processP() throws RemoteException {
 		this.decideNewValueProcess();
 	}
 	
@@ -168,7 +167,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		else return Integer.MIN_VALUE;
 	}
 	
-	public synchronized void tryToDecide() {
+	public void tryToDecide() {
 		int decider = this.checkNewValue("Decide");
 		if((decider == 0) | (decider == 1)) {
 			this.v = decider;
@@ -194,8 +193,8 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		boolean concensus = false;
 		while(concensus == false) {
 			concensus = this.runRound();
-			System.out.println(concensus);
 		}
+		System.out.println("the number decided by process " + this.processID + " is: " + this.decidedvalue);
 	}
 	
 	@Override
@@ -205,6 +204,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 			this.awaitMessages();
 			this.processN();
 			if (this.processisdecided == true) {return true;}
+			this.awaitMessages();
 			this.processP();
 			return false;
 		} 
@@ -216,7 +216,6 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		while(receivedenoughmessages == false) {
 			receivedenoughmessages = this.checkIfEnoughMessagesAreReceived(this.messagetype, this.round);
 		}
-		System.out.println("process " + this.processID + " has received its messages");
 	}
 	
 	public synchronized Boolean checkIfEnoughMessagesAreReceived(String type, int round) {
