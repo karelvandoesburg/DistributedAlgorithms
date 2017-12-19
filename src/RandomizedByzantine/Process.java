@@ -43,7 +43,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	public void broadcastN() {
 		System.out.println(this.createMessage());
 		for(int i = 0; i < this.amountofprocesses; i++) {
-			if(i != this.processID) {this.createAndSendMessage(i);}
+			this.createAndSendMessage(i);
 		}
 	}
 	
@@ -105,7 +105,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	public void broadcastP(int w) {
 		System.out.println(this.createMessage(w));
 		for(int i = 0; i < this.amountofprocesses; i++) {
-			if(i != this.processID) {this.createAndSendMessage(i, w);}
+			this.createAndSendMessage(i, w);
 		}
 	}
 	
@@ -232,7 +232,6 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		int amountofmessagesthatshouldbereceived = this.amountofprocesses - this.amountoffaultyprocesses;
 		int amountofmessagesreceived = 0;
 		for(Message message : this.receivedmessages) {
-			System.out.println(amountofmessagesreceived);
 			if(this.compareMessageTypeAndRound(message, type, round)) {
 				amountofmessagesreceived++;
 				if(amountofmessagesreceived == amountofmessagesthatshouldbereceived) {return true;}
