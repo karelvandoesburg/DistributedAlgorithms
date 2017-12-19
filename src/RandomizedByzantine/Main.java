@@ -15,7 +15,7 @@ public class Main {
 		createLocalRegistry(port);
 		
 		int amountofprocesses = 7;
-		int amountoffaultyprocesses = 3;
+		int amountoffaultyprocesses = 1;
 		int amountofnormalprocesses = amountofprocesses - amountoffaultyprocesses;
 		
 		Server server = new Server(host,amountoffaultyprocesses);
