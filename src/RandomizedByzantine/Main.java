@@ -1,6 +1,5 @@
 package RandomizedByzantine;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -15,13 +14,23 @@ public class Main {
 		String host = "rmi://localhost:" + port;
 		createLocalRegistry(port);
 		
-		Server server = new Server(host);
+		int amountofprocesses = 7;
+		int amountoffaultyprocesses = 3;
+		int amountofnormalprocesses = amountofprocesses - amountoffaultyprocesses;
+		
+		Server server = new Server(host,amountoffaultyprocesses);
 		Main.addServerToRegistry(server, host);
 		
 		Thread.sleep(100);
 		
-		for(int i = 0; i < 50; i++) {
+		for(int i = 0; i < amountofnormalprocesses; i++) {
 			Client client = new Client();
+			new Thread(client).start();
+			Thread.sleep(50);
+		}
+		
+		for(int i = 0; i < amountoffaultyprocesses; i++) {
+			FPNoBroadcastNClient client = new FPNoBroadcastNClient();
 			new Thread(client).start();
 			Thread.sleep(50);
 		}

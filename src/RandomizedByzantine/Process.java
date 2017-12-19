@@ -297,5 +297,4 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		return this.decidedvalue;
 	}
 	
-	
 }

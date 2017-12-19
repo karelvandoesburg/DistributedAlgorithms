@@ -11,10 +11,11 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	private int amountofprocesses;
 	private int amountoffaultyprocesses;
 	
-	protected Server(String host) throws RemoteException {
+	protected Server(String host, int amountoffaultyprocesses) throws RemoteException {
 		super();
 		this.host = host;
 		this.amountofprocesses = 0;
+		this.amountoffaultyprocesses = amountoffaultyprocesses;
 	}
 	
 	@Override
@@ -164,7 +165,6 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	
 	public void setAmountOfProcessesInClients() {
-		this.amountoffaultyprocesses = amountofprocesses/5;
 		for(int i = 0; i < this.amountofprocesses; i++) {
 			try {
 				ProcessIF process = Main.getProcess(host, i);
@@ -195,5 +195,10 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	public void updateFaultyProcesses() {
 		
 	}
-
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//FAULTY SERVER METHODS
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
 }
