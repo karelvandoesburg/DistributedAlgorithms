@@ -21,6 +21,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	private int amountoffaultyprocesses;
 	private boolean processisdecided;
 	private int decidedvalue;
+	private int maximumdelay;
 	
 	protected Process() throws RemoteException {
 		super();
@@ -30,6 +31,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		this.receivedmessages = new ArrayList<Message>();
 		this.decidedvalue = Integer.MIN_VALUE;
 		this.processisdecided = false;
+		this.maximumdelay = 300;
 	}
 	
 	
@@ -197,11 +199,22 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	@Override
 	public boolean runRound() {
 		try{
+			this.createDelayUpTo(this.maximumdelay);
 			this.broadcastN();
+			
+			this.createDelayUpTo(this.maximumdelay);
 			this.awaitMessages();
+			
+			this.createDelayUpTo(this.maximumdelay);
 			this.processN();
+			
+			this.createDelayUpTo(this.maximumdelay);
 			if (this.processisdecided == true) {return true;}
+			
+			this.createDelayUpTo(this.maximumdelay);
 			this.awaitMessages();
+			
+			this.createDelayUpTo(this.maximumdelay);
 			this.processP();
 			return false;
 		} 
@@ -245,6 +258,15 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	
 	public static int createRandomNumberBetween(int smallest, int largest) {
 		return (int )(Math.random() * ((largest+1)-smallest) + smallest);
+	}
+	
+	public void createDelayUpTo(int maximum) {
+		int sleep = Process.createRandomNumberBetween(0, maximum);
+		try {
+			Thread.sleep(sleep);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
