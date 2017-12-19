@@ -232,6 +232,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		int amountofmessagesthatshouldbereceived = this.amountofprocesses - this.amountoffaultyprocesses;
 		int amountofmessagesreceived = 0;
 		for(Message message : this.receivedmessages) {
+			System.out.println(amountofmessagesreceived);
 			if(this.compareMessageTypeAndRound(message, type, round)) {
 				amountofmessagesreceived++;
 				if(amountofmessagesreceived == amountofmessagesthatshouldbereceived) {return true;}

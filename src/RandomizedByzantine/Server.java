@@ -21,8 +21,8 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	@Override
 	public void runSynchronousAlgorithm() throws RemoteException {
 		try {
-			Thread.sleep(50);
 			this.setAmountOfProcessesInClients();
+			Thread.sleep(50);
 			Boolean concensus = false;
 			while(concensus == false) {
 				concensus = this.runSynchronousRound();
