@@ -26,7 +26,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 			while(concensus == false) {
 				concensus = this.runSynchronousRound();
 			}
-			System.out.println("The decided value is: " + this.showDecidedValue());
+			System.out.println("The decided value is: " + Server.showDecidedValue(this.amountofprocesses, this.amountoffaultyprocesses, this.host));
 		} 
 		catch (InterruptedException e) {
 			e.printStackTrace();
@@ -36,7 +36,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	public boolean runSynchronousRound() {
 		this.broadcastNSynchronous();
 		this.processNSynchronous();
-		boolean concensus = this.checkIfDecided();
+		boolean concensus = Server.checkIfDecided(this.amountofprocesses,this.amountoffaultyprocesses,this.host);
 		if(concensus == true) {return true;}
 		this.processPSynchronous();
 		return false;
@@ -68,8 +68,8 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		}
 	}
 	
-	public boolean checkIfDecided() {
-		int totalneeded = this.amountofprocesses - this.amountoffaultyprocesses;
+	public synchronized static boolean checkIfDecided(int amountofprocesses, int amountoffaultyprocesses, String host) {
+		int totalneeded = amountofprocesses - amountoffaultyprocesses;
 		int processesdecided = 0;
 		for(int i = 0; i < amountofprocesses; i++) {
 			try {
@@ -99,8 +99,8 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		}
 	}
 	
-	public int showDecidedValue() {
-		int totalneeded = this.amountofprocesses - this.amountoffaultyprocesses;
+	public synchronized static int showDecidedValue(int amountofprocesses, int amountoffaultyprocesses, String host) {
+		int totalneeded = amountofprocesses - amountoffaultyprocesses;
 		int value0decided = 0;
 		int value1decided = 0;
 		for(int i = 0; i < amountofprocesses; i++) {
@@ -140,6 +140,8 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 				e.printStackTrace();
 			}
 		}
+		ASynchronousDecider decider = new ASynchronousDecider(this.amountofprocesses, this.amountoffaultyprocesses, this.host);
+		new Thread(decider).start();
 	}
 	
 	

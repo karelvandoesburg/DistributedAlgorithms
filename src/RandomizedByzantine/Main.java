@@ -20,7 +20,7 @@ public class Main {
 		
 		Thread.sleep(100);
 		
-		for(int i = 0; i < 20; i++) {
+		for(int i = 0; i < 50; i++) {
 			Client client = new Client();
 			new Thread(client).start();
 			Thread.sleep(50);
