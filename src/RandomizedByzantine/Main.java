@@ -14,8 +14,8 @@ public class Main {
 		String host = "rmi://localhost:" + port;
 		createLocalRegistry(port);
 		
-		int amountofprocesses = 7;
-		int amountoffaultyprocesses = 1;
+		int amountofprocesses = 50;
+		int amountoffaultyprocesses = 9;
 		int amountofnormalprocesses = amountofprocesses - amountoffaultyprocesses;
 		
 		Server server = new Server(host,amountoffaultyprocesses);

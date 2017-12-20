@@ -33,7 +33,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		this.decidedvalue = Integer.MIN_VALUE;
 		this.processisdecided = false;
 		this.serverhasdecided = false;
-		this.maximumdelay = 300;
+		this.maximumdelay = 0;
 	}
 	
 	
