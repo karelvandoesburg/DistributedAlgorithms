@@ -14,8 +14,8 @@ public class Main {
 		String host = "rmi://localhost:" + port;
 		createLocalRegistry(port);
 		
-		int amountofprocesses = 50;
-		int amountoffaultyprocesses = 9;
+		int amountofprocesses = 30;
+		int amountoffaultyprocesses = 5;
 		int amountofnormalprocesses = amountofprocesses - amountoffaultyprocesses;
 		
 		Server server = new Server(host,amountoffaultyprocesses);
@@ -45,7 +45,7 @@ public class Main {
 	}
 	
 	public static Client selectRandomFaultyProcess() {
-		int randomprocess = Process.createRandomNumberBetween(1, 5);
+		int randomprocess = Process.createRandomNumberBetween(1, 6);
 		System.out.println("FaultyProcess: " + randomprocess);
 		Client client = null;
 		switch(randomprocess) {
@@ -59,6 +59,8 @@ public class Main {
 					break;
 			case 5: client = new FPAsyncDoesNotAwaitMessagesClient();
 					break;
+			case 6: client = new FPDoesNotIncrementRoundClient();
+					break;		
 		}
 		return client;
 	}
