@@ -22,6 +22,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	protected boolean processisdecided;
 	protected int decidedvalue;
 	protected int maximumdelay;
+	protected boolean serverhasdecided;
 	
 	protected Process() throws RemoteException {
 		super();
@@ -31,6 +32,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		this.receivedmessages = new ArrayList<Message>();
 		this.decidedvalue = Integer.MIN_VALUE;
 		this.processisdecided = false;
+		this.serverhasdecided = false;
 		this.maximumdelay = 300;
 	}
 	
@@ -190,7 +192,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	@Override
 	public void run() {
 		boolean concensus = false;
-		while(concensus == false) {
+		while((concensus == false) && (this.serverhasdecided == false)) {
 			concensus = this.runRound();
 		}
 		System.out.println("the number decided by process " + this.processID + " is: " + this.decidedvalue);
@@ -238,6 +240,10 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 			}
 		}
 		return false;
+	}
+	
+	public void stopAsynchronousAlgorithm() {
+		this.serverhasdecided = true;
 	}
 	
 	
