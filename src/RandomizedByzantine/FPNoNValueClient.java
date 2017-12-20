@@ -2,7 +2,7 @@ package RandomizedByzantine;
 
 import java.rmi.Naming;
 
-public class FPNoNValueClient implements Runnable{
+public class FPNoNValueClient extends Client {
 	
 	private String host = "rmi://127.0.0.1:1099";
 
@@ -15,7 +15,7 @@ public class FPNoNValueClient implements Runnable{
 	public void run() {
 		try{
 			ServerIF server = (ServerIF) Naming.lookup(this.host + "/server");
-			FPNoBroadcastN process = new FPNoBroadcastN();
+			FPNoNValue process = new FPNoNValue();
 			process.setProcessID(server.getNextID());
 			this.addProcessToRegistry(process, this.host);
 			server.incrementProcesses();

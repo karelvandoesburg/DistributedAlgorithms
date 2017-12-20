@@ -1,8 +1,9 @@
 package RandomizedByzantine;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 
-public class FPNoBroadcastNClient extends Client {
+public class FPNothingworksClient extends Client {
 	
 	private String host = "rmi://127.0.0.1:1099";
 
@@ -15,7 +16,7 @@ public class FPNoBroadcastNClient extends Client {
 	public void run() {
 		try{
 			ServerIF server = (ServerIF) Naming.lookup(this.host + "/server");
-			FPNoBroadcastN process = new FPNoBroadcastN();
+			FPNothingworks process = new FPNothingworks();
 			process.setProcessID(server.getNextID());
 			this.addProcessToRegistry(process, this.host);
 			server.incrementProcesses();

@@ -30,7 +30,7 @@ public class Main {
 		}
 		
 		for(int i = 0; i < amountoffaultyprocesses; i++) {
-			FPNoBroadcastNClient client = new FPNoBroadcastNClient();
+			Client client = Main.selectRandomFaultyProcess();
 			new Thread(client).start();
 			Thread.sleep(50);
 		}
@@ -38,9 +38,33 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Press 1 for the synchronous algorithm, press 2 for the asynchronous algorithm");
 		int choice = scanner.nextInt();
+		
+		Process process = new FPNoNValue();
 
 		Main.runChosenAlgorithm(choice,host); 
 	}
+	
+	public static Client selectRandomFaultyProcess() {
+		int randomprocess = Process.createRandomNumberBetween(1, 5);
+		System.out.println("FaultyProcess: " + randomprocess);
+		Client client = null;
+		switch(randomprocess) {
+			case 1: client = new FPNoBroadcastNClient();
+					break;
+			case 2: client = new FPNoNValueClient();
+					break;
+			case 3: client = new FPNoProcessPClient();
+					break;
+			case 4: client = new FPNothingworksClient();
+					break;
+			case 5: client = new FPAsyncDoesNotAwaitMessagesClient();
+					break;
+		}
+		return client;
+	}
+	
+	
+	
 	
 	public static void createLocalRegistry(int port) {
 		try {

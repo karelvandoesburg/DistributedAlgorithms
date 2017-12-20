@@ -10,18 +10,18 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2L;
-	private int processID;
-	private int v;
-	private int round;
-	private String messagetype;
-	private ArrayList<Message> receivedmessages;
-	private String host = "rmi://localhost:1099";
-	private int amountofprocesses;
-	private int amountoffaultyprocesses;
-	private boolean processisdecided;
-	private int decidedvalue;
-	private int maximumdelay;
+	protected static final long serialVersionUID = 2L;
+	protected int processID;
+	protected int v;
+	protected int round;
+	protected String messagetype;
+	protected ArrayList<Message> receivedmessages;
+	protected String host = "rmi://localhost:1099";
+	protected int amountofprocesses;
+	protected int amountoffaultyprocesses;
+	protected boolean processisdecided;
+	protected int decidedvalue;
+	protected int maximumdelay;
 	
 	protected Process() throws RemoteException {
 		super();
