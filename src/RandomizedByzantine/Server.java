@@ -28,6 +28,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 				concensus = this.runSynchronousRound();
 			}
 			System.out.println("The decided value is: " + Server.showDecidedValue(this.amountofprocesses, this.amountoffaultyprocesses, this.host));
+			Main.closeAlgorithm(host);
 		} 
 		catch (InterruptedException e) {
 			e.printStackTrace();

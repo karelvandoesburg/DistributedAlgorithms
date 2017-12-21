@@ -10,41 +10,18 @@ public class Main {
 
 	public static void main(String[] args) throws RemoteException, InterruptedException {
 		
-		int port = 1099;
-		String host = "rmi://localhost:" + port;
-		createLocalRegistry(port);
+		//You can select delay in processes with field maximumdelay in the constructor of the Process Class
+		Main.runMain(2, 10, 1, 0);
 		
-		int amountofprocesses = 10;
-		int amountoffaultyprocesses = 1;
-		int amountofnormalprocesses = amountofprocesses - amountoffaultyprocesses;
-		
-		Server server = new Server(host,amountoffaultyprocesses);
-		Main.addServerToRegistry(server, host);
-		
-		Thread.sleep(100);
-		
-		for(int i = 0; i < amountofnormalprocesses; i++) {
-			Client client = new Client();
-			new Thread(client).start();
-			Thread.sleep(50);
-		}
-		
-		for(int i = 0; i < amountoffaultyprocesses; i++) {
-			Client client = Main.selectFaultyProcess(0);
-			new Thread(client).start();
-			Thread.sleep(50);
-		}
-		
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Press 1 for the synchronous algorithm, press 2 for the asynchronous algorithm");
-		int choice = scanner.nextInt();
-		
-		Process process = new FPNoNValue();
-
-		Main.runChosenAlgorithm(choice,host); 
 	}
 	
-	public static void runMain(int amountofprocesses, int amountoffaultyprocesses, int typeoffaultyprocess) throws InterruptedException {
+	public static void runMain(int SyncorAsync, int amountofprocesses, int amountoffaultyprocesses, int typeoffaultyprocess) throws InterruptedException {
+		
+		/*
+		 * SyncorAsync: 1 for synchronous, 2 for asynchronous
+		 * typeoffaultyprocess: look at the method selectFaultyProcess to select which process you want from 1 to 6, number 0 means random
+		 * 
+		 */
 		
 		int port = 1099;
 		String host = "rmi://localhost:" + port;
@@ -69,15 +46,33 @@ public class Main {
 				new Thread(client).start();
 				Thread.sleep(50);
 			}
+
+			Main.runChosenAlgorithm(SyncorAsync,host);
+			
+		} 
+		catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void onlySetUpMain(int amountoffaultyprocesses) {
+		
+		int port = 1099;
+		String host = "rmi://localhost:" + port;
+		createLocalRegistry(port);
+		
+		try {
+			Server server = new Server(host, amountoffaultyprocesses);
+			Main.addServerToRegistry(server, host);
 			
 			Scanner scanner = new Scanner(System.in);
-			System.out.println("Press 1 for the synchronous algorithm, press 2 for the asynchronous algorithm");
-			int choice = scanner.nextInt();
-			
-			Process process = new FPNoNValue();
+			System.out.println("press 1 to run the synchronous server and press 2 to run the asynchronous server");
+			int SyncorAsync = scanner.nextInt();
 
-			Main.runChosenAlgorithm(choice,host); 
+			Main.runChosenAlgorithm(SyncorAsync,host);
 			scanner.close();
+			
 		} 
 		catch (RemoteException e) {
 			e.printStackTrace();
