@@ -1,6 +1,7 @@
 package RandomizedByzantine;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 
 public class ASynchronousDecider implements Runnable{
 
@@ -25,8 +26,12 @@ public class ASynchronousDecider implements Runnable{
 			Thread.sleep(1500);
 			int decider = Server.showDecidedValue(amountofprocesses, amountoffaultyprocesses, host);
 			System.out.println("The decided value is: " + decider);
+			Main.closeAlgorithm(this.host);
 		}
 		catch (InterruptedException e) {
+			e.printStackTrace();
+		} 
+		catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}

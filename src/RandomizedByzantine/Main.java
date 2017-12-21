@@ -14,8 +14,8 @@ public class Main {
 		String host = "rmi://localhost:" + port;
 		createLocalRegistry(port);
 		
-		int amountofprocesses = 30;
-		int amountoffaultyprocesses = 5;
+		int amountofprocesses = 10;
+		int amountoffaultyprocesses = 1;
 		int amountofnormalprocesses = amountofprocesses - amountoffaultyprocesses;
 		
 		Server server = new Server(host,amountoffaultyprocesses);
@@ -30,7 +30,7 @@ public class Main {
 		}
 		
 		for(int i = 0; i < amountoffaultyprocesses; i++) {
-			Client client = Main.selectRandomFaultyProcess();
+			Client client = Main.selectFaultyProcess(0);
 			new Thread(client).start();
 			Thread.sleep(50);
 		}
@@ -44,11 +44,54 @@ public class Main {
 		Main.runChosenAlgorithm(choice,host); 
 	}
 	
-	public static Client selectRandomFaultyProcess() {
-		int randomprocess = Process.createRandomNumberBetween(1, 6);
-		System.out.println("FaultyProcess: " + randomprocess);
+	public static void runMain(int amountofprocesses, int amountoffaultyprocesses, int typeoffaultyprocess) throws InterruptedException {
+		
+		int port = 1099;
+		String host = "rmi://localhost:" + port;
+		createLocalRegistry(port);
+		
+		int amountofnormalprocesses = amountofprocesses - amountoffaultyprocesses;
+		
+		try {
+			Server server = new Server(host,amountoffaultyprocesses);
+			Main.addServerToRegistry(server, host);
+			
+			Thread.sleep(100);
+			
+			for(int i = 0; i < amountofnormalprocesses; i++) {
+				Client client = new Client();
+				new Thread(client).start();
+				Thread.sleep(50);
+			}
+			
+			for(int i = 0; i < amountoffaultyprocesses; i++) {
+				Client client = Main.selectFaultyProcess(0);
+				new Thread(client).start();
+				Thread.sleep(50);
+			}
+			
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Press 1 for the synchronous algorithm, press 2 for the asynchronous algorithm");
+			int choice = scanner.nextInt();
+			
+			Process process = new FPNoNValue();
+
+			Main.runChosenAlgorithm(choice,host); 
+			scanner.close();
+		} 
+		catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static Client selectFaultyProcess(int process) {
+		if(process == 0) {
+			process = Process.createRandomNumberBetween(1, 6);
+		}
+		System.out.println("FaultyProcess: " + process);
 		Client client = null;
-		switch(randomprocess) {
+		switch(process) {
 			case 1: client = new FPNoBroadcastNClient();
 					break;
 			case 2: client = new FPNoNValueClient();
@@ -68,13 +111,13 @@ public class Main {
 	
 	
 	
+	
 	public static void createLocalRegistry(int port) {
 		try {
 			LocateRegistry.createRegistry(port);
 		}
 		catch(Exception e) {
-			System.out.println("Exception in createLocalRegistry in Main: " + e);
-			e.printStackTrace();
+			System.out.println("Registry already in use, no need to make another one");
 		}
 	}
 	
@@ -99,6 +142,20 @@ public class Main {
 			if(choice == 2) {
 				server.runASynchronousAlgorithm();
 			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void closeAlgorithm(String host) throws RemoteException {
+		try {
+			ServerIF server = Main.getServer(host);
+			int amountofprocesses = server.getAmountOfProcesses();
+			for(int i = 0; i < amountofprocesses; i++) {
+				Naming.unbind(host + "/" + i);
+			}
+			Naming.unbind(host + "/server");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
