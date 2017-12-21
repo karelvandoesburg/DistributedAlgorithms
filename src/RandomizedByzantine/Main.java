@@ -18,8 +18,10 @@ public class Main {
 	public static void runMain(int SyncorAsync, int amountofprocesses, int amountoffaultyprocesses, int typeoffaultyprocess) throws InterruptedException {
 		
 		/*
+		 * This method will do the whole charade, just fill in what you want in the main method and it runs it for you.
+		 * 
 		 * SyncorAsync: 1 for synchronous, 2 for asynchronous
-		 * typeoffaultyprocess: look at the method selectFaultyProcess to select which process you want from 1 to 6, number 0 means random
+		 * typeoffaultyprocess: look at the method selectFaultyProcess in this class to select which process you want from 1 to 6, number 0 means random
 		 * 
 		 */
 		
