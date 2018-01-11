@@ -1,12 +1,11 @@
 package RandomizedByzantine;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 
-
-public class Client implements Runnable{
+public class FPAlwaysSendWrongVClient extends Client {
 	
-	private int port = 1099;
-	private String host = "rmi://145.94.181.77:1099";
+	private String host = "rmi://127.0.0.1:1099";
 
 	public static void main(String[] args) {
 		Client client = new Client();
@@ -17,13 +16,14 @@ public class Client implements Runnable{
 	public void run() {
 		try{
 			ServerIF server = (ServerIF) Naming.lookup(this.host + "/server");
-			Process process = new Process();
+			FPAlwaysSendWrongV process = new FPAlwaysSendWrongV();
 			process.setProcessID(server.getNextID());
 			this.addProcessToRegistry(process, this.host);
 			server.incrementProcesses();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+			this.run();
 		}
 	}
 	

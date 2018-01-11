@@ -63,7 +63,7 @@ public class Main {
 	public static void onlySetUpMain(int amountoffaultyprocesses) {
 		
 		int port = 1099;
-		String host = "rmi://127.0.0.1:1099";
+		String host = "rmi://145.94.181.77:1099";
 		createLocalRegistry(port);
 		
 		try {
@@ -86,7 +86,7 @@ public class Main {
 	
 	public static Client selectFaultyProcess(int process) {
 		if(process == 0) {
-			process = Process.createRandomNumberBetween(1, 6);
+			process = Process.createRandomNumberBetween(1, 7);
 		}
 		System.out.println("FaultyProcess: " + process);
 		Client client = null;
@@ -102,7 +102,9 @@ public class Main {
 			case 5: client = new FPAsyncDoesNotAwaitMessagesClient();
 					break;
 			case 6: client = new FPDoesNotIncrementRoundClient();
-					break;		
+					break;
+			case 7: client = new FPAlwaysSendWrongVClient();
+					break;
 		}
 		return client;
 	}
