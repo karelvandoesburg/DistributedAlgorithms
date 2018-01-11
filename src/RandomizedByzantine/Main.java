@@ -11,7 +11,9 @@ public class Main {
 	public static void main(String[] args) throws RemoteException, InterruptedException {
 		
 		//You can select delay in processes with field maximumdelay in the constructor of the Process Class
-		Main.runMain(2, 10, 1, 0);
+//		Main.runMain(2, 30, 9, 0);
+		Main.onlySetUpMain(1);
+		
 		
 	}
 	
@@ -26,7 +28,7 @@ public class Main {
 		 */
 		
 		int port = 1099;
-		String host = "rmi://localhost:" + port;
+		String host = "rmi://145.94.181.77:" + port;
 		createLocalRegistry(port);
 		
 		int amountofnormalprocesses = amountofprocesses - amountoffaultyprocesses;
@@ -61,7 +63,7 @@ public class Main {
 	public static void onlySetUpMain(int amountoffaultyprocesses) {
 		
 		int port = 1099;
-		String host = "rmi://localhost:" + port;
+		String host = "rmi://127.0.0.1:1099";
 		createLocalRegistry(port);
 		
 		try {

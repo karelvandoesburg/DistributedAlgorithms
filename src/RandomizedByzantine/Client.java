@@ -5,6 +5,7 @@ import java.rmi.Naming;
 
 public class Client implements Runnable{
 	
+	private int port = 1099;
 	private String host = "rmi://127.0.0.1:1099";
 
 	public static void main(String[] args) {

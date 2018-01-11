@@ -11,6 +11,9 @@ public class FPNoBroadcastN extends Process{
 	}
 
 	public void broadcastN() {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("ROUND: " + this.round);
 		System.out.println("I won't broadcast N messages");
 	}
 	

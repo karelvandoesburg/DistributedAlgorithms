@@ -21,5 +21,9 @@ public class FPNothingworks extends Process{
 	public void processP() throws RemoteException {
 		System.out.println("This process does nothing");
 	}
+	
+	public void displayInitialValue() {
+		System.out.println("This is a faulty process");
+	}
 
 }

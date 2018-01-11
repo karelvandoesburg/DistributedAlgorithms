@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 
 	/**
@@ -34,6 +36,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		this.processisdecided = false;
 		this.serverhasdecided = false;
 		this.maximumdelay = 0;
+		this.displayInitialValue();
 	}
 	
 	
@@ -43,7 +46,10 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	 */
 	@Override
 	public void broadcastN() {
-		System.out.println(this.createMessage());
+		System.out.println("");
+		System.out.println("");
+		System.out.println("ROUND: " + this.round);
+		System.out.println("Sending N message: " + this.createMessage());
 		for(int i = 0; i < this.amountofprocesses; i++) {
 			this.createAndSendMessage(i);
 		}
@@ -61,12 +67,13 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	}
 	
 	public Message createMessage() {
-		return new Message(this.messagetype, this.round, this.v);
+		return new Message(this.messagetype, this.round, this.v, this.processID);
 	}
 	
 	@Override
 	public synchronized void receiveMessage(Message message) {
 		this.receivedmessages.add(message);
+		System.out.println("Message received from process " + message.getSendingID() + " with message: " + message.toString());
 	}
 	
 	
@@ -99,13 +106,23 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	}
 	
 	public int choosePvalue(int amount, int value0messages, int value1messages) {
-		if (value0messages > amount) 		{return 0;}
-		else if (value1messages > amount) 	{return 1;}
-		else 								{return Integer.MIN_VALUE;}
+		if (value0messages > amount) 		{
+			System.out.println("The selected v value after processing P of the process is now: 0");
+			return 0;
+		}
+		else if (value1messages > amount) 	{
+			System.out.println("The selected v value after processing P of the process is now: 1");
+			return 1;
+		}
+		else 								{
+			System.out.println("The random v value after processing P of the process is now: " + Integer.MIN_VALUE);
+			return Integer.MIN_VALUE;
+		}
 	}
 	
 	public void broadcastP(int w) {
-		System.out.println(this.createMessage(w));
+		System.out.println("");
+		System.out.println("Sending P message: " + this.createMessage(w));
 		for(int i = 0; i < this.amountofprocesses; i++) {
 			this.createAndSendMessage(i, w);
 		}
@@ -123,7 +140,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	}
 	
 	public synchronized Message createMessage(int value) {
-		return new Message(this.messagetype, this.round, value);
+		return new Message(this.messagetype, this.round, value, this.processID);
 	}
 	
 	
@@ -144,6 +161,7 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 		}
 		else {
 			this.v = Process.createRandomNumberBetween(0, 1);
+			System.out.println("The process has not decided a value");
 		}
 		this.round++;
 		this.messagetype = "N";
@@ -174,6 +192,9 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 			this.v = decider;
 			this.decidedvalue = decider;
 			this.processisdecided = true;
+		}
+		else {
+			System.out.println("The process has not decided a value");
 		}
 	}
 	
@@ -301,6 +322,10 @@ public class Process extends UnicastRemoteObject implements ProcessIF, Runnable{
 	@Override
 	public synchronized int getDecidedValue() throws RemoteException {
 		return this.decidedvalue;
+	}
+	
+	public void displayInitialValue() {
+		System.out.println("This is a correct process with initial value: " + this.v);
 	}
 	
 }

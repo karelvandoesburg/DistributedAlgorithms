@@ -8,11 +8,13 @@ public class Message implements Serializable{
 	private String messagetype;
 	private int round;
 	private int v;
+	private int sendingID;
 	
-	public Message(String messagetype, int round, int v) {
+	public Message(String messagetype, int round, int v, int sendingID) {
 		this.messagetype = messagetype;
 		this.round = round;
 		this.v = v;
+		this.sendingID = sendingID;
 	}
 	
 	public String getMessageType() {
@@ -25,6 +27,10 @@ public class Message implements Serializable{
 	
 	public int getMessageValue() {
 		return this.v;
+	}
+	
+	public int getSendingID() {
+		return this.sendingID;
 	}
 	
 	public String toString() {
